@@ -434,6 +434,7 @@ body.busy .pip{visibility:hidden}
 .dev-row .dt{font:500 16px var(--font-display);min-width:0;overflow-wrap:anywhere}
 .dev-row .dt small{display:block;font:400 12px var(--font-thai);color:var(--ink-soft)}
 .dev-row .dt .tag{display:inline-block;font:600 11px var(--font-display);background:var(--leaf);color:#fff;border-radius:6px;padding:1px 6px;margin-left:6px;vertical-align:middle}
+.dev-row .dt .tag.web{background:#3d7ea6}
 .dev-acts{display:flex;gap:6px;flex-wrap:wrap;justify-content:flex-end}
 .mini{border:0;border-radius:10px;padding:7px 11px;min-height:38px;font:600 14px var(--font-thai);background:var(--paper-edge);color:var(--ink);cursor:pointer}
 .mini.rec{background:var(--berry);color:#fff}
@@ -7863,7 +7864,7 @@ function renderDevLines(body){
   const all=allVoiceLines(),done=all.filter(x=>CLIPS[x.key]).length,inScript=SCRIPT.filter(r=>CLIPS[r[1]+"|"+r[2]]).length;
   const head=el("div","vo-head");
   head.innerHTML=`<div class="vo-prog"><b>อัดแล้ว ${inScript} / ${SCRIPT.length} บท</b><i style="width:${(inScript/Math.max(1,SCRIPT.length)*100).toFixed(1)}%"></i></div>`+
-    `<p class="devnote">อัดเสียงทีละบทได้ (● อัด / ⬆ ไฟล์) หรืออัดข้างนอกแล้ว<b>ตั้งชื่อไฟล์ตามรหัส</b> เช่น <code>LIL-0001.mp3</code> แล้วกด "ใส่ไฟล์หลายไฟล์" ทีเดียว เกมจะจับคู่ให้เอง `+
+    `${remoteState.on?`<p class="devnote"><b>เสียงจากโฟลเดอร์ voices บนเว็บ: ${remoteState.found} ไฟล์</b>${remoteState.checked<remoteState.total?` (กำลังตรวจ ${remoteState.checked}/${remoteState.total})`:""}</p>`:""}<p class="devnote">อัดเสียงทีละบทได้ (● อัด / ⬆ ไฟล์) หรืออัดข้างนอกแล้ว<b>ตั้งชื่อไฟล์ตามรหัส</b> เช่น <code>LIL-0001.mp3</code> แล้วกด "ใส่ไฟล์หลายไฟล์" ทีเดียว เกมจะจับคู่ให้เอง `+
     `· บทที่มี {name} ให้อัดแบบไม่พูดชื่อ หรือพูดว่า friend แทน · บทที่ไม่มีรหัส คือบทที่เปลี่ยนตามเกม (ตัวเลข สิ่งของ) ที่เพิ่งได้ยินระหว่างเล่น อัดในหน้านี้ได้เลย</p>`;
   const acts=el("div","dev-acts");acts.style.justifyContent="flex-start";
   const fi=el("input");fi.type="file";fi.accept="audio/*";fi.multiple=true;fi.hidden=true;fi.onchange=()=>bulkVoiceImport([...(fi.files||[])]);
@@ -7887,14 +7888,14 @@ function renderDevLines(body){
   const per=120,shown=list.slice(0,devVoice.page*per);
   if(!list.length){const p=el("p","devnote");p.textContent=devVoice.show==="todo"?"อัดครบทุกบทในหมวดนี้แล้ว เก่งมาก!":"ไม่มีบทที่ตรงกับที่ค้นหา";body.append(p);}
   for(const x of shown){
-    const has=!!CLIPS[x.key],row=el("div","dev-row"),dt=el("div","dt");
-    dt.innerHTML=`<span class="vo-id${x.id?"":" new"}">${esc(x.id||"ใหม่")}</span>${esc(x.text)}${has?'<span class="tag">เสียงอัดเอง</span>':""}`+
+    const has=!!CLIPS[x.key],isWeb=has&&!String(CLIPS[x.key]).startsWith("blob:"),row=el("div","dev-row"),dt=el("div","dt");
+    dt.innerHTML=`<span class="vo-id${x.id?"":" new"}">${esc(x.id||"ใหม่")}</span>${esc(x.text)}${has?(isWeb?'<span class="tag web">เสียงจากเว็บ</span>':'<span class="tag">เสียงอัดเอง</span>'):""}`+
       `<small>${devVoice.who==="all"?esc((SPK_INFO[x.group]||[0,x.who])[1])+" · ":""}${x.stage?"ด่าน "+(x.stage>4?"หลังจบ":x.stage)+" · ":""}${x.th&&x.th!==x.text?esc(x.th):""}</small>`;
     const a=el("div","dev-acts");a.append(devBtnEl("▶ ฟัง","",()=>playLine(x.key)));
     if(canRecord()){const rb=devBtnEl(recState&&recState.k===x.key?"■ หยุดอัด":"● อัด","rec"+(recState&&recState.k===x.key?" on":""),()=>toggleRecord(x.key,rb));a.append(rb);}
     const f1=el("input");f1.type="file";f1.accept="audio/*";f1.hidden=true;f1.onchange=async()=>{const f=f1.files&&f1.files[0];if(f){await setClip(x.key,f);toast("Saved","ใส่ไฟล์เสียงแล้ว",{say:false,ms:1500});renderDev();}};
     a.append(f1,devBtnEl("⬆ ไฟล์","",()=>f1.click()));
-    if(has)a.append(devBtnEl("✕ ลบ","",async()=>{await delClip(x.key);renderDev();}));
+    if(has&&!isWeb)a.append(devBtnEl("✕ ลบ","",async()=>{await delClip(x.key);renderDev();}));
     row.append(dt,a);body.append(row);
   }
   if(list.length>shown.length){const more=devBtnEl(`แสดงเพิ่ม (อีก ${list.length-shown.length} บท)`,"",()=>{devVoice.page++;renderDev();});more.style.margin="10px 0";body.append(more);}
@@ -7918,6 +7919,30 @@ function exportScriptCSV(all){
   const q=v=>`"${String(v==null?"":v).replace(/"/g,'""')}"`;
   const rows=[["รหัส (ชื่อไฟล์)","ตัวละคร","บทพูด","คำแปล / หมายเหตุ","ด่าน","อัดแล้ว"]].concat(all.map(x=>[x.id||"(ใหม่ อัดในเกม)",(SPK_INFO[x.group]||[0,x.who])[1],x.text,x.th&&x.th!==x.text?x.th:"",x.stage?(x.stage>4?"หลังจบ":x.stage):"ทุกด่าน",CLIPS[x.key]?"✓":""]));
   saveFile(`wordfarm-script-${todayKey()}.csv`,"﻿"+rows.map(r=>r.map(q).join(",")).join("\r\n"),"text/csv");
+}
+/* ---------- voices that live next to the game on the website: voices/LIL-0001.mp3, voices/BGM-S1.mp3, voices/SONG1.mp3 ----------
+   Upload the recorded files to a "voices" folder beside index.html and every device that plays gets them, no importing.
+   A voice put in on this device (developer mode) wins over the website one. */
+const REMOTE=new Set();let remoteState={on:false,checked:0,found:0,total:0};
+function remoteVoicesAllowed(){
+  if(window.__WF_REMOTE_TEST)return true;
+  if(!/^https?:$/.test(location.protocol))return false;
+  if(/(^|\.)claude\.(ai|site|com)$|claudeusercontent|anthropic/.test(location.hostname))return false;
+  return true;
+}
+async function loadRemoteVoices(){
+  if(!remoteVoicesAllowed()||remoteState.on)return;remoteState.on=true;
+  const base=window.__WF_REMOTE_BASE||"voices/";
+  const jobs=[...BGM_SLOTS.map(([k])=>["bgm|"+k,"BGM-"+k.toUpperCase()]),...SONGS.map((s,i)=>["song|"+s.id,"SONG"+(i+1)]),...SCRIPT.map(r=>[r[1]+"|"+r[2],r[0]])];
+  remoteState.total=jobs.length;
+  /* one quick look first: no voices folder at all → stop, nothing else is asked for */
+  const probe=async(name)=>{try{const r=await fetch(base+name+".mp3",{method:"HEAD",cache:"no-cache"});return r.ok&&!/text\/html/.test(r.headers.get("content-type")||"");}catch(e){return false;}};
+  let i=0;
+  const worker=async()=>{while(i<jobs.length){const [k,name]=jobs[i++];
+      if(await probe(name)){REMOTE.add(k);remoteState.found++;if(!CLIPS[k]){CLIPS[k]=base+name+".mp3";if(k.startsWith("bgm|"))bgmCur="";}}
+      remoteState.checked++;}};
+  await Promise.all(Array.from({length:6},worker));
+  if(remoteState.found&&typeof devTab!=="undefined"&&!$("devModal").hidden)renderDev();
 }
 
 /* ---------- accounts: kids log in with 3 secret pictures, grown-ups with a username + password ---------- */
@@ -8720,7 +8745,7 @@ function boot(data){
   S=freshState("");
   if(innerWidth<600){$("quest").classList.add("collapsed");$("qChev").textContent="+";}
   placePlayer();rebuildPlayer();if(ok)snapCam();renderAll();
-  loadClips();
+  loadClips().then(()=>loadRemoteVoices()).catch(()=>loadRemoteVoices());
   const hotAcc=data&&data.acc&&ACC.find(a=>a.id===data.acc);
   if(hotAcc&&data.started)enterAccount(hotAcc);else showLogin("pick");
   requestAnimationFrame(frameLoop);
