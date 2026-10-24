@@ -351,6 +351,9 @@ body.joymode.lefty .pip{left:auto;right:max(16px,env(safe-area-inset-right,0px))
 .name-row{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-top:18px;font:500 22px var(--font-display)}
 .name-row input{font:600 22px var(--font-display);padding:9px 14px;border-radius:12px;border:3px solid var(--paper-edge);background:#fff;width:min(240px,100%);color:var(--ink);user-select:text;-webkit-user-select:text}
 .name-row input:focus{border-color:var(--leaf-light);outline:none}
+.name-en{margin-top:10px}.name-en .name-row{margin-top:6px}
+.en-name{display:flex;gap:8px;align-items:center}.en-name input,.cc-petname{font:600 18px var(--font-display);padding:8px 12px;border-radius:12px;border:3px solid var(--paper-edge);background:#fff;width:150px;color:var(--ink);user-select:text;-webkit-user-select:text}
+.en-name input:focus,.cc-petname:focus{border-color:var(--leaf-light);outline:none}
 .row{display:flex;gap:10px;flex-wrap:wrap;margin-top:18px;align-items:center}
 .note{font-size:13px;color:var(--ink-soft);margin-top:14px;line-height:1.5}
 .stages{display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));gap:8px;margin-top:16px}
@@ -845,6 +848,44 @@ body.th-ask #dialog:not(.th-show) .ptile .pt-en{font:600 18px/1.25 var(--font-di
   .st-face{width:52px;height:52px;margin-top:-34px}.qz-opt{min-height:112px;padding:8px 4px}.qz-vis img{width:44px;height:44px}.qz-coins img{width:22px;height:22px}
   .qz-en{font-size:20px}.stz-chips{grid-template-columns:repeat(2,minmax(0,1fr))}.st-acts{gap:6px}.st-acts .btn{padding:8px 12px}
 }
+
+/* ---------- song player ---------- */
+.song{width:min(620px,100%)}
+.sg-head{display:flex;align-items:center;gap:12px}
+.sg-face{position:relative;width:76px;height:76px;flex:none;border-radius:50%;background:#e3f3fc;border:3px solid var(--paper-edge)}
+.sg-face canvas{width:100%;height:100%;border-radius:50%}
+.sg-note{position:absolute;font-style:normal;font-size:20px;color:var(--berry);opacity:0}
+.sg-note.n1{right:-6px;top:-4px}.sg-note.n2{left:-8px;top:10px;color:var(--water)}
+#songModal.npc-turn .sg-note{animation:floatup 1.6s ease-in-out infinite}#songModal.npc-turn .sg-note.n2{animation-delay:.5s}
+#songModal.npc-turn .sg-face{animation:hop .5s ease-in-out infinite}
+.sg-tt{flex:1;min-width:0}.sg-tt h2{margin:2px 0 0}
+.sg-mode{margin-top:10px;font:500 15px var(--font-thai);color:var(--leaf)}
+.sg-lines{margin-top:10px;display:flex;flex-direction:column;gap:6px;max-height:min(46vh,380px);overflow-y:auto;padding:2px}
+.sg-line{border:3px solid var(--paper-edge);background:#fff;border-radius:14px;padding:8px 12px;cursor:pointer;transition:background .2s,border-color .2s,transform .2s}
+.sg-line b{display:block;font:600 22px/1.3 var(--font-display)}.sg-line .th{font-size:14px}
+.sg-line.on{border-color:var(--water);background:#eef8fe;transform:scale(1.02)}
+.sg-line.on.you{border-color:var(--leaf);background:#effae6}
+.sg-line.on.you::after{content:"🎤 ร้องตาม · Your turn!";display:block;font:600 13px var(--font-thai);color:var(--leaf);margin-top:2px}
+.sg-line.done{opacity:.6}
+.sg-done{margin-top:10px;font:600 17px var(--font-thai);color:var(--wood-dark);background:#fff3c4;border-radius:12px;padding:8px 12px}
+.sg-dev textarea{width:100%;font:500 15px/1.5 ui-monospace,monospace;border:2px solid var(--paper-edge);border-radius:10px;padding:8px;margin-top:4px;user-select:text;-webkit-user-select:text;background:#fff;color:var(--ink)}
+.sg-dev-row{display:flex;gap:8px;align-items:center;margin:6px 0}.sg-dev-row input{flex:1;font:600 15px var(--font-display);border:2px solid var(--paper-edge);border-radius:10px;padding:6px 10px;user-select:text;-webkit-user-select:text}
+.sg-l{display:block;font:500 13px var(--font-thai);color:var(--ink-soft);margin-top:6px}
+.sg-file{margin:6px 0}.sg-dev h3 small{display:block;font:400 12px var(--font-thai);color:var(--ink-soft)}
+.sg-file .tag{display:inline-block;font:600 12px var(--font-display);background:var(--leaf);color:#fff;border-radius:8px;padding:2px 8px}.sg-file .tag.off{background:#eee;color:#777}
+.sg-tap{background:#fff3c4;border-radius:10px;padding:8px;margin:6px 0;font:500 14px var(--font-thai);display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+@media (max-width:560px){.sg-line b{font-size:18px}.sg-face{width:60px;height:60px}}
+
+/* ---------- developer: voice lines ---------- */
+.vo-prog{position:relative;background:#f1e6cf;border-radius:10px;height:30px;overflow:hidden;margin-bottom:6px}
+.vo-prog b{position:relative;z-index:1;display:block;line-height:30px;padding:0 10px;font:600 15px var(--font-thai)}
+.vo-prog i{position:absolute;left:0;top:0;bottom:0;background:#bfe6a8}
+.vo-tabs{flex-wrap:wrap}.vo-tabs .tab small{opacity:.7}
+.vo-bar{display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin:8px 0}
+.vo-q{flex:1 1 220px;font:500 15px var(--font-thai);border:2px solid var(--paper-edge);border-radius:10px;padding:8px 10px;user-select:text;-webkit-user-select:text;background:#fff}
+.vo-id{display:inline-block;font:700 12px ui-monospace,monospace;background:#e3f3fc;color:#1b6fa0;border-radius:6px;padding:1px 6px;margin-right:6px}
+.vo-id.new{background:#fff3c4;color:#8a5a00}
+.dev-h{margin:14px 0 4px;font:600 17px var(--font-display)}
 @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
 </style>
 
@@ -940,6 +981,7 @@ body.th-ask #dialog:not(.th-show) .ptile .pt-en{font:600 18px/1.25 var(--font-di
     <div class="profile-row"><canvas id="setFace" width="96" height="96"></canvas><div class="pr-t"><span class="th keep">กำลังเล่นเป็น · <span id="setRole"></span></span><b id="setName"></b></div>
       <div class="pr-acts"><button class="btn ghost" id="outfitBtn" type="button">Change outfit<span class="th">เปลี่ยนชุด</span></button><button class="btn ghost" id="logoutBtn" type="button">Switch player<span class="th">เปลี่ยนผู้เล่น / ออกจากระบบ</span></button></div></div>
     <div class="setlist">
+      <div class="set" id="enNameRow" hidden><label class="st" for="optEnName"><b>ชื่อที่ตัวละครเรียก (ตัวอังกฤษ)</b><span class="th keep">ตัวละครพูดภาษาอังกฤษ อ่านชื่อภาษาไทยไม่ได้ จึงเรียกด้วยชื่อนี้แทน</span></label><span class="en-name"><input id="optEnName" type="text" maxlength="14" autocomplete="off"><button class="mini" id="optEnNameTest" type="button">▶ ลองฟัง</button></span></div>
       <div class="set"><span class="st"><b>วิธีตอบในเกม</b><span class="th keep" id="optModeNote"></span></span><div class="seg" id="optMode" role="radiogroup" aria-label="answer mode"><button type="button" role="radio" data-v="little">ฟังแล้วพูดตาม</button><button type="button" role="radio" data-v="big">เลือกคำตอบ</button></div></div>
       <div class="set"><span class="st"><b>การเดิน</b><span class="th keep" id="optCtrlNote"></span></span><div class="seg" id="optCtrl" role="radiogroup" aria-label="controls"><button type="button" role="radio" data-v="joy">จอยสติ๊ก</button><button type="button" role="radio" data-v="tap">แตะเพื่อเดิน</button></div></div>
       <div class="set" id="joyRow"><span class="st"><b>ตำแหน่งและขนาดจอย</b><span class="th keep">ถนัดซ้ายให้ย้ายจอยไปทางขวา ปุ่มใหญ่ไปทางซ้าย</span></span><div class="seg" id="optHand" role="radiogroup" aria-label="hand"><button type="button" role="radio" data-v="r">ถนัดขวา</button><button type="button" role="radio" data-v="l">ถนัดซ้าย</button></div><div class="seg" id="optJoySize" role="radiogroup" aria-label="joystick size"><button type="button" role="radio" data-v="s">เล็ก</button><button type="button" role="radio" data-v="m">กลาง</button><button type="button" role="radio" data-v="l">ใหญ่</button></div></div>
@@ -971,6 +1013,16 @@ body.th-ask #dialog:not(.th-show) .ptile .pt-en{font:600 18px/1.25 var(--font-di
     <div class="letter" id="letterBody"></div>
     <div class="lt-gift" id="letterGift" hidden></div>
     <div class="row"><button class="btn" id="letterOk" type="button">Thank you!<span class="th">ขอบคุณ</span></button></div>
+  </div>
+</div>
+<div class="modal" id="songModal" hidden>
+  <div class="sheet panel song">
+    <div class="sg-head"><div class="sg-face"><canvas id="sgFace" width="160" height="160"></canvas><i class="sg-note n1">♪</i><i class="sg-note n2">♫</i></div>
+      <div class="sg-tt"><div class="eyebrow">Song · เพลง</div><h2 id="sgTitle">Song</h2><div class="th keep" id="sgTh"></div></div><button class="x" id="sgClose" type="button" aria-label="close">✕</button></div>
+    <div class="sg-mode" id="sgMode"></div>
+    <div class="sg-lines" id="sgLines"></div>
+    <div class="sg-done" id="sgDone" hidden></div>
+    <div class="row"><button class="btn" id="sgPlay" type="button">▶ ร้องเลย<span class="th">Sing!</span></button><button class="btn ghost" id="sgAgain" type="button">↺ เริ่มใหม่<span class="th">Again</span></button></div>
   </div>
 </div>
 <div class="modal story" id="storyModal" hidden>
@@ -1727,6 +1779,59 @@ function readingOf(sentence){
 }
 const sylParts=w=>{const p=prOf(w);return (p&&p.syl?p.syl:String(w)).split("·");};
 const meaningOf=w=>{const p=prOf(w);return p&&p.mean?p.mean:"";};
+/* ---------- Thai names → letters the English voice can read (rough RTGS) ---------- */
+const hasThai=s=>/[฀-๿]/.test(String(s||""));
+const TH_INIT={"ก":"k","ข":"kh","ฃ":"kh","ค":"kh","ฅ":"kh","ฆ":"kh","ง":"ng","จ":"ch","ฉ":"ch","ช":"ch","ซ":"s","ฌ":"ch","ญ":"y","ฎ":"d","ฏ":"t","ฐ":"th","ฑ":"th","ฒ":"th","ณ":"n","ด":"d","ต":"t","ถ":"th","ท":"th","ธ":"th","น":"n","บ":"b","ป":"p","ผ":"ph","ฝ":"f","พ":"ph","ฟ":"f","ภ":"ph","ม":"m","ย":"y","ร":"r","ล":"l","ว":"w","ศ":"s","ษ":"s","ส":"s","ห":"h","ฬ":"l","อ":"","ฮ":"h"};
+const TH_FIN={"ก":"k","ข":"k","ค":"k","ฆ":"k","ง":"ng","จ":"t","ช":"t","ซ":"t","ฌ":"t","ญ":"n","ฎ":"t","ฏ":"t","ฐ":"t","ฑ":"t","ฒ":"t","ณ":"n","ด":"t","ต":"t","ถ":"t","ท":"t","ธ":"t","น":"n","บ":"p","ป":"p","พ":"p","ฟ":"p","ภ":"p","ม":"m","ย":"i","ร":"n","ล":"n","ว":"o","ศ":"t","ษ":"t","ส":"t","ฬ":"n","ฮ":"","อ":""};
+function romanizeThai(src){
+  let s=String(src||"").replace(/[่้๊๋็ๆ]/g,"").replace(/[ก-ฮ][ิุ]?์/g,"");
+  const isC=c=>!!c&&c in TH_INIT,PRE="เแโใไ",POST="ะัาำิีึืุูๅ",isP=c=>!!c&&POST.includes(c),isPre=c=>!!c&&PRE.includes(c);
+  const clus=(a,b)=>"กขคปพตบดฟ".includes(a)&&(b==="ร"||b==="ล"||(b==="ว"&&"กขค".includes(a)));
+  let i=0,out="";
+  while(i<s.length){
+    const ch=s[i];
+    if(!isC(ch)&&!isPre(ch)){if(/[a-zA-Z0-9]/.test(ch))out+=ch;i++;continue;}
+    let pre="";if(isPre(s[i]))pre=s[i++];
+    if(!isC(s[i])){i++;continue;}
+    let c1=s[i++],c2="";
+    if(c1==="ห"&&"งญนมยรลว".includes(s[i])&&s[i])c1=s[i++];
+    else if(c1==="อ"&&s[i]==="ย"&&(isP(s[i+1])||pre))c1=s[i++];
+    if(isC(s[i])&&clus(c1,s[i])&&(pre||isP(s[i+1])||s[i+1]==="อ"))c2=s[i++];
+    let marks="";while(i<s.length&&isP(s[i]))marks+=s[i++];
+    let v="";
+    if(pre==="เ"){
+      if(marks==="า")v="ao";else if(marks==="ี"&&s[i]==="ย"){v="ia";i++;}else if(marks==="ื"&&s[i]==="อ"){v="uea";i++;}
+      else if(marks==="ิ")v="oe";else if(!marks&&s[i]==="อ"&&!isP(s[i+1])){v="oe";i++;}
+      else v="e";}
+    else if(pre==="แ")v="ae";else if(pre==="โ")v="o";else if(pre==="ใ"||pre==="ไ")v="ai";
+    else if(marks){
+      if(marks==="ั"&&s[i]==="ว"){v="ua";i++;}
+      else v=marks.replace(/ั|ะ|า|ๅ/g,"a").replace(/ำ/g,"am").replace(/[ิี]/g,"i").replace(/[ึื]/g,"ue").replace(/[ุู]/g,"u");
+      v=v.replace(/a+/g,"a").replace(/i+/g,"i").replace(/u+/g,"u");}
+    else if(s[i]==="อ"&&c1!=="อ"&&!isP(s[i+1])){v="o";i++;}
+    else if(s[i]==="ว"&&isC(s[i+1])&&!isP(s[i+2])&&s[i+2]!=="อ"){v="ua";i++;}
+    let fin="";
+    const n1=s[i+1]||"";
+    /* a consonant closes this syllable unless a vowel after it makes it the start of the next one */
+    if(isC(s[i])&&s[i]!=="อ"&&!isP(n1)&&n1!=="อ")fin=s[i++];
+    if(!v)v=fin?"o":"a";
+    let f=fin?TH_FIN[fin]||"":"";
+    if(fin==="ย"&&v==="e")v="oe";
+    if(fin==="ว"&&(v==="i"||v==="ia"))f="u";
+    out+=(TH_INIT[c1]||"")+(c2?TH_INIT[c2]:"")+v+f;
+  }
+  out=out.replace(/([a-z])\1\1+/g,"$1$1");
+  return out?out.charAt(0).toUpperCase()+out.slice(1):"";
+}
+/* names the English voices say: a Thai name is read from the English spelling the grown-up typed, or a romanized guess */
+function nameEn(){if(!S||!S.name)return "";if(CUR&&CUR.enName)return CUR.enName;return hasThai(S.name)?(romanizeThai(S.name)||"friend"):S.name;}
+function petNameEn(p){p=p||(S&&S.look&&S.look.pet)||{};const n=p.name||"";return hasThai(n)?(romanizeThai(n)||"buddy"):n;}
+function speakableNames(t){
+  if(!S||!t)return t;t=String(t);
+  if(S.name&&hasThai(S.name))t=t.split(S.name).join(nameEn());
+  const p=S.look&&S.look.pet;if(p&&p.name&&hasThai(p.name))t=t.split(p.name).join(petNameEn(p));
+  return t;
+}
 
 /* ---------- voice: speech recognition (works where the page may use the microphone) ---------- */
 const SR=window.SpeechRecognition||window.webkitSpeechRecognition;
@@ -2775,8 +2880,10 @@ const SONG={
        [69,72,77,0,81,0,79,77],[76,0,79,0,76,0,72,0],[74,0,77,0,74,72,70,69],[67,0,72,0,76,0,0,0]],
 };
 let musicOn=false,nextT=0,stepI=0,schedTimer=null,nightMode=false;
-function musicStart(){if(!AC||musicOn)return;musicOn=true;nextT=AC.currentTime+.2;stepI=0;schedTimer=setInterval(schedule,30);}
-function musicStop(){musicOn=false;if(schedTimer)clearInterval(schedTimer);schedTimer=null;}
+let musicHeld=true;/* music was stopped on purpose (sleeping, time's up, a song): nothing restarts it until musicStart() */
+function musicStart(){if(!AC)return;musicHeld=false;if(bgmPick()){bgmTick();return;}startTune();}
+function startTune(){if(!AC||musicOn)return;musicOn=true;nextT=AC.currentTime+.2;stepI=0;schedTimer=setInterval(schedule,30);}
+function musicStop(tuneOnly){musicOn=false;if(schedTimer)clearInterval(schedTimer);schedTimer=null;if(!tuneOnly){musicHeld=true;if(bgmEl){try{bgmEl.pause();}catch(e){}bgmCur="";}}}
 function schedule(){
   if(!AC||!musicOn)return;
   while(nextT<AC.currentTime+.2){
@@ -2866,47 +2973,62 @@ const VOICE_DEF={
 function voiceCfg(who){const d=VOICE_DEF[who]||VOICE_DEF.narr,c=(S&&S.voiceCfg&&S.voiceCfg[who])||{};
   return {pitch:c.pitch!==undefined?c.pitch:d.pitch,rate:c.rate!==undefined?c.rate:d.rate,voiceURI:c.voiceURI||"",lang:d.lang,pref:d.pref};}
 const langPool=lang=>{let p=VOICES.filter(v=>lang==="th"?/^th/i.test(v.lang):/^en[-_]US/i.test(v.lang));if(!p.length&&lang!=="th")p=VOICES.filter(v=>/^en/i.test(v.lang));return p;};
-function pickVoiceFor(who){
-  if(!VOICES.length)loadVoices();const cfg=voiceCfg(who);
-  if(cfg.voiceURI){const v=VOICES.find(v=>v.voiceURI===cfg.voiceURI);if(v)return v;}
-  const pool=langPool(cfg.lang);if(!pool.length)return null;
+function pickVoiceFor(who,lang){
+  if(!VOICES.length)loadVoices();const cfg=voiceCfg(who);lang=lang||cfg.lang;
+  if(cfg.voiceURI&&lang===cfg.lang){const v=VOICES.find(v=>v.voiceURI===cfg.voiceURI);if(v)return v;}
+  const pool=langPool(lang);if(!pool.length)return null;
   if(cfg.pref==="m")return pool.find(v=>MAL.test(v.name)&&!/female/i.test(v.name))||pool[0];
   return pool.find(v=>FEM.test(v.name))||pool[0];
 }
 const hasThaiVoice=()=>{if(!VOICES.length)loadVoices();return VOICES.some(v=>/^th/i.test(v.lang));};
+let karaoke=false;/* true while a sentence is read word by word (those single words are not lines to record) */
 const sq=[];let sqBusy=false,sqGen=0,curAudio=null,sqTimer=null;
 function speak(text,interrupt=true,who="narr",rateMul=1,onStart=null,onEnd=null){
   if(!S||!text)return;
-  if(((VOICE_DEF[who]||{}).lang==="th")?!S.thaiVoice:!S.sound){if(onEnd)setTimeout(onEnd,0);return;}
+  if(window.__WF_HARVEST&&!karaoke)(window.__harvest=window.__harvest||[]).push([who,keyFor(who,text),(QUESTS[S.q]||{stage:5}).stage]);
+  /* Thai lines follow the Thai-voice switch, whoever says them (friends speak Thai in the story too) */
+  const thLine=((VOICE_DEF[who]||{}).lang==="th")||hasThai(speakableNames(String(text)));/* a Thai name inside an English line does not count */
+  if(thLine?!S.thaiVoice:!S.sound){if(onEnd)setTimeout(onEnd,0);return;}
   if(interrupt)sqClear();
-  logLine(who,text);sq.push({text:String(text),who,rateMul,onStart,onEnd});pump();
+  logLine(who,text);
+  const prep=t=>stripEmoji(thLine?String(t):speakableNames(t));
+  /* a long line with no recording of its own plays sentence by sentence, so recorded sentences are used where they exist */
+  const parts=splitSentences(text);
+  if(parts.length>1&&!clipFor(who,text)&&parts.some(p=>clipFor(who,p))){
+    parts.forEach((p,i)=>sq.push({text:prep(p),orig:p,who,rateMul,onStart:i?null:onStart,onEnd:i===parts.length-1?onEnd:null}));pump();return;}
+  sq.push({text:prep(text),orig:String(text),who,rateMul,onStart,onEnd});pump();
 }
+const stripEmoji=t=>String(t).replace(/[\u{1F300}-\u{1FAFF}\u{2600}-\u{27BF}\u{2B00}-\u{2BFF}]\u{FE0F}?/gu,"").replace(/\s{2,}/g," ").trim();
+function splitSentences(t){const m=stripEmoji(t).match(/[^.!?…]+(?:[.!?…]+["')]?|$)/g);return (m||[String(t)]).map(x=>x.trim()).filter(Boolean);}
 function sqClear(){sq.length=0;sqGen++;sqBusy=false;clearTimeout(sqTimer);try{if(canSpeak)speechSynthesis.cancel();}catch(e){}
   if(curAudio){try{curAudio.pause();}catch(e){}curAudio=null;}duck(false);pipTalk(false);hiChoice(null);}
 function pump(){
   if(sqBusy||!sq.length)return;
   const it=sq.shift(),gen=++sqGen;sqBusy=true;duck(true);if(it.who==="pip"||it.who==="pipen")pipTalk(true);if(it.onStart)try{it.onStart();}catch(e){}
   const done=()=>{if(gen!==sqGen)return;sqGen++;sqBusy=false;clearTimeout(sqTimer);curAudio=null;pipTalk(false);hiChoice(null);if(!sq.length)duck(false);if(it.onEnd)try{it.onEnd();}catch(e){}pump();};
-  const clip=clipFor(it.who,it.text);
+  const clip=clipFor(it.who,it.orig||it.text);
   if(clip){
-    try{const a=new Audio(clip);curAudio=a;try{a.playbackRate=Math.max(.5,Math.min(1.5,(it.rateMul||1)*(S.speechRate||1)));}catch(e){}a.onended=done;a.onerror=()=>{if(gen===sqGen){curAudio=null;ttsSay(it,done);}};
+    /* recordings play at their natural speed; only the deliberate slow replays are slowed a little */
+    try{const a=new Audio(clip);curAudio=a;try{const r=it.rateMul||1;a.playbackRate=r<.75?Math.max(.6,r+.12):1;}catch(e){}a.onended=done;a.onerror=()=>{if(gen===sqGen){curAudio=null;ttsSay(it,done);}};
       const p=a.play();if(p&&p.catch)p.catch(()=>{if(gen===sqGen){curAudio=null;ttsSay(it,done);}});sqTimer=setTimeout(done,25000);return;}catch(e){}
   }
   ttsSay(it,done);
 }
 function ttsSay(it,done){
-  const cfg=voiceCfg(it.who);
-  if(!canSpeak||(cfg.lang==="th"&&!hasThaiVoice())){clearTimeout(sqTimer);sqTimer=setTimeout(done,cfg.lang==="th"?Math.min(5000,900+it.text.length*45):10);return;}
+  const cfg=voiceCfg(it.who),lang=(cfg.lang==="th"||hasThai(it.text))?"th":"en";
+  if(!canSpeak||(lang==="th"&&!hasThaiVoice())){clearTimeout(sqTimer);sqTimer=setTimeout(done,lang==="th"?Math.min(5000,900+it.text.length*45):10);return;}
   try{
-    const u=new SpeechSynthesisUtterance(it.text.replace(/[·…]/g,", "));u.lang=cfg.lang==="th"?"th-TH":"en-US";
-    const v=pickVoiceFor(it.who);if(v)u.voice=v;u.pitch=cfg.pitch;u.rate=Math.max(.35,Math.min(1.6,cfg.rate*(it.rateMul||1)*(S.speechRate||1)));u.onend=done;u.onerror=done;
+    const u=new SpeechSynthesisUtterance(it.text.replace(/[·…]/g,", "));u.lang=lang==="th"?"th-TH":"en-US";
+    const v=pickVoiceFor(it.who,lang);if(v)u.voice=v;u.pitch=cfg.pitch;u.rate=Math.max(.35,Math.min(1.6,cfg.rate*(it.rateMul||1)*(S.speechRate||1)));u.onend=done;u.onerror=done;
     speechSynthesis.speak(u);clearTimeout(sqTimer);sqTimer=setTimeout(done,Math.min(20000,2500+it.text.length*120/u.rate));
   }catch(e){done();}
 }
 
 /* recorded voice clips (developer mode), kept in this browser's IndexedDB */
 const CLIPS={};let idb=null;
-const keyFor=(who,text)=>{let t=String(text);if(S&&S.name&&S.name.length>1)t=t.split(S.name).join("{name}");return who+"|"+t;};
+/* a line is found by who says it and its words; the player's and the pet's names become {name} and {pet}, so one recording fits every player */
+const keyFor=(who,text)=>{let t=String(text);if(S&&S.name&&S.name.length>1)t=t.split(S.name).join("{name}");
+  const pn=S&&S.look&&S.look.pet&&S.look.pet.name;if(pn&&pn.length>1)t=t.split(pn).join("{pet}");return who+"|"+t;};
 const clipFor=(who,text)=>CLIPS[keyFor(who,text)]||null;
 function idbOpen(){return new Promise(res=>{try{const r=indexedDB.open("wordfarm-voice",1);r.onupgradeneeded=()=>r.result.createObjectStore("clips");r.onsuccess=()=>{idb=r.result;res(idb);};r.onerror=()=>res(null);}catch(e){res(null);}});}
 function idbAll(){return new Promise(res=>{if(!idb)return res([]);try{const out=[],rq=idb.transaction("clips","readonly").objectStore("clips").openCursor();
@@ -2920,7 +3042,7 @@ async function delClip(k){await idbDel(k);try{if(CLIPS[k])URL.revokeObjectURL(CL
 const LINES_KEY="wordfarm-lines-v1";let LINES=[];
 try{LINES=JSON.parse(localStorage.getItem(LINES_KEY)||"[]");if(!Array.isArray(LINES))LINES=[];}catch(e){LINES=[];}
 let linesDirty=false;
-function logLine(who,text){const k=keyFor(who,text);if(LINES.some(l=>l[0]===k))return;LINES.push([k,who]);if(LINES.length>600)LINES.shift();linesDirty=true;}
+function logLine(who,text){if(karaoke)return;const k=keyFor(who,text);if(LINES.some(l=>l[0]===k))return;LINES.push([k,who]);if(LINES.length>4000)LINES.shift();linesDirty=true;}
 setInterval(()=>{if(linesDirty){linesDirty=false;try{localStorage.setItem(LINES_KEY,JSON.stringify(LINES));}catch(e){}}},5000);
 
 /* ---------- Pip: the little Thai-speaking helper ---------- */
@@ -3001,6 +3123,7 @@ function syncSettings(){
   $("optDiffNote").textContent={easy:"ง่าย = พูดคำสำคัญได้บางคำก็ผ่าน เหมาะกับเด็กเล็ก",mid:"กลาง = ต้องพูดได้ประมาณครึ่งประโยคขึ้นไป",hard:"ยาก = ต้องพูดชัดเกือบทุกคำ เหมาะกับเด็กโตที่อยากฝึกจริงจัง"}[S.diff||"easy"];$("optRate").value=S.speechRate||.9;
   const ta=S.thaiAuto===false?"on":"auto";$("optThaiAuto").querySelectorAll("button").forEach(b=>b.setAttribute("aria-checked",String(b.dataset.v===ta)));
   $("optThaiAutoNote").textContent=ta==="auto"?`ด่าน ★ แสดงคำแปลเลย · ด่าน ★★ ขึ้นไป ซ่อนไว้ใต้ปุ่ม ? (ตอนนี้อยู่ด่าน ${Math.min(4,stageNow())} ${"★".repeat(stageStars())})`:"แสดงคำแปลไทยทุกด่าน (ง่ายขึ้น)";
+  const thName=!!CUR&&hasThai(CUR.name);$("enNameRow").hidden=!thName;if(thName&&document.activeElement!==$("optEnName"))$("optEnName").value=nameEn();
   $("optThai").checked=S.thai;$("optMusic").checked=S.music;$("optMusicVol").value=S.musicVol;$("optSfx").checked=S.sfx;$("optSfxVol").value=S.sfxVol;
 }
 function openSettings(){syncSettings();renderProfile();openModal("setModal");}
@@ -3013,6 +3136,8 @@ $("optSound").onchange=e=>{S.sound=e.target.checked;if(!S.sound)sqClear();else s
 $("optThaiVoice").onchange=e=>{S.thaiVoice=e.target.checked;save();if(S.thaiVoice)pipSay("เปิดเสียงปิ๊บแล้วจ้า");else sqClear();};
 $("optVoice").onchange=e=>{S.voice=e.target.checked;applyPrefs();save();};
 $("optThai").onchange=e=>{S.thai=e.target.checked;applyPrefs();save();};
+$("optEnName").onchange=()=>{if(!CUR)return;const v=$("optEnName").value.replace(/[^A-Za-z .'-]/g,"").trim().slice(0,14);CUR.enName=v;saveAccounts();$("optEnName").value=nameEn();speak(`Hello, ${nameEn()}!`,true,"lily");};
+$("optEnNameTest").onclick=()=>{audioInit();speak(`Hello, ${nameEn()}! Nice to meet you!`,true,"lily");};
 $("optThaiAuto").querySelectorAll("button").forEach(b=>b.onclick=()=>{S.thaiAuto=b.dataset.v==="auto";save();syncSettings();applyPrefs();sfx.tap();});
 $("optDiff").querySelectorAll("button").forEach(b=>b.onclick=()=>{S.diff=b.dataset.v;save();syncSettings();sfx.tap();});
 $("optCtrl").querySelectorAll("button").forEach(b=>b.onclick=()=>{S.ctrl=b.dataset.v;save();syncSettings();updateActBtn();joyDraw();sfx.tap();});
@@ -3038,7 +3163,7 @@ let devTab="accounts",devWho="lily",recState=null,recBlocked=false,devPicFor=nul
 $("devBtn").onclick=()=>{closeModal("setModal");openDev();};
 $("devClose").onclick=()=>{stopRec();closeModal("devModal");};
 function openDev(){if(!CUR||CUR.role!=="dev")return;openModal("devModal");renderDev();}
-const DEV_TABS=[["accounts","บัญชีผู้ใช้ & ความคืบหน้า"],["voices","เสียงตัวละคร"],["lines","อัด/ใส่เสียงบทพูด"],["test","ทดสอบเกม"],["data","ส่งออก/นำเข้า"]];
+const DEV_TABS=[["accounts","บัญชีผู้ใช้ & ความคืบหน้า"],["voices","เสียงตัวละคร"],["lines","อัด/ใส่เสียงบทพูด"],["songs","เพลง & BGM"],["test","ทดสอบเกม"],["data","ส่งออก/นำเข้า"]];
 const SEED={
   lily:["Hello! I'm Lily. What's your name?","Nice to meet you, {name}!","This is a carrot seed. Can you say it?","Let's grow vegetables! Here are four carrot seeds.",
     "Good morning, {name}!","Good afternoon, {name}!","Good evening, {name}!","Hello, {name}!","Use the hoe to dig. Then plant the seeds.",
@@ -3087,6 +3212,8 @@ function renderDev(){
     b.onclick=()=>{stopRec();devTab=id;renderDev();};tabs.append(b);});
   const body=$("devBody");body.innerHTML="";
   if(devTab==="accounts"){renderDevAccounts(body);return;}
+  if(devTab==="songs"){renderDevSongs(body);return;}
+  if(devTab==="lines"){renderDevLines(body);return;}
   if(devTab==="voices"){
     const n=el("p","devnote");n.textContent="เลือกเสียงและปรับความสูง-ความเร็วให้เข้ากับตัวละคร เสียงที่มีให้เลือกขึ้นกับเครื่องที่ใช้เล่น (iPad, Android, คอม จะได้เสียงต่างกัน)"+(hasThaiVoice()?"":" · เครื่องนี้ยังไม่มีเสียงอ่านภาษาไทย ติดตั้งได้ในการตั้งค่าภาษาของเครื่อง");body.append(n);
     for(const who of Object.keys(VOICE_DEF)){
@@ -3100,26 +3227,6 @@ function renderDev(){
       const acts=el("div","dev-acts");acts.style.justifyContent="flex-start";
       acts.append(devBtnEl("▶ ลองฟัง","",()=>speak(d.sample,true,who)),devBtnEl("ค่าเริ่มต้น","",()=>{if(S.voiceCfg)delete S.voiceCfg[who];save();renderDev();}));
       card.append(acts);body.append(card);
-    }
-  }else if(devTab==="lines"){
-    const sub=el("div","tabs");sub.style.marginTop="0";
-    WHO_TABS.forEach(([id,lab])=>{const b=el("button","tab");b.type="button";b.setAttribute("aria-selected",String(id===devWho));b.textContent=lab;b.onclick=()=>{stopRec();devWho=id;renderDev();};sub.append(b);});
-    body.append(sub);
-    const note=el("p","devnote");
-    note.textContent=(canRecord()?"กด ● อัด แล้วพูดบทนั้น กดอีกครั้งเพื่อหยุด (อัดได้ครั้งละไม่เกิน 15 วินาที) ":"หน้านี้อัดเสียงผ่านไมค์ไม่ได้ ใช้ปุ่ม ⬆ ไฟล์ เพื่อใส่ไฟล์เสียงที่อัดจากมือถือแทน ")+
-      "· เสียงที่อัดจะใช้แทนเสียงเครื่องทันที · บทพูดที่มีตัวเลขหรือจำนวนต่างกันจะขึ้นมาเองหลังจากเล่นเกมไปถึงตรงนั้น · {name} คือชื่อเด็ก ตอนอัดให้ข้ามชื่อไปได้";
-    body.append(note);
-    const keys=linesFor(devWho);
-    if(!keys.length){const p=el("p","devnote");p.textContent="ยังไม่มีบทพูดในหมวดนี้ ลองเล่นเกมไปก่อนแล้วกลับมาดู";body.append(p);}
-    for(const k of keys){
-      const row=el("div","dev-row"),txt=k.slice(k.indexOf("|")+1),has=!!CLIPS[k];
-      const dt=el("div","dt");dt.innerHTML=`${esc(txt)}${has?'<span class="tag">เสียงอัดเอง</span>':""}<small>${has?"ใช้เสียงที่อัดไว้":"ใช้เสียงของเครื่อง"}</small>`;
-      const acts=el("div","dev-acts");acts.append(devBtnEl("▶ ฟัง","",()=>playLine(k)));
-      if(canRecord()){const rb=devBtnEl(recState&&recState.k===k?"■ หยุดอัด":"● อัด","rec"+(recState&&recState.k===k?" on":""),()=>toggleRecord(k,rb));acts.append(rb);}
-      const fi=el("input");fi.type="file";fi.accept="audio/*";fi.hidden=true;fi.onchange=async()=>{const f=fi.files&&fi.files[0];if(f){await setClip(k,f);toast("Saved","ใส่ไฟล์เสียงแล้ว",{say:false,ms:1500});renderDev();}};
-      acts.append(fi,devBtnEl("⬆ ไฟล์","",()=>fi.click()));
-      if(has)acts.append(devBtnEl("✕ ลบ","",async()=>{await delClip(k);renderDev();}));
-      row.append(dt,acts);body.append(row);
     }
   }else if(devTab==="test"){
     const n=el("p","devnote");n.textContent="ปุ่มลัดสำหรับทดสอบเควสให้เร็วขึ้น (เด็กไม่เห็นหน้านี้)";body.append(n);
@@ -3150,9 +3257,9 @@ function renderDev(){
 function blobToDataURL(b){return new Promise(res=>{const r=new FileReader();r.onload=()=>res(r.result);r.onerror=()=>res("");r.readAsDataURL(b);});}
 async function exportVoices(){
   const all=await idbAll();
-  if(!all.length&&!Object.keys(S.voiceCfg||{}).length)return toast("Nothing yet","ยังไม่มีเสียงที่อัดหรือการตั้งค่าเสียงให้ส่งออก",{say:false});
+  if(!all.length&&!Object.keys(S.voiceCfg||{}).length&&!Object.keys(songStore()).length)return toast("Nothing yet","ยังไม่มีเสียงที่อัดหรือการตั้งค่าเสียงให้ส่งออก",{say:false});
   const clips=[];for(const [k,b] of all)if(b instanceof Blob)clips.push({k,d:await blobToDataURL(b)});
-  const json=JSON.stringify({app:"wordfarm-voice",v:1,voiceCfg:S.voiceCfg||{},clips}),name="wordfarm-voices.json";
+  const json=JSON.stringify({app:"wordfarm-voice",v:1,voiceCfg:S.voiceCfg||{},clips,songs:songStore()}),name="wordfarm-voices.json";
   const inViewer=!!(window.claude&&window.claude.use);
   if(inViewer){
     let dl=null;try{dl=await window.claude.use("downloads");}catch(e){}
@@ -3173,6 +3280,7 @@ async function importVoices(file){
       const bin=atob(m[3]),u=new Uint8Array(bin.length);for(let i=0;i<bin.length;i++)u[i]=bin.charCodeAt(i);
       await setClip(String(c.k),new Blob([u],{type:m[1]||"audio/webm"}));n++;}
     if(j.voiceCfg&&typeof j.voiceCfg==="object")S.voiceCfg=Object.assign({},S.voiceCfg,j.voiceCfg);
+    if(j.songs&&typeof j.songs==="object")songStoreSet(Object.assign(songStore(),j.songs));
     save();toast(`Imported ${n}`,`นำเข้าเสียง ${n} บทแล้ว`,{say:false});renderDev();
   }catch(e){toast("Import failed","ไฟล์นี้ไม่ใช่ชุดเสียงของ Word Farm",{say:false});}
 }
@@ -3485,6 +3593,7 @@ function addXP(n){const before=levelOf(S.xp);S.xp+=n;const lv=levelOf(S.xp);
   if(lv>before){sfx.level();toast(`Level up! Level ${lv}`,`เลเวลอัป! ตอนนี้เลเวล ${lv}`,{kind:"gold",img:spriteURL("star"),sayText:`Level up! Level ${numWord(lv)}!`});}
   renderHUD();}
 function learn(id){
+  if(window.__WF_TEST&&id&&WORDS[id]&&S)(window.__learnLog=window.__learnLog||[]).push((curQ().stage||5)+"|"+id);
   if(!id||!WORDS[id]||!S||S.words[id])return;
   S.words[id]=true;const w=WORDS[id];sfx.word();lifeNew();
   S.wmeta=S.wmeta||{};S.wmeta[id]=[todayKey(),Math.min(4,curQ().stage||1)];
@@ -3499,7 +3608,7 @@ function markSpoken(id,force,stars){
 function progress(n){const q=curQ();if(!q.goal)return;S.qc=Math.min(q.goal,S.qc+n);renderQuest();if(S.qc>=q.goal)completeQuest();}
 function completeQuest(){
   const q=curQ();if(q.id==="done")return;
-  S.q++;S.qc=0;S.coins+=10;sfx.quest();emote("you","happy",2600);
+  S.q++;S.qc=0;S.coins+=10;sfx.quest();emote("you","happy",2600);songAfterQuest(q.id);
   toast(`Quest complete! ${q.en}`,"ทำเควสสำเร็จ! ได้ 10 เหรียญ",{kind:"gold",img:spriteURL("star"),sayText:"Quest complete! Great job!"});
   speak("Quest complete! Great job!",false);
   addXP(5);renderHUD();renderQuest();renderTools();save();
@@ -3669,6 +3778,7 @@ function showDlg(node){
     const go=()=>{sfx.tap();(node.next||closeDialog)();};b.onclick=go;dlg.primary=go;row.append(b);ex.append(row);
   }
   $("dialog").hidden=false;updateBusy();if(!wasOpen)sfx.open();
+  if(window.__WF_HARVEST&&node.en&&node.th)(window.__harvestTh=window.__harvestTh||{})[keyFor(node.who||"narr",node.en)]=node.th;
   speak(node.en,!dlg.afterChoice,node.who||"narr");dlg.afterChoice=false;talkFx(node.who,node.en,who.look);
   if(little){
     if(node.tip){const k=node.tipKey||node.tip;tipCount[k]=(tipCount[k]||0)+1;if(tipCount[k]<=2)pipSay(node.tip);}
@@ -3714,6 +3824,7 @@ function goChoice(c,spoken,stars){stopListen();if(!spoken)sfx.tap();else{lifeSpe
 function repeatCard(ex,o){
   if(window.__WF_TEST)(window.__sayLog=window.__sayLog||[]).push((curQ().stage||0)+"|"+o.en);
   const node=o.node,voiceMode=S.voice&&voiceUsable(),target=gradedSay(o.en),words=target.split(/\s+/).filter(Boolean);
+  if(window.__WF_HARVEST&&o.th)(window.__harvestTh=window.__harvestTh||{})[keyFor("you",target)]=o.th;
   const card=el("div","rcard"+(o.img?"":" noimg")),alive=()=>dlg.open&&dlg.node===node&&card.isConnected;
   card.innerHTML=(o.img?`<img class="rc-img" src="${spriteURL(o.img)}" alt="">`:"")+
     `<div class="rc-body"><span class="rc-lbl">ฟังแล้วพูดตาม · Say it!</span><p class="rc-en">${words.map(w=>`<span class="rw">${esc(w)}</span>`).join(" ")}</p>`+
@@ -3726,9 +3837,10 @@ function repeatCard(ex,o){
     const first=!modelHeard.has(target);modelHeard.add(target);card.classList.remove("ready");if(mic)mic.classList.remove("ready");
     const fin=()=>{if(!alive())return;card.classList.add("ready");ready();
       if(!turnHintShown&&voiceMode){turnHintShown=true;pipSay("ถึงตาเราแล้ว แตะไมค์สีแดงแล้วพูดตามเลย");}};
-    const byWord=words.length>1&&words.length<=8&&(first||slow);
+    /* word by word only with the computer voice: a recorded line is already clear and natural */
+    const byWord=words.length>1&&words.length<=8&&(first||slow)&&!clipFor("you",target);
     speak(target,false,"you",slow?.62:.85,()=>lit(card),byWord?null:fin);
-    if(byWord)words.forEach((w,i)=>speak(bareWord(w)||w,false,"you",.72,()=>lit(spans[i]),i===words.length-1?fin:null));
+    if(byWord){karaoke=true;words.forEach((w,i)=>speak(bareWord(w)||w,false,"you",.72,()=>lit(spans[i]),i===words.length-1?fin:null));karaoke=false;}
   };
   const stopMic=()=>{if(recog){stopListen();if(mic)mic.classList.remove("listening");if(heard)heard.textContent="";}};
   play.onclick=e=>{e.stopPropagation();audioInit();stopMic();sqClear();model(true);};
@@ -4030,7 +4142,7 @@ function maxColor(t){
 }
 function maxPay(t,c){
   const D=DECOR[t];
-  showDlg({who:"max",img:`${t}_${c}`,en:`A ${c} ${D.en}. That's ${D.price} coins.`,th:`${D.th}${COLORS[c].th} ราคา ${D.price} เหรียญ`,choices:[
+  showDlg({who:"max",img:`${t}_${c}`,en:`${cap(aN(c))} ${D.en}. That's ${D.price} coins.`,th:`${D.th}${COLORS[c].th} ราคา ${D.price} เหรียญ`,choices:[
     {en:"Here you are.",th:"นี่จ้ะ (จ่ายเงิน)",go:()=>{
       if(S.coins<D.price)return showDlg({who:"max",en:`Oh no! You have ${S.coins} coins. You need ${D.price} coins.`,th:`มีอยู่ ${S.coins} เหรียญ ต้องใช้ ${D.price} เหรียญ ลองไปขายของที่ตลาดก่อนนะ`});
       S.coins-=D.price;addDecorItem(t,c);sfx.coin();markSpoken("hereyou");renderHUD();renderTools();save();
@@ -4450,7 +4562,7 @@ function showStageClear(st,final){
 }
 
 /* ---------- UI rendering ---------- */
-const MODALS=["loginModal","bookModal","morningModal","clearModal","setModal","devModal","coachModal","creatorModal","procModal","timeModal","parentModal","testModal","mapModal","dayModal","letterModal","diaryModal","storyModal"];
+const MODALS=["loginModal","bookModal","morningModal","clearModal","setModal","devModal","coachModal","creatorModal","procModal","timeModal","parentModal","testModal","mapModal","dayModal","letterModal","diaryModal","storyModal","songModal"];
 const modalOpen=()=>MODALS.some(id=>!$(id).hidden);
 const busy=()=>dlg.open||modalOpen()||sleeping||!started;
 function updateBusy(){document.body.classList.toggle("busy",dlg.open||modalOpen()||sleeping);}
@@ -4515,9 +4627,11 @@ function renderBook(){
   const tabs=$("bookTabs");tabs.innerHTML="";const all=Object.values(WORDS),vu=voiceUsable();
   const rev=S.review||{},revN=all.filter(w=>rev[w.id]&&S.words[w.id]).length;
   if(bookCat==="review"&&!revN)bookCat="veg";
-  const cats=(revN?[{id:"review",en:"Practice",th:"ฝึกเพิ่ม"}]:[]).concat([{id:"story",en:"Story",th:"เรื่องราว"},{id:"stickers",en:"Stickers",th:"สติกเกอร์"}],CATS);
+  const cats=(revN?[{id:"review",en:"Practice",th:"ฝึกเพิ่ม"}]:[]).concat([{id:"story",en:"Story",th:"เรื่องราว"},{id:"songs",en:"Songs",th:"เพลง"},{id:"stickers",en:"Stickers",th:"สติกเกอร์"}],CATS);
   const inCat=(w,id)=>id==="review"?!!(rev[w.id]&&S.words[w.id]):w.cat===id;
-  cats.forEach(c=>{if(c.id==="story"){const f=storyFlag(),n=STORY_ORDER.filter(id=>f.seen[id]).length,b=el("button","tab stb-tab");b.type="button";b.setAttribute("role","tab");b.setAttribute("aria-selected",String(bookCat==="story"));
+  cats.forEach(c=>{if(c.id==="songs"){const n=SONGS.filter(s=>songUnlocked(s.id)).length,b=el("button","tab stb-tab");b.type="button";b.setAttribute("role","tab");b.setAttribute("aria-selected",String(bookCat==="songs"));
+      b.innerHTML=`🎵 ${esc(c.en)} <span class="th keep" style="font-size:12px;color:inherit">${esc(c.th)}</span> <small>${n}/${SONGS.length}</small>`;b.onclick=()=>{stopListen();bookCat="songs";renderBook();};tabs.append(b);return;}
+    if(c.id==="story"){const f=storyFlag(),n=STORY_ORDER.filter(id=>f.seen[id]).length,b=el("button","tab stb-tab");b.type="button";b.setAttribute("role","tab");b.setAttribute("aria-selected",String(bookCat==="story"));
       b.innerHTML=`📖 ${esc(c.en)} <span class="th keep" style="font-size:12px;color:inherit">${esc(c.th)}</span> <small>${n}/${STORY_ORDER.length}</small>`;b.onclick=()=>{stopListen();bookCat="story";renderBook();};tabs.append(b);return;}
     if(c.id==="stickers"){const n=Object.keys(S.stickers||{}).length,b=el("button","tab stk-tab");b.type="button";b.setAttribute("role","tab");b.setAttribute("aria-selected",String(bookCat==="stickers"));
       b.innerHTML=`⭐ ${esc(c.en)} <span class="th keep" style="font-size:12px;color:inherit">${esc(c.th)}</span> <small>${n}/${STICKER_LIST.length}</small>`;b.onclick=()=>{stopListen();bookCat="stickers";renderBook();};tabs.append(b);return;}
@@ -4526,6 +4640,7 @@ function renderBook(){
     b.innerHTML=`${esc(c.en)} <span class="th keep" style="font-size:12px;color:inherit">${esc(c.th)}</span> <small>${c.id==="review"?ws.length:got+"/"+ws.length}</small>`;
     b.onclick=()=>{stopListen();bookCat=c.id;renderBook();};tabs.append(b);});
   const grid=$("bookWords");grid.innerHTML="";
+  if(bookCat==="songs"){renderSongBook(grid);$("bookCount").textContent=bookCountText();$("bookNote").textContent="แตะเพลงเพื่อร้องตาม · เพลงใหม่ปลดล็อกเมื่อทำเควสของแต่ละด่าน";return;}
   if(bookCat==="story"){renderStoryBook(grid);$("bookCount").textContent=bookCountText();$("bookNote").textContent="แตะเพื่อดูเรื่องราวอีกครั้ง · ตอนที่ยังไม่ถึงจะล็อกไว้";return;}
   if(bookCat==="stickers"){renderStickers(grid);$("bookCount").textContent=bookCountText();$("bookNote").textContent="สติกเกอร์ได้จากการจับแมลง ตกปลา เก็บของ และวันพิเศษ · แตะเพื่อฟังชื่อ";return;}
   all.filter(w=>inCat(w,bookCat)).forEach(w=>{
@@ -4735,7 +4850,9 @@ function actionTarget(){
   const side=["up","down","left","right"].filter(d=>d!==P.dir).map(d=>[P.x+DIRV[d][0],P.y+DIRV[d][1]]);
   for(const t of side)if(npcAt(t[0],t[1])||animalAt(t[0],t[1]))return t;
   for(const t of side){const a=actionLabel(t[0],t[1]);if(a&&a.emo!=="👀")return t;}
-  if(petNear())return "pet";
+  /* things on a diagonal count too, so the pet never steals the button from them */
+  for(const [dx,dy] of [[1,1],[-1,1],[1,-1],[-1,-1]]){const t=[P.x+dx,P.y+dy];if(npcAt(t[0],t[1])||animalAt(t[0],t[1])||spawnAt(t[0],t[1]))return t;}
+  if(petFacing())return "pet";
   return null;
 }
 let actKey=null;
@@ -5122,10 +5239,14 @@ function makePet(p){
 }
 function rebuildPet(){if(!renderer)return;if(petObj)scene.remove(petObj);petObj=makePet(petOf());petObj.visible=started;scene.add(petObj);petPos={x:P.rx+.5,z:P.ry+1.3};petZone=zoneNow();}
 function petNear(){if(!petObj||!started)return false;return Math.hypot(petPos.x-(P.rx+.5),petPos.z-(P.ry+.5))<1.5;}
+/* the pet button only shows when we look at the pet (it follows behind us, so it never blocks what is in front) */
+function petFacing(){if(!petNear())return false;const [dx,dy]=DIRV[P.dir],vx=petPos.x-(P.rx+.5),vz=petPos.z-(P.ry+.5),d=Math.hypot(vx,vz)||1;return (vx*dx+vz*dy)/d>.55;}
+const busyTile=(x,y)=>!!(spawnAt(x,y)||npcAt(x,y)||animalAt(x,y)||(typeof mimiAt==="function"&&mimiAt(x,y)));
 function updatePet(dt,t){
   if(!petObj||!S)return;petObj.visible=started;if(!started)return;
   const z=zoneNow(),[dx,dy]=DIRV[P.dir],px=P.rx+.5,pz=P.ry+.5;
   let tx=px-dx*1.05+dy*.45,tz=pz-dy*1.05-dx*.45;
+  if(busyTile(Math.floor(tx),Math.floor(tz))){const ax=px-dx*1.05-dy*.45,az=pz-dy*1.05+dx*.45;if(!busyTile(Math.floor(ax),Math.floor(az))){tx=ax;tz=az;}else{tx=px-dx*.8;tz=pz-dy*.8;}}
   if(z!==petZone||Math.hypot(petPos.x-px,petPos.z-pz)>8){petZone=z;petPos.x=tx;petPos.z=tz;}
   const ddx=tx-petPos.x,ddz=tz-petPos.z,d=Math.hypot(ddx,ddz),u=petObj.userData;
   const moving=d>.35;
@@ -5208,15 +5329,21 @@ function makeSpawnObj(s){
   cuteOutline(g);
   return g;
 }
+function dropSpawnObj(id){const o=spawnObjs[id];if(!o)return;scene.remove(o);const i=clickables.indexOf(o);if(i>=0)clickables.splice(i,1);delete spawnObjs[id];}
 function syncSpawns(t){
-  if(!renderer||!S||!S.spawn)return;const ids=new Set();
-  for(const s of S.spawn.list){ids.add(s.id);let o=spawnObjs[s.id];if(!o){o=spawnObjs[s.id]=makeSpawnObj(s);scene.add(o);clickables.push(o);}
+  if(!renderer)return;
+  if(!S||!S.spawn){for(const id in spawnObjs)dropSpawnObj(id);return;}
+  const ids=new Set(),drop=dropSpawnObj;
+  /* ids restart at s1 every day (and per player), so an object is only reused when it is the very same thing in the very same spot */
+  for(const s of S.spawn.list){ids.add(s.id);const sig=`${S.spawn.day}|${s.k}|${s.t}|${s.x},${s.y}`;let o=spawnObjs[s.id];
+    if(o&&o.userData.sig!==sig){drop(s.id);o=null;}
+    if(!o){o=spawnObjs[s.id]=makeSpawnObj(s);o.userData.sig=sig;scene.add(o);clickables.push(o);}
     const u=o.userData;
     if(u.fly){const ground=u.fly.position.y<.2;if(!ground){u.fly.position.y=.5+Math.sin(t/500+s.x)*.12;u.fly.position.x=Math.sin(t/900+s.y)*.18;u.fly.rotation.y=Math.sin(t/1200+s.x)*1.5;}else u.fly.rotation.y=Math.sin(t/2000+s.x)*.6;}
     if(u.wings)for(const [wg,sx] of u.wings)wg.rotation.z=sx*Math.sin(t/(u.bug==="butterfly"?110:45))*.8;
     if(u.glow){const on=S.min>=1080||S.min<330;u.glow.visible=true;u.glow.scale.setScalar(on?.06+Math.abs(Math.sin(t/300+s.x))*.04:.03);}
     if(s.k==="branch"&&o.userData.hp!==s.hp){o.userData.hp=s.hp;o.rotation.y=(3-(s.hp||3))*.25;}}
-  for(const id in spawnObjs)if(!ids.has(id)){const o=spawnObjs[id];scene.remove(o);const i=clickables.indexOf(o);if(i>=0)clickables.splice(i,1);delete spawnObjs[id];}
+  for(const id in spawnObjs)if(!ids.has(id))drop(id);
 }
 
 /* ---------- v8 friends: Bo, Finn and Pat, hearts, a daily topic, gifts, birthdays, mail, Sunday festivals, the bedtime diary ---------- */
@@ -5306,6 +5433,7 @@ function giveGift(who,t){
 /* extra answers after a friend's tip: talk about today, give a gift */
 function socialChoices(who){
   if(!S||!S.today||!NPCS[who])return [];const out=[];
+  const sg=songFor(who);if(sg)out.push({en:"Let's sing!",th:"ร้องเพลงกัน",emo:"🎵",free:true,tile:true,go:()=>{closeDialog();openSong(sg.id);}});
   if(!S.today.topics[who])out.push({en:"Let's talk!",th:"คุยเรื่องวันนี้กัน",emo:"💬",free:true,tile:true,go:()=>topicFlow(who)});
   if(!S.today.gifts[who]&&giftable().length)out.push({en:"I have a gift for you.",th:"ให้ของขวัญ",emo:"🎁",free:true,tile:true,go:()=>giftFlow(who)});
   return out;
@@ -5475,7 +5603,7 @@ function updateLifeProps(){if(mailFlag)mailFlag.rotation.z=(S&&S.mail&&S.mail.le
 
 /* ---------- the sticker page in the word book ---------- */
 function renderStickers(grid){
-  const st=S.stickers||{},groups=[["story","Story","เรื่องราว"],["bug","Bugs","แมลง"],["fish","Fish","ปลา"],["find","Nature","ของจากธรรมชาติ"],["special","Special days","วันพิเศษ"]];
+  const st=S.stickers||{},groups=[["story","Story","เรื่องราว"],["song","Songs","เพลง"],["bug","Bugs","แมลง"],["fish","Fish","ปลา"],["find","Nature","ของจากธรรมชาติ"],["special","Special days","วันพิเศษ"]];
   for(const [g,en,th] of groups){const h=el("div","stk-h");h.innerHTML=`<b>${en}</b> <span class="th keep">${th}</span>`;grid.append(h);
     STICKER_LIST.filter(s=>s.grp===g).forEach(s=>{const n=st[s.id]||0,c=el("button","stk"+(n?"":" none"));c.type="button";
       c.innerHTML=`<img src="${spriteURL(s.icon)}" alt=""><b>${n?esc(s.en):"???"}</b><span class="th keep">${n?esc(s.th):"ยังไม่เจอ"}</span>${n>1?`<i>×${n}</i>`:""}`;
@@ -5665,8 +5793,8 @@ function showBeat(){
   if(b.sfx&&sfx[b.sfx])setTimeout(()=>{if(story===s)sfx[b.sfx]();},b.art==="letter"?500:120);
   if(b.title)titleExtra(ex,b.title);
   if(b.teaser)teaserExtra(ex);
-  /* voices: Thai first (Pip's own voice for Pip, the narrator for everyone else), then the English line */
-  const thV=b.who==="pip"?"pip":"nar";
+  /* Thai lines are said by whoever speaks them (so each actor can record their own), the narrator for narration */
+  const thV=b.who==="pip"?"pip":b.who==="narr"?"nar":b.who==="you"?"you":b.who;
   if(th&&!b.title)speak(th,true,thV);
   if(b.say){next.hidden=true;sayExtra(ex,b);}
   else if(b.quiz){next.hidden=true;$("stEn").hidden=true;quizExtra(ex,b.quiz);}
@@ -5697,7 +5825,7 @@ function teaserExtra(ex){
 function sayExtra(ex,b){
   const s=story,target=b.say,enEl=$("stEn"),spans=[...enEl.querySelectorAll(".rw")],voiceMode=S.voice&&voiceUsable();
   const row=el("div","st-say"),play=el("button","rc-play");play.type="button";play.innerHTML=SPK;play.setAttribute("aria-label","ฟังอีกครั้ง");
-  const model=slow=>{sqClear();speak(target,false,"you",slow?.62:.85,()=>litEn(spans,-1));if(spans.length>1)spans.forEach((x,i)=>speak(bareWord(x.textContent),false,"you",.72,()=>litEn(spans,i)));};
+  const model=slow=>{sqClear();speak(target,false,"you",slow?.62:.85,()=>litEn(spans,-1));if(spans.length>1&&!clipFor("you",target)){karaoke=true;spans.forEach((x,i)=>speak(bareWord(x.textContent),false,"you",.72,()=>litEn(spans,i)));karaoke=false;}};
   play.onclick=()=>{audioInit();model(true);};
   const done=(passed)=>{if(story!==s)return;enEl.classList.add(passed?"pass":"glow");lifeSpeak();setTimeout(()=>{if(story===s)storyNext();},passed?1300:1700);};
   const miss=()=>{s.misses++;sfx.wrong();
@@ -5887,7 +6015,7 @@ function mimiFound(spot){
   const f=storyFlag();f.mimiFound=S.day;f.mimi=(f.mimi||0)+1;sfx.meow();sfx.correct();if(mimiObj)mimiObj.userData.hop=.6;
   if(renderer)confetti(SLOT_POS[spot][0],SLOT_POS[spot][2]);
   S.coins+=5;renderHUD();lifeCount("pet");lifeLog("mimi","I found Mimi!","หามีมี่เจอ");
-  if(f.mimi===1||f.mimi===5)addSticker("mimi");save();
+  if(f.mimi===1||f.mimi===5)addSticker("mimi");if(f.mimi===1)unlockSong("song4");save();
   showDlg({who:"mimi",en:`Meow! You found me! I am ${SLOTS[spot].en}.`,th:`เมี้ยว! หาเจอแล้ว มีมี่อยู่${SLOTS[spot].th} ได้ 5 เหรียญ`,next:closeDialog});
 }
 /* a tiny picture of where Mimi is: the furniture, and a cat on / under / next to / in front of it */
@@ -5923,7 +6051,1874 @@ $("stNext").onclick=()=>{audioInit();storyNext();};
 $("stSkip").onclick=()=>{audioInit();sfx.tap();storyClose(true);};
 $("stSay").onclick=()=>{audioInit();if(!story)return;const b=story.sc.beats[story.i];if(!b)return;
   const en=b.title?`Stage ${numWord(b.title)}! ${STAGES[b.title].en}!`:(b.say||b.en||(b.quiz&&b.quiz.en)||"");
-  if(en)speak(en,true,b.say?"you":b.quiz?"pipen":b.title?"narr":enVoice(b.who),.8);else if(b.th)speak(b.th.replace("{name}",S.name),true,b.who==="pip"?"pip":"nar");};
+  if(en)speak(en,true,b.say?"you":b.quiz?"pipen":b.title?"narr":enVoice(b.who),.8);else if(b.th)speak(b.th.replace("{name}",S.name),true,b.who==="pip"?"pip":b.who==="narr"?"nar":b.who);};
+
+/* ---------- songs: one song per stage, sung with that stage's friend ----------
+   A song unlocks when its quest is done (the friend asks "Let's sing!"), then it can be sung again from that friend's
+   talk menu or the Songs page in the word book. A grown-up can put in a real recording in developer mode (Songs tab):
+   an audio file plus lyrics, with optional [mm:ss] times so the words light up with the music.
+   With no recording, the friend sings each line and the child sings it back (an echo song). */
+const SONGS=[
+  {id:"song1",stage:1,npc:"lily",icon:"carrot",title:"Dig, Plant, Water",th:"ขุด ปลูก รดน้ำ",unlock:"carrots",when:"ส่งแครอท 3 หัวให้ลิลลี่",
+    lines:[["Dig, dig, dig the soil.","ขุด ขุด ขุดดิน"],["Plant, plant, plant a seed.","ปลูก ปลูก ปลูกเมล็ด"],["Water, water, every day.","รดน้ำ รดน้ำ ทุกวัน"],["Grow, grow, carrot, grow!","โต โต แครอทโตนะ"],["One, two, three, four, five.","หนึ่ง สอง สาม สี่ ห้า"],["Five carrots for you!","แครอทห้าหัวให้เธอ"]]},
+  {id:"song2",stage:2,npc:"tom",icon:"cow",title:"Happy Animals",th:"สัตว์ ๆ มีความสุข",unlock:"brush",when:"แปรงขนวัวกับแกะเสร็จ",
+    lines:[["The cow says moo, moo, moo.","วัวร้อง มอ มอ มอ"],["The hen says cluck, cluck, cluck.","ไก่ร้อง กุ๊ก กุ๊ก กุ๊ก"],["The sheep says baa, baa, baa.","แกะร้อง แบ๊ แบ๊ แบ๊"],["Feed them, brush them, happy farm!","ให้อาหาร แปรงขน ฟาร์มมีความสุข"],["Milk and eggs and wool for you!","นม ไข่ ขนแกะ ให้เธอ"]]},
+  {id:"song3",stage:3,npc:"max",icon:"coin",title:"Hello, Friends",th:"สวัสดีเพื่อน ๆ",unlock:"greet3",when:"ทักทายเพื่อนในเมืองครบ 3 คน",
+    lines:[["Hello, hello, how are you?","สวัสดี สวัสดี สบายดีไหม"],["I'm fine, thank you! How are you?","สบายดี ขอบคุณ แล้วเธอล่ะ"],["Good morning, friends, good morning!","อรุณสวัสดิ์ เพื่อน ๆ อรุณสวัสดิ์"],["Please and thank you, every day!","พูดว่า please กับ thank you ทุกวัน"]]},
+  {id:"song4",stage:4,npc:"lily",icon:"cat",title:"Where Is Mimi?",th:"มีมี่อยู่ไหน",unlock:"mimi",when:"หามีมี่เจอครั้งแรก",
+    lines:[["Where is Mimi? Where is she?","มีมี่อยู่ไหน อยู่ที่ไหนนะ"],["On the bed? No, no, no!","บนเตียงเหรอ ไม่ใช่"],["Under the table? No, no, no!","ใต้โต๊ะเหรอ ไม่ใช่"],["Next to the window? Yes, yes, yes!","ข้าง ๆ หน้าต่างเหรอ ใช่แล้ว"],["Meow, meow, there you are!","เมี้ยว เมี้ยว เจอแล้ว"]]},
+];
+const SONG_BY=Object.fromEntries(SONGS.map(s=>[s.id,s]));
+const SONG_KEY="wordfarm-songs-v1";
+/* what a grown-up changed in developer mode (title + lyrics), kept on this device for every player */
+function songStore(){try{return JSON.parse(localStorage.getItem(SONG_KEY)||"{}")||{};}catch(e){return {};}}
+function songStoreSet(v){try{localStorage.setItem(SONG_KEY,JSON.stringify(v||{}));}catch(e){}}
+const songClipKey=id=>"song|"+id;
+const songHasAudio=id=>!!CLIPS[songClipKey(id)];
+/* lyrics text: one line each, "[01:05] English words | คำแปลไทย" (the time and the Thai part are optional) */
+function parseLyrics(txt){
+  return String(txt||"").split(/\r?\n/).map(l=>l.trim()).filter(Boolean).map(l=>{
+    let t=null;const m=/^\[(\d{1,2}):(\d{1,2}(?:\.\d+)?)\]\s*/.exec(l);if(m){t=(+m[1])*60+(+m[2]);l=l.slice(m[0].length);}
+    const [en,th]=l.split("|").map(x=>x.trim());return {t,en:en||"",th:th||""};}).filter(x=>x.en);
+}
+const fmtTime=t=>`[${String(Math.floor(t/60)).padStart(2,"0")}:${String(Math.floor(t%60)).padStart(2,"0")}]`;
+function lyricsText(lines){return lines.map(l=>(l.t!==null&&l.t!==undefined?fmtTime(l.t)+" ":"")+l.en+(l.th?" | "+l.th:"")).join("\n");}
+function songData(id){
+  const s=SONG_BY[id],c=songStore()[id]||{};const lines=c.lyrics?parseLyrics(c.lyrics):s.lines.map(([en,th])=>({t:null,en,th}));
+  return {id,s,title:c.title||s.title,lines:lines.length?lines:s.lines.map(([en,th])=>({t:null,en,th}))};
+}
+function songFlags(){S.songs=S.songs||{};return S.songs;}
+/* unlocked by its quest, or by having got past it already (players who started before songs existed) */
+function songUnlocked(id){
+  if(!S)return false;if(S.songs&&S.songs[id]&&S.songs[id].on)return true;const s=SONG_BY[id];if(!s)return false;
+  if(s.unlock==="mimi")return !!(S.story&&S.story.mimi);const qi=QUESTS.findIndex(q=>q.id===s.unlock);return qi>=0&&(S.q>qi||!!S.done);
+}
+function songFor(npc){const list=SONGS.filter(s=>s.npc===npc&&songUnlocked(s.id));return list.length?list[list.length-1]:null;}
+/* a quest finished (or Mimi found): the friend asks to sing, as soon as nothing else is on screen */
+function unlockSong(id){
+  const f=songFlags();if(f[id]&&f[id].on)return;f[id]={on:true,n:0};save();
+  let tries=0;const t=setInterval(()=>{tries++;if(!started||tries>40){clearInterval(t);return;}if(busy())return;clearInterval(t);offerSong(id);},800);
+}
+function songAfterQuest(qid){for(const s of SONGS)if(s.unlock===qid)unlockSong(s.id);}
+function offerSong(id){
+  const s=SONG_BY[id];if(!s)return;
+  showDlg({who:s.npc,en:"Let's sing a song together!",th:`มาร้องเพลง "${s.th}" ด้วยกันนะ`,tip:"ร้องเพลงได้ทุกเมื่อ แตะคุยกับเพื่อนคนนี้แล้วเลือก Let's sing!",tipKey:"song",
+    choices:[{en:"Let's sing!",th:"ร้องกันเลย",emo:"🎵",tile:true,go:()=>{closeDialog();openSong(id);}},
+      {en:"Not now.",th:"ไว้ทีหลัง",emo:"⏰",minor:true,go:()=>{closeDialog();pipSay(`ไว้ร้องทีหลังก็ได้ แตะคุยกับ${NPCS[s.npc].th}แล้วเลือก Let's sing! หรือเปิดหน้าเพลงในสมุดคำศัพท์`);}}]});
+}
+
+/* ---------- the song player ---------- */
+let SG=null;
+function openSong(id){
+  const d=songData(id);if(!d.s)return;stopSong();sqClear();stopListen();
+  SG={id,d,i:-1,audio:null,timer:null,playing:false,gen:0};
+  const N=NPCS[d.s.npc];drawPortrait($("sgFace"),N.look,"smile");
+  $("sgTitle").textContent=d.title;$("sgTh").textContent=`${d.s.th} · ร้องกับ${N.th}`;
+  $("sgMode").innerHTML=songHasAudio(id)?`🎵 ฟังเพลงแล้วร้องตาม <span class="th keep">Sing along!</span>`:`🎤 ${esc(N.name)} ร้องก่อน แล้วเราร้องตาม <span class="th keep">Listen, then sing it back!</span>`;
+  const box=$("sgLines");box.innerHTML="";
+  d.lines.forEach((l,i)=>{const p=el("div","sg-line");p.innerHTML=`<b>${esc(l.en)}</b>${l.th?`<span class="th">${esc(l.th)}</span>`:""}`;p.onclick=()=>{if(!SG.playing){audioInit();speak(l.en,true,d.s.npc,.85);}};box.append(p);});
+  $("sgDone").hidden=true;openModal("songModal");setSongBtn();
+  setTimeout(()=>{if(SG&&SG.id===id)playSong();},500);
+}
+function setSongBtn(){const b=$("sgPlay");if(!b||!SG)return;b.innerHTML=SG.playing?`⏸ หยุด<span class="th">Pause</span>`:`▶ ร้องเลย<span class="th">Sing!</span>`;}
+function litLine(i,who){
+  if(!SG)return;SG.i=i;const els=[...$("sgLines").children];
+  els.forEach((e,k)=>{e.classList.toggle("on",k===i);e.classList.toggle("you",k===i&&who==="you");e.classList.toggle("done",k<i);});
+  const e=els[i];if(e&&e.scrollIntoView)try{e.scrollIntoView({block:"nearest",behavior:"smooth"});}catch(_){}
+  $("songModal").classList.toggle("npc-turn",who==="npc");
+}
+function playSong(){
+  if(!SG)return;audioInit();if(SG.playing)return pauseSong();
+  SG.playing=true;setSongBtn();if(musicOn)musicStop();
+  if(songHasAudio(SG.id))playSongAudio();else echoSong(Math.max(0,SG.i<0?0:SG.i));
+}
+function pauseSong(){if(!SG)return;SG.playing=false;SG.gen++;clearTimeout(SG.timer);sqClear();if(SG.audio)try{SG.audio.pause();}catch(e){}setSongBtn();$("songModal").classList.remove("npc-turn");}
+function stopSong(){if(!SG)return;pauseSong();if(SG.audio){try{SG.audio.pause();}catch(e){}SG.audio=null;}SG=null;}
+function playSongAudio(){
+  const s=SG;if(!s.audio){s.audio=new Audio(CLIPS[songClipKey(s.id)]);s.audio.onended=()=>{if(SG===s)songFinished();};}
+  const a=s.audio,lines=s.d.lines,timed=lines.some(l=>l.t!==null);
+  const tick=()=>{if(SG!==s||!s.playing)return;const t=a.currentTime,dur=a.duration||0;let i=-1;
+    if(timed){for(let k=0;k<lines.length;k++)if(lines[k].t!==null&&lines[k].t<=t+.05)i=k;}
+    else if(dur>0)i=Math.min(lines.length-1,Math.floor(t/dur*lines.length));
+    if(i!==s.i&&i>=0)litLine(i,"sing");requestAnimationFrame(tick);};
+  const p=a.play();if(p&&p.catch)p.catch(()=>{toast("Can't play","เล่นไฟล์เพลงไม่ได้ ลองแตะ ▶ อีกครั้ง",{say:false});pauseSong();});requestAnimationFrame(tick);
+}
+/* no recording yet: the friend sings a line, the child sings it back */
+function echoSong(from){
+  const s=SG,gen=++s.gen,npc=s.d.s.npc,lines=s.d.lines;
+  const step=i=>{if(SG!==s||gen!==s.gen||!s.playing)return;if(i>=lines.length)return songFinished();
+    litLine(i,"npc");emote(npc,"happy",1500);
+    speak(lines[i].en,true,npc,.82,null,()=>{if(SG!==s||gen!==s.gen||!s.playing)return;litLine(i,"you");sfx.tap();
+      const words=lines[i].en.split(/\s+/).length,wait=1400+words*420;
+      s.timer=setTimeout(()=>step(i+1),S.sound?wait:900);});};
+  step(from);
+}
+function songFinished(){
+  const s=SG;if(!s)return;s.playing=false;setSongBtn();litLine(s.d.lines.length,"done");
+  const f=songFlags(),r=f[s.id]||(f[s.id]={on:true,n:0});r.n=(r.n||0)+1;
+  if(r.n===1){S.coins+=5;renderHUD();addSticker(s.id);}
+  lifeSpeak();lifeLog("song",`I sang "${s.d.title}".`,`ร้องเพลง ${s.d.s.th}`);save();
+  sfx.cheer();speak("Yay! Great singing!",true,"pipen");$("sgDone").hidden=false;$("sgDone").innerHTML=`🌟 เก่งมาก! ร้องจบแล้ว${r.n===1?" ได้ 5 เหรียญ + สติกเกอร์":""} <span class="th keep">Great singing!</span>`;
+  if(S.music)setTimeout(()=>{if(!SG||!SG.playing)musicStart();},2500);
+}
+function closeSong(){stopSong();closeModal("songModal");if(S&&S.music)musicStart();}
+$("sgPlay").onclick=()=>{if(!SG)return;if(SG.playing)pauseSong();else{if(SG.i>=SG.d.lines.length)SG.i=-1;if(SG.audio&&SG.i<0)try{SG.audio.currentTime=0;}catch(e){}playSong();}};
+$("sgAgain").onclick=()=>{if(!SG)return;const id=SG.id;openSong(id);};
+$("sgClose").onclick=closeSong;
+
+/* ---------- songs in the word book, and their stickers ---------- */
+STICKER_LIST.push(...SONGS.map(s=>({id:s.id,icon:s.icon,en:songData(s.id).title,th:"เพลง "+s.th,grp:"song"})));
+for(const s of STICKER_LIST)STICKER_BY[s.id]=s;
+function renderSongBook(grid){
+  SONGS.forEach(s=>{const on=songUnlocked(s.id),d=songData(s.id),N=NPCS[s.npc],c=el("button","stb"+(on?"":" none"));c.type="button";
+    c.innerHTML=`<span class="stb-n">ด่าน ${s.stage} · ร้องกับ ${esc(N.name)}${songHasAudio(s.id)?" · 🎧":""}</span><b>${esc(on?d.title:"???")}</b><span class="th keep">${esc(on?s.th:"ปลดล็อกเมื่อ"+s.when)}</span><span class="stb-play">${on?"🎵":"🔒"}</span>`;
+    c.onclick=()=>{if(!on){sfx.tap();return pipSay("ยังร้องเพลงนี้ไม่ได้ ปลดล็อกเมื่อ"+s.when);}closeModal("bookModal");openSong(s.id);};grid.append(c);});
+}
+
+/* ---------- developer mode: put in your own song (audio file + lyrics) ---------- */
+function renderDevSongs(body){
+  renderDevBgm(body);
+  const n=el("p","devnote");
+  n.innerHTML="ใส่เพลงที่อัดหรือสร้างเองได้ทีละเพลง: กด ⬆ ไฟล์เพลง (mp3, m4a, wav) แล้วแก้เนื้อร้องให้ตรงกับเพลง บรรทัดละท่อน "+
+    "ใส่เวลาหน้าบรรทัดได้ เช่น <code>[00:12] Plant, plant, plant a seed. | ปลูก ปลูก ปลูกเมล็ด</code> ตัวหนังสือจะสว่างตรงจังหวะ ถ้าไม่ใส่เวลา เกมจะแบ่งเวลาให้เท่า ๆ กัน "+
+    "· เพลงเก็บในเบราว์เซอร์เครื่องนี้ ใช้ ส่งออก/นำเข้า ชุดเสียง เพื่อย้ายไปแท็บเล็ตเด็ก (เพลงกับเนื้อร้องติดไปด้วย)";body.append(n);
+  const top=el("div","dev-acts");top.style.justifyContent="flex-start";
+  top.append(devBtnEl("ปลดล็อกทุกเพลง (ทดสอบ)","",()=>{const f=songFlags();for(const s of SONGS)f[s.id]=f[s.id]||{on:true,n:0},f[s.id].on=true;save();toast("Unlocked","ปลดล็อกทุกเพลงแล้ว",{say:false});}));body.append(top);
+  for(const s of SONGS){
+    const d=songData(s.id),st=songStore(),cust=st[s.id]||{},has=songHasAudio(s.id),card=el("div","vcard sg-dev");
+    card.innerHTML=`<h3>ด่าน ${s.stage} · ${esc(d.title)} <small>ร้องกับ ${esc(NPCS[s.npc].name)} · เปิดเมื่อ${esc(s.when)} · รหัส ${s.id}</small></h3>`+
+      `<div class="sg-dev-row"><label>ชื่อเพลง</label><input type="text" class="sg-t" maxlength="40"></div>`+
+      `<label class="sg-l">เนื้อร้อง (บรรทัดละท่อน · [นาที:วินาที] ข้างหน้าได้ · | แล้วตามด้วยคำแปลไทยได้)</label><textarea class="sg-ly" rows="7" spellcheck="false"></textarea>`+
+      `<div class="sg-file">${has?'<span class="tag">มีไฟล์เพลงแล้ว</span>':'<span class="tag off">ยังไม่มีไฟล์เพลง (ใช้แบบร้องตามทีละบรรทัด)</span>'}</div>`;
+    const ti=card.querySelector(".sg-t"),ly=card.querySelector(".sg-ly");ti.value=d.title;ly.value=lyricsText(d.lines);
+    const acts=el("div","dev-acts");acts.style.justifyContent="flex-start";
+    const fi=el("input");fi.type="file";fi.accept="audio/*";fi.hidden=true;
+    fi.onchange=async()=>{const f=fi.files&&fi.files[0];if(!f)return;if(f.size>15*1024*1024)return toast("Too big","ไฟล์ใหญ่เกิน 15 MB ลองย่อไฟล์ก่อนนะ",{say:false});
+      await setClip(songClipKey(s.id),f);toast("Saved","ใส่ไฟล์เพลงแล้ว",{say:false,ms:1500});renderDev();};
+    const saveIt=()=>{const all=songStore();all[s.id]={title:ti.value.trim()||s.title,lyrics:ly.value};songStoreSet(all);};
+    acts.append(devBtnEl("💾 บันทึกเนื้อร้อง","",()=>{saveIt();toast("Saved","บันทึกชื่อเพลงและเนื้อร้องแล้ว",{say:false,ms:1500});renderDev();}),
+      fi,devBtnEl("⬆ ไฟล์เพลง","",()=>fi.click()),
+      devBtnEl("▶ ลองเล่น","",()=>{saveIt();closeModal("devModal");const f=songFlags();f[s.id]=f[s.id]||{on:true,n:0};openSong(s.id);}),
+      devBtnEl("⏱ จับเวลาบรรทัด","",()=>tapTiming(s.id,ly)));
+    if(has)acts.append(devBtnEl("✕ ลบไฟล์เพลง","",async()=>{await delClip(songClipKey(s.id));renderDev();}));
+    if(cust.lyrics||cust.title)acts.append(devBtnEl("คืนค่าเนื้อร้องเดิม","",()=>{const all=songStore();delete all[s.id];songStoreSet(all);renderDev();}));
+    card.append(acts);body.append(card);
+  }
+}
+/* tap along with the music to stamp a time on each line (easier than typing [00:12] by hand) */
+function tapTiming(id,ly){
+  if(!songHasAudio(id))return toast("No song file","ใส่ไฟล์เพลงก่อน แล้วค่อยจับเวลา",{say:false});
+  const lines=parseLyrics(ly.value);if(!lines.length)return;
+  const a=new Audio(CLIPS[songClipKey(id)]);let k=0;
+  const bar=el("div","sg-tap");bar.innerHTML=`<b>กำลังจับเวลา:</b> แตะปุ่มตอนที่บรรทัดนี้เริ่มร้อง <q class="sg-tap-line"></q> <button class="mini" type="button">แตะ! (${k+1}/${lines.length})</button> <button class="mini" type="button">หยุด</button>`;
+  ly.before(bar);const [tapB,stopB]=bar.querySelectorAll("button"),q=bar.querySelector(".sg-tap-line");q.textContent=lines[0].en;
+  const end=()=>{try{a.pause();}catch(e){}ly.value=lyricsText(lines);bar.remove();toast("Timed","ใส่เวลาแล้ว กด 💾 บันทึกเนื้อร้อง",{say:false,ms:3000});};
+  tapB.onclick=()=>{lines[k].t=Math.round(a.currentTime*10)/10;k++;if(k>=lines.length)return end();q.textContent=lines[k].en;tapB.textContent=`แตะ! (${k+1}/${lines.length})`;};
+  stopB.onclick=end;a.onended=end;a.play().catch(()=>{bar.remove();toast("Can't play","เล่นไฟล์เพลงไม่ได้",{say:false});});
+}
+
+/* ---------- background music: the built-in tune, or a grown-up's own track for each stage ----------
+   Tracks live in the same store as recorded voices (key "bgm|s1" …), so they travel with the voice pack export. */
+const BGM_SLOTS=[["s1","ด่าน 1 · ฟาร์มผัก"],["s2","ด่าน 2 · ฟาร์มสัตว์"],["s3","ด่าน 3 · ตลาดในเมือง"],["s4","ด่าน 4 · บ้านคุณยาย (และหลังจบพาท 1)"],
+  ["night","ตอนกลางคืน (ไม่ใส่ก็ได้ จะใช้เพลงของด่าน)"],["home","ในบ้าน (ไม่ใส่ก็ได้)"],["fest","งานเทศกาลวันอาทิตย์ในเมือง (ไม่ใส่ก็ได้)"],["title","หน้าเลือกผู้เล่น (ไม่ใส่ก็ได้)"]];
+const bgmClip=k=>CLIPS["bgm|"+k]||null;
+let bgmEl=null,bgmNode=null,bgmCur="",bgmPreview=null;
+function bgmPick(){
+  if(!S||!started)return bgmClip("title")?"title":"";
+  const st="s"+Math.min(4,Math.max(1,stageNow()));
+  if(festOn()&&zoneNow()==="town"&&bgmClip("fest"))return "fest";
+  if(zoneNow()==="home"&&bgmClip("home"))return "home";
+  if((S.min>=1140||S.min<330)&&bgmClip("night"))return "night";
+  return bgmClip(st)?st:"";
+}
+function bgmEnsureEl(){
+  if(bgmEl&&(bgmNode||!AC))return bgmEl;
+  if(bgmEl){try{bgmEl.pause();}catch(e){}}
+  bgmEl=new Audio();bgmEl.loop=true;bgmEl.preload="auto";bgmCur="";
+  /* through the music volume (and the duck while someone talks) when the audio engine is on */
+  if(AC){try{bgmNode=AC.createMediaElementSource(bgmEl);const g=AC.createGain();g.gain.value=.85;bgmNode.connect(g);g.connect(musicBus);}catch(e){bgmNode=null;}}
+  return bgmEl;
+}
+function bgmTick(){
+  const songOn=!!(SG&&SG.playing)||!!bgmPreview,title=!started&&!!bgmClip("title");
+  const want=(S&&S.music!==false&&!songOn&&(!musicHeld||title))?bgmPick():"";
+  if(!want){if(bgmEl&&!bgmEl.paused)bgmEl.pause();bgmCur="";
+    /* no track of our own here: the built-in tune plays (unless music is on hold) */
+    if(S&&S.music&&started&&!songOn&&!musicHeld&&!musicOn)startTune();return;}
+  if(musicOn)musicStop(true);
+  const el=bgmEnsureEl();
+  if(want!==bgmCur){bgmCur=want;el.src=bgmClip(want);try{el.currentTime=0;}catch(e){}}
+  if(!bgmNode)el.volume=Math.max(0,Math.min(1,(S.musicVol||.5)*.8));
+  if(el.paused){const p=el.play();if(p&&p.catch)p.catch(()=>{});}
+}
+setInterval(bgmTick,1000);
+function renderDevBgm(body){
+  const h=el("h3","dev-h");h.textContent="เพลงพื้นหลัง (BGM) แยกตามด่าน";body.append(h);
+  const n=el("p","devnote");n.textContent="ใส่ไฟล์เพลงของแต่ละด่านได้ (mp3, m4a, wav) เพลงจะวนเล่นตอนอยู่ในด่านนั้น ด่านไหนไม่ใส่ จะใช้เพลงที่เกมแต่งไว้ · ช่องที่เขียนว่าไม่ใส่ก็ได้ จะเล่นแทนเพลงด่านเฉพาะตอนนั้น";body.append(n);
+  for(const [k,label] of BGM_SLOTS){
+    const has=!!bgmClip(k),row=el("div","dev-row"),dt=el("div","dt");
+    dt.innerHTML=`${esc(label)}${has?'<span class="tag">มีเพลงแล้ว</span>':""}<small>รหัส BGM-${k.toUpperCase()} · ${has?"ใช้เพลงที่ใส่ไว้":"ใช้เพลงของเกม"}</small>`;
+    const acts=el("div","dev-acts"),fi=el("input");fi.type="file";fi.accept="audio/*";fi.hidden=true;
+    fi.onchange=async()=>{const f=fi.files&&fi.files[0];if(!f)return;if(f.size>25*1024*1024)return toast("Too big","ไฟล์ใหญ่เกิน 25 MB",{say:false});await setClip("bgm|"+k,f);bgmCur="";toast("Saved","ใส่เพลงพื้นหลังแล้ว",{say:false,ms:1500});renderDev();};
+    acts.append(fi,devBtnEl("⬆ ไฟล์เพลง","",()=>fi.click()));
+    if(has){acts.append(devBtnEl(bgmPreview&&bgmPreview.k===k?"■ หยุด":"▶ ฟัง","",()=>{
+        if(bgmPreview){try{bgmPreview.a.pause();}catch(e){}const same=bgmPreview.k===k;bgmPreview=null;if(same)return renderDev();}
+        const a=new Audio(bgmClip(k));bgmPreview={k,a};a.onended=()=>{bgmPreview=null;renderDev();};a.play().catch(()=>{bgmPreview=null;});if(bgmEl)bgmEl.pause();renderDev();}),
+      devBtnEl("✕ ลบ","",async()=>{await delClip("bgm|"+k);bgmCur="";renderDev();}));}
+    row.append(dt,acts);body.append(row);
+  }
+  const h2=el("h3","dev-h");h2.textContent="เพลงร้องตามประจำด่าน";body.append(h2);
+}
+/* every line of the game, with the code its recording is filed under (made by check/gen_script.py from play-throughs) */
+const SCRIPT=[["WRD-0001", "narr", "carrot", "แครอท", 1],
+["WRD-0002", "narr", "cow", "วัว", 1],
+["WRD-0003", "narr", "egg", "ไข่", 1],
+["WRD-0004", "narr", "price", "ราคา", 1],
+["WRD-0005", "narr", "chair", "เก้าอี้", 1],
+["WRD-0006", "narr", "girl", "เด็กผู้หญิง", 1],
+["NAR-0001", "narr", "one", "1", 1],
+["NAR-0002", "narr", "two", "2", 1],
+["NAR-0003", "narr", "three", "3", 1],
+["WRD-0007", "narr", "Thank you.", "ขอบคุณ", 1],
+["WRD-0008", "narr", "Good night!", "ราตรีสวัสดิ์", 1],
+["PIP-0001", "pip", "ได้เมล็ดแครอทมาแล้ว แตะจอบ แล้วแตะดินในแปลงผักเพื่อขุด จากนั้นแตะเมล็ด แล้วแตะดินที่ขุดไว้ ปลูกให้ครบสี่เมล็ดนะ", "", 1],
+["PIP-0002", "pip", "ต้นผักหิวน้ำแล้ว แตะบัวรดน้ำ แล้วแตะที่ต้นผักทีละต้น ถ้าน้ำหมดให้แตะบ่อน้ำหน้าบ้าน", "", 1],
+["PIP-0003", "pip", "ไปร้านของเบ็นทางขวามือ แล้วพูดว่าอยากซื้อเมล็ด ซื้อเมล็ดมะเขือเทศสองเมล็ดนะ", "", 1],
+["PIP-0004", "pip", "สวัสดีจ้า ฉันชื่อปิ๊บ จะคอยช่วยนะ ใช้นิ้วลากวงกลมเพื่อเดิน เดินไปใกล้ ๆ เพื่อน แล้วกดปุ่มสีเขียวใหญ่เพื่อคุยกัน", "", 1],
+["PIP-0005", "pip", "อรุณสวัสดิ์จ้า สัตว์หิวแล้ว อย่าลืมให้อาหารนะ", "", 1],
+["PIP-0006", "pip", "นี่คือในบ้านของเรา แตะของที่แถบด้านล่าง แล้วแตะจุดสีขาวเพื่อวางของ แตะกระจกเพื่อเปลี่ยนชุดได้ด้วยนะ", "", 1],
+["PIP-0007", "pip", "เลือกชุดได้ตามใจเลย แตะแต่ละอันแล้วฟังคำศัพท์ภาษาอังกฤษด้วยนะ", "", 1],
+["PIP-0008", "pip", "อีกห้านาทีจะหมดเวลาเล่นแล้วนะ ทำเควสนี้ให้เสร็จ แล้วเตรียมพักกันเถอะ", "", 1],
+["PIP-0009", "pip", "อีกหนึ่งนาทีจะหมดเวลาแล้วจ้า", "", 1],
+["PIP-0010", "pip", "วันนี้เล่นครบเวลาแล้ว เก่งมากเลย พักสายตากันนะ พรุ่งนี้มาเล่นกันใหม่", "", 1],
+["PIP-0011", "pip", "ผู้ปกครองเพิ่มเวลาให้แล้ว เล่นต่อกันเลย", "", 1],
+["NAR-0004", "narr", "Let's try again!", "ไม่เป็นไรนะ ฟังอีกครั้งแล้วลองพูดตามใหม่", 1],
+["PIP-0012", "pip", "เยี่ยมมาก ออกเสียงชัดเจนเลย", "", 1],
+["NTH-0001", "nar", "วันหนึ่ง มีจดหมายลอยมาถึงเรา... เป็นจดหมายจากคุณยายโรซี่", "", 1],
+["GRA-0001", "gran", "Help the farm, please!", "ช่วยฟาร์มด้วยนะ!", 1],
+["GRA-0002", "gran", "Love, Grandma.", "รักนะ จากยาย", 1],
+["NAR-0005", "narr", "Stage one! Vegetable Farm!", "ด่าน 1", 1],
+["PIP-0013", "pip", "ฉันชื่อปิ๊บ อยู่ที่ฟาร์มนี้มาตั้งแต่เกิดเลยนะ ตั้งแต่คุณยายไป แปลงผักก็มีแต่ก้อนหินกับวัชพืช ไม่มีผักให้กินเลย", "", 1],
+["PIP-0014", "pip", "ฉันรอหลานคุณยายทุกวัน ๆ แล้ววันนี้เธอก็มาถึงสักที!", "", 1],
+["PIE-0001", "pipen", "Hi! I'm Pip!", "สวัสดี ฉันชื่อปิ๊บ!", 1],
+["KID-0001", "you", "Hi, Pip!", "สวัสดี ปิ๊บ!", 1],
+["PIP-0015", "pip", "ไปปลุกแปลงผักด้วยกันนะ! เริ่มจากไปทักทายลิลลี่ เพื่อนสนิทของคุณยายก่อน", "", 1],
+["PIP-0016", "pip", "แปลงผักกลับมาเขียวแล้ว เราเก่งมากเลย!", "", 1],
+["PIE-0002", "pipen", "Happy farm!", "ฟาร์มมีความสุข!", 1],
+["PIE-0003", "pipen", "What do plants need?", "ผักจะโตได้ ต้องมีอะไรนะ?", 1],
+["PIP-0017", "pip", "ผักจะโตได้ ต้องมีอะไรนะ?", "", 1],
+["KID-0002", "you", "Water!", "น้ำ", 1],
+["KID-0003", "you", "Candy!", "ลูกอม", 1],
+["KID-0004", "you", "Teddy!", "ตุ๊กตา", 1],
+["PIP-0018", "pip", "ใช่แล้ว ต้นไม้ต้องการน้ำและแสงแดดถึงจะโตนะ", "", 1],
+["PIE-0004", "pipen", "Plants need water and sun.", "ต้นไม้ต้องการน้ำและแสงแดด", 1],
+["PIP-0019", "pip", "เดี๋ยวนะ... ได้ยินเสียงอะไรไหม?", "", 1],
+["NAR-0006", "narr", "Moo~!", "(เสียงวัว)", 1],
+["PIE-0005", "pipen", "Moo? Let's go!", "มู? ไปดูกัน!", 1],
+["LIL-0001", "lily", "Dig, dig, dig the soil.", "ขุด ขุด ขุดดิน", 1],
+["LIL-0002", "lily", "Plant, plant, plant a seed.", "ปลูก ปลูก ปลูกเมล็ด", 1],
+["LIL-0003", "lily", "Water, water, every day.", "รดน้ำ รดน้ำ ทุกวัน", 1],
+["LIL-0004", "lily", "Grow, grow, carrot, grow!", "โต โต แครอทโตนะ", 1],
+["LIL-0005", "lily", "One, two, three, four, five.", "หนึ่ง สอง สาม สี่ ห้า", 1],
+["LIL-0006", "lily", "Five carrots for you!", "แครอทห้าหัวให้เธอ", 1],
+["GRA-0003", "gran", "The garden is green! Good job!", "ยายได้ข่าวว่าแปลงผักเขียวแล้ว เก่งมากจ้ะ", 1],
+["GRA-0004", "gran", "Here are pumpkin seeds for you.", "ยายส่งเมล็ดฟักทองมาให้ปลูกนะ", 1],
+["BOO-0001", "bo", "In spring, you can find butterflies and bees!", "ฤดูใบไม้ผลิมีผีเสื้อกับผึ้งเยอะ", 1],
+["BOO-0002", "bo", "In summer, look for beetles and grasshoppers!", "ฤดูร้อนลองหาด้วงกับตั๊กแตนดู", 1],
+["PIE-0006", "pipen", "Yay!", "", 1],
+["PIE-0007", "pipen", "Good try!", "", 1],
+["PIE-0008", "pipen", "Listen again!", "", 1],
+["PIE-0009", "pipen", "Yay! Great singing!", "", 1],
+["NAR-0007", "narr", "star", "", 1],
+["NAR-0008", "narr", "Hello, {name}!", "", 1],
+["NAR-0009", "narr", "Hello, {pet}!", "", 1],
+["GRA-0005", "gran", "ถึง {name} หลานรักของยาย ยายต้องเดินทางไปไกลสักพักนะจ๊ะ", "", 1],
+["GRA-0006", "gran", "ฟาร์มของเราตอนนี้หลับใหลไปหมดแล้ว ผักไม่งอก สัตว์ไม่ยิ้ม เพื่อน ๆ ในเมืองก็ไม่มาเยี่ยมกันเลย", "", 1],
+["GRA-0007", "gran", "ยายเชื่อว่าหลานทำได้ ไปปลุกฟาร์มให้ตื่นขึ้นมาอีกครั้งนะ", "", 1],
+["GRA-0008", "gran", "ที่ฟาร์มมีเพื่อนตัวเล็กรออยู่ ชื่อของเขาคือปิ๊บ", "", 1],
+["NAR-0010", "narr", "Stage 1: Vegetable Farm", "", 1],
+["NAR-0011", "narr", "Welcome to Word Farm, {name}! Tap Lily and say hello.", "", 1],
+["LIL-0007", "lily", "Hello! I'm Lily. What's your name?", "สวัสดี ฉันชื่อ Lily เธอชื่ออะไรเหรอ", 1],
+["KID-0005", "you", "I am five carrots.", "", 1],
+["KID-0006", "you", "Good night!", "", 1],
+["KID-0007", "you", "Hi! My name is {name}.", "", 1],
+["LIL-0008", "lily", "Nice to meet you, {name}!", "ยินดีที่ได้รู้จักนะ {name}", 1],
+["KID-0008", "you", "How much is it?", "", 1],
+["KID-0009", "you", "Nice to meet you, too!", "", 1],
+["LIL-0009", "lily", "This is a carrot seed. Can you say it?", "นี่คือเมล็ดแครอท ลองพูดตามว่า carrot seed", 1],
+["KID-0010", "you", "carrot seed", "", 1],
+["LIL-0010", "lily", "Let's grow vegetables! Here are four carrot seeds.", "มาปลูกผักกัน! นี่เมล็ดแครอท 4 เมล็ด ให้เธอ", 1],
+["KID-0011", "you", "Thank you!", "ขอบคุณ", 1],
+["NAR-0012", "narr", "Quest complete! Great job!", "", 1],
+["LIL-0011", "lily", "Good morning, {name}!", "อรุณสวัสดิ์ {name}!", 1],
+["KID-0012", "you", "Good morning, Lily!", "อรุณสวัสดิ์ ลิลลี่", 1],
+["KID-0013", "you", "Good afternoon, Lily!", "", 1],
+["LIL-0012", "lily", "Use the hoe to dig. Then plant the seeds.", "ใช้จอบขุดดิน แล้วปลูกเมล็ดลงไปนะ", 1],
+["KID-0014", "you", "Goodbye!", "", 1],
+["LIL-0013", "lily", "Oh! What is it?", "อุ๊ย อะไรเหรอ เลือกของที่จะให้", 1],
+["KID-0015", "you", "Here is a carrot for you.", "", 1],
+["KID-0016", "you", "Here is a potato for you.", "", 1],
+["KID-0017", "you", "Here is a cabbage for you.", "", 1],
+["KID-0018", "you", "Here is a tomato for you.", "", 1],
+["KID-0019", "you", "Here is a pumpkin for you.", "", 1],
+["KID-0020", "you", "Here is a bottle of milk for you.", "", 1],
+["KID-0021", "you", "Here is an egg for you.", "", 1],
+["KID-0022", "you", "Here is a bag of wool for you.", "", 1],
+["KID-0023", "you", "Here is a cheese for you.", "", 1],
+["KID-0024", "you", "Here is a jar of mayonnaise for you.", "", 1],
+["KID-0025", "you", "Here is a ball of yarn for you.", "", 1],
+["KID-0026", "you", "Here is a cake for you.", "", 1],
+["LIL-0014", "lily", "Thank you, {name}.", "ขอบคุณนะ", 1],
+["LIL-0015", "lily", "Bye-bye!", "บ๊ายบาย", 1],
+["LIL-0016", "lily", "You're welcome!", "ด้วยความยินดี", 1],
+["TOM-0001", "tom", "Good morning, {name}!", "อรุณสวัสดิ์ {name}!", 1],
+["KID-0027", "you", "Good morning, Grandpa Tom!", "อรุณสวัสดิ์ คุณตาทอม", 1],
+["KID-0028", "you", "Good afternoon, Grandpa Tom!", "", 1],
+["TOM-0002", "tom", "I'm Grandpa Tom. Come back later!", "ตาชื่อทอม ไว้มาหาตาทีหลังนะ", 1],
+["PIP-0020", "pip", "คุณตาทอมจะให้ช่วยเลี้ยงสัตว์ตอนด่าน 2 นะ ทำเควสที่ฟาร์มผักให้ครบก่อน", "", 1],
+["TOM-0003", "tom", "Do you like animals?", "ชอบสัตว์ไหม", 1],
+["KID-0029", "you", "Yes, I do!", "", 1],
+["KID-0030", "you", "No, I don't.", "", 1],
+["TOM-0004", "tom", "Me too! I love my cows.", "ตาก็ชอบ ตารักวัวของตามาก", 1],
+["TOM-0005", "tom", "You're welcome!", "ด้วยความยินดี", 1],
+["TOM-0006", "tom", "Oh! What is it?", "อุ๊ย อะไรเหรอ เลือกของที่จะให้", 1],
+["TOM-0007", "tom", "Thank you, {name}.", "ขอบคุณนะ", 1],
+["TOM-0008", "tom", "Bye-bye!", "บ๊ายบาย", 1],
+["ROS-0001", "rosa", "Good morning, {name}!", "อรุณสวัสดิ์ {name}!", 1],
+["KID-0031", "you", "Good afternoon, Rosa!", "", 1],
+["KID-0032", "you", "Good morning, Rosa!", "อรุณสวัสดิ์ โรซ่า", 1],
+["ROS-0002", "rosa", "My bakery opens soon. Come back later!", "ร้านเบเกอรี่ยังไม่เปิดนะ ไว้มาใหม่", 1],
+["PIP-0021", "pip", "ร้านเบเกอรี่ของโรซ่าจะเปิดตอนด่าน 3 นะ", "", 1],
+["ROS-0003", "rosa", "What do you like for breakfast?", "ชอบกินอะไรเป็นอาหารเช้า", 1],
+["KID-0033", "you", "I like bread.", "", 1],
+["KID-0034", "you", "I like eggs.", "", 1],
+["KID-0035", "you", "I like milk.", "", 1],
+["KID-0036", "you", "I like apples.", "", 1],
+["ROS-0004", "rosa", "Yummy! Me too!", "อร่อยจัง ฉันก็ชอบ", 1],
+["ROS-0005", "rosa", "You're welcome!", "ด้วยความยินดี", 1],
+["ROS-0006", "rosa", "Oh! What is it?", "อุ๊ย อะไรเหรอ เลือกของที่จะให้", 1],
+["ROS-0007", "rosa", "Thank you, {name}.", "ขอบคุณนะ", 1],
+["ROS-0008", "rosa", "Bye-bye!", "บ๊ายบาย", 1],
+["MIA-0001", "mia", "Good morning, {name}!", "อรุณสวัสดิ์ {name}!", 1],
+["KID-0037", "you", "Good afternoon, Mia!", "", 1],
+["KID-0038", "you", "Good morning, Mia!", "อรุณสวัสดิ์ มีอา", 1],
+["MIA-0002", "mia", "I love your farm! Do you have eggs?", "ฉันชอบฟาร์มของเธอ มีไข่ไหม", 1],
+["MIA-0003", "mia", "What's your favorite color?", "ชอบสีอะไรที่สุด", 1],
+["KID-0039", "you", "I like red.", "", 1],
+["KID-0040", "you", "I like blue.", "", 1],
+["KID-0041", "you", "I like yellow.", "", 1],
+["KID-0042", "you", "I like green.", "", 1],
+["KID-0043", "you", "I like pink.", "", 1],
+["KID-0044", "you", "I like purple.", "", 1],
+["MIA-0004", "mia", "Yellow is so pretty!", "สีเหลืองสวยมาก!", 1],
+["MIA-0005", "mia", "You're welcome!", "ด้วยความยินดี", 1],
+["MIA-0006", "mia", "Oh! What is it?", "อุ๊ย อะไรเหรอ เลือกของที่จะให้", 1],
+["MIA-0007", "mia", "Thank you, {name}.", "ขอบคุณนะ", 1],
+["MIA-0008", "mia", "Bye-bye!", "บ๊ายบาย", 1],
+["JOE-0001", "joe", "Good morning, {name}!", "อรุณสวัสดิ์ {name}!", 1],
+["KID-0045", "you", "Good afternoon, Grandpa Joe!", "", 1],
+["KID-0046", "you", "Good morning, Grandpa Joe!", "อรุณสวัสดิ์ คุณตาโจ", 1],
+["JOE-0002", "joe", "Oh, I forget things. What day is it today?", "ตาชอบลืม วันนี้วันอะไรนะ", 1],
+["KID-0047", "you", "It's Saturday.", "วันเสาร์", 1],
+["KID-0048", "you", "It's Sunday.", "วันอาทิตย์", 1],
+["KID-0049", "you", "It's Monday.", "วันจันทร์", 1],
+["JOE-0003", "joe", "Monday! Thank you, {name}!", "วันจันทร์ ขอบใจนะ", 1],
+["JOE-0004", "joe", "Oh! What is it?", "อุ๊ย อะไรเหรอ เลือกของที่จะให้", 1],
+["JOE-0005", "joe", "Thank you, {name}.", "ขอบคุณนะ", 1],
+["KID-0050", "you", "It's Friday.", "วันศุกร์", 1],
+["JOE-0006", "joe", "Bye-bye!", "บ๊ายบาย", 1],
+["KID-0051", "you", "It's Thursday.", "วันพฤหัสบดี", 1],
+["JOE-0007", "joe", "You're welcome!", "ด้วยความยินดี", 1],
+["KID-0052", "you", "It's Wednesday.", "วันพุธ", 1],
+["JOE-0008", "joe", "How old are you?", "หลานอายุเท่าไรแล้ว", 1],
+["KID-0053", "you", "I'm four.", "", 1],
+["KID-0054", "you", "I'm five.", "", 1],
+["KID-0055", "you", "I'm six.", "", 1],
+["KID-0056", "you", "I'm seven.", "", 1],
+["KID-0057", "you", "I'm eight.", "", 1],
+["KID-0058", "you", "I'm nine.", "", 1],
+["JOE-0009", "joe", "Four! You are a big kid!", "4 ขวบแล้ว โตแล้วนะ", 1],
+["MAX-0001", "max", "Good morning, {name}!", "อรุณสวัสดิ์ {name}!", 1],
+["KID-0059", "you", "Good afternoon, Mayor Max!", "", 1],
+["KID-0060", "you", "Good morning, Mayor Max!", "อรุณสวัสดิ์ นายกฯ แม็กซ์", 1],
+["MAX-0002", "max", "My shop is not open yet. Come back later!", "ร้านยังไม่เปิด ไว้มาใหม่นะ (เปิดในด่าน 4)", 1],
+["MAX-0003", "max", "What's your favorite toy?", "ของเล่นที่ชอบที่สุดคืออะไร", 1],
+["KID-0061", "you", "I like my ball.", "", 1],
+["KID-0062", "you", "I like my teddy bear.", "", 1],
+["MAX-0004", "max", "Cool! I like it too!", "เจ๋งไปเลย ฉันก็ชอบ", 1],
+["MAX-0005", "max", "You're welcome!", "ด้วยความยินดี", 1],
+["MAX-0006", "max", "Oh! What is it?", "อุ๊ย อะไรเหรอ เลือกของที่จะให้", 1],
+["MAX-0007", "max", "Thank you, {name}.", "ขอบคุณนะ", 1],
+["MAX-0008", "max", "Bye-bye!", "บ๊ายบาย", 1],
+["BOO-0003", "bo", "Good morning, {name}!", "อรุณสวัสดิ์ {name}!", 1],
+["KID-0063", "you", "Good morning, Bo!", "อรุณสวัสดิ์ โบ", 1],
+["KID-0064", "you", "Good afternoon, Bo!", "", 1],
+["BOO-0004", "bo", "Which bug do you like?", "ชอบแมลงตัวไหน", 1],
+["KID-0065", "you", "I like butterflies.", "", 1],
+["KID-0066", "you", "I like ladybugs.", "", 1],
+["KID-0067", "you", "I like bees.", "", 1],
+["BOO-0005", "bo", "Me too! Bees are cute!", "ฉันก็ชอบผึ้ง น่ารักมาก", 1],
+["BOO-0006", "bo", "You're welcome!", "ด้วยความยินดี", 1],
+["BOO-0007", "bo", "Oh! What is it?", "อุ๊ย อะไรเหรอ เลือกของที่จะให้", 1],
+["KID-0068", "you", "Here is a loaf of bread for you.", "", 1],
+["BOO-0008", "bo", "Thank you, {name}.", "ขอบคุณนะ", 1],
+["BOO-0009", "bo", "Bye-bye!", "บ๊ายบาย", 1],
+["FIN-0001", "finn", "Good morning, {name}!", "อรุณสวัสดิ์ {name}!", 1],
+["KID-0069", "you", "Good morning, Finn!", "อรุณสวัสดิ์ ฟินน์", 1],
+["KID-0070", "you", "Good afternoon, Finn!", "", 1],
+["FIN-0002", "finn", "Nice! You have a carp. You can cook it at home!", "เก่งมาก มีปลาคาร์ปแล้ว เอาไปทำอาหารที่บ้านได้นะ", 1],
+["FIN-0003", "finn", "Do you like fishing?", "ชอบตกปลาไหม", 1],
+["FIN-0004", "finn", "Me too! Let's fish together!", "ฉันก็ชอบ ไปตกปลาด้วยกันนะ", 1],
+["FIN-0005", "finn", "You're welcome!", "ด้วยความยินดี", 1],
+["FIN-0006", "finn", "Oh! What is it?", "อุ๊ย อะไรเหรอ เลือกของที่จะให้", 1],
+["FIN-0007", "finn", "Thank you, {name}.", "ขอบคุณนะ", 1],
+["FIN-0008", "finn", "Bye-bye!", "บ๊ายบาย", 1],
+["PAT-0001", "pat", "Good morning, {name}!", "อรุณสวัสดิ์ {name}!", 1],
+["KID-0071", "you", "Good afternoon, Pat!", "", 1],
+["KID-0072", "you", "Good morning, Pat!", "อรุณสวัสดิ์ แพท", 1],
+["PAT-0002", "pat", "No letters today. Have a nice day!", "วันนี้ไม่มีจดหมาย ขอให้เป็นวันที่ดีนะ", 1],
+["PAT-0003", "pat", "Do you like letters?", "ชอบจดหมายไหม", 1],
+["PAT-0004", "pat", "Me too! I bring letters every day.", "ฉันก็ชอบ ฉันเอาจดหมายมาส่งทุกวันเลย", 1],
+["PAT-0005", "pat", "You're welcome!", "ด้วยความยินดี", 1],
+["PAT-0006", "pat", "Oh! What is it?", "อุ๊ย อะไรเหรอ เลือกของที่จะให้", 1],
+["PAT-0007", "pat", "Thank you, {name}.", "ขอบคุณนะ", 1],
+["PAT-0008", "pat", "Bye-bye!", "บ๊ายบาย", 1],
+["BEN-0001", "ben", "Good morning, {name}! What would you like?", "อรุณสวัสดิ์ {name}! อยากได้อะไรดี", 1],
+["KID-0073", "you", "I want to buy seeds.", "", 1],
+["KID-0074", "you", "I want to sell vegetables.", "", 1],
+["BEN-0002", "ben", "Which seeds? Here are my prices.", "เอาเมล็ดอะไรดี ราคาตามนี้เลย", 1],
+["KID-0075", "you", "Carrot seeds, please.", "", 1],
+["KID-0076", "you", "Potato seeds, please.", "", 1],
+["KID-0077", "you", "Cabbage seeds, please.", "", 1],
+["KID-0078", "you", "Tomato seeds, please.", "เมล็ดมะเขือเทศ · เมล็ดละ 10 เหรียญ", 1],
+["KID-0079", "you", "Pumpkin seeds, please.", "", 1],
+["BEN-0003", "ben", "How many potato seeds?", "เอาเมล็ดมันฝรั่งกี่เมล็ด", 1],
+["BEN-0004", "ben", "One potato seed. That's 5 coins.", "เมล็ดมันฝรั่ง 1 เมล็ด ทั้งหมด 5 เหรียญ", 1],
+["KID-0080", "you", "Here you are.", "นี่จ้ะ (จ่ายเงิน)", 1],
+["BEN-0005", "ben", "What do you want to sell?", "อยากขายอะไร", 1],
+["KID-0081", "you", "Carrots", "", 1],
+["KID-0082", "you", "Potatoes", "", 1],
+["KID-0083", "you", "Cabbages", "", 1],
+["KID-0084", "you", "Pumpkins", "", 1],
+["KID-0085", "you", "Carp", "", 1],
+["KID-0086", "you", "Trout", "", 1],
+["KID-0087", "you", "Catfish", "", 1],
+["KID-0088", "you", "Goldfish", "", 1],
+["KID-0089", "you", "Crabs", "", 1],
+["KID-0090", "you", "Mushrooms", "", 1],
+["KID-0091", "you", "Berries", "", 1],
+["KID-0092", "you", "Apples", "", 1],
+["KID-0093", "you", "Flowers", "", 1],
+["KID-0094", "you", "Shells", "", 1],
+["KID-0095", "you", "Pine cones", "", 1],
+["KID-0096", "you", "Pieces of wood", "", 1],
+["BEN-0006", "ben", "How many cabbages?", "จะขายกะหล่ำปลีกี่หัว", 1],
+["BEN-0007", "ben", "How many carp?", "จะขายปลาคาร์ปกี่ตัว", 1],
+["BEN-0008", "ben", "How many catfish?", "จะขายปลาดุกกี่ตัว", 1],
+["BEN-0009", "ben", "How many crabs?", "จะขายปูกี่ตัว", 1],
+["BEN-0010", "ben", "How many berries?", "จะขายเบอร์รี่กี่ลูก", 1],
+["BEN-0011", "ben", "How many flowers?", "จะขายดอกไม้กี่ดอก", 1],
+["BEN-0012", "ben", "How many pine cones?", "จะขายลูกสนกี่ลูก", 1],
+["BEN-0013", "ben", "See you!", "แล้วเจอกันนะ", 1],
+["BEN-0014", "ben", "How many pumpkin seeds?", "เอาเมล็ดฟักทองกี่เมล็ด", 1],
+["BEN-0015", "ben", "How many carrot seeds?", "เอาเมล็ดแครอทกี่เมล็ด", 1],
+["BEN-0016", "ben", "How many cabbage seeds?", "เอาเมล็ดกะหล่ำปลีกี่เมล็ด", 1],
+["KID-0097", "you", "What do you want to make?", "อยากทำอะไรดี", 1],
+["NAR-0013", "narr", "Let's make cheese! What do we do first?", "", 1],
+["NAR-0014", "narr", "Let's make mayonnaise! What do we do first?", "", 1],
+["NAR-0015", "narr", "Let's make yarn! What do we do first?", "", 1],
+["NAR-0016", "narr", "This is a market stall. It opens in stage 3.", "", 1],
+["PIP-0022", "pip", "แผงนี้จะเปิดให้ขายของในด่าน 3", "", 1],
+["KID-0098", "you", "This is my house. What do you want to do?", "นี่คือบ้านของเรา จะทำอะไรดี (นอนแล้วผักที่รดน้ำจะโต)", 1],
+["KID-0099", "you", "Yes. Good night!", "ใช่ ราตรีสวัสดิ์", 1],
+["KID-0100", "you", "Dear diary.", "", 1],
+["KID-0101", "you", "Today is Monday.", "", 1],
+["KID-0102", "you", "It was sunny.", "", 1],
+["KID-0103", "you", "I gave a tomato to Lily.", "", 1],
+["KID-0104", "you", "I gave a tomato to Grandpa Tom.", "", 1],
+["KID-0105", "you", "I gave a tomato to Rosa.", "", 1],
+["KID-0106", "you", "I gave a tomato to Mia.", "", 1],
+["KID-0107", "you", "I gave a cheese to Grandpa Joe.", "", 1],
+["KID-0108", "you", "I gave a tomato to Mayor Max.", "", 1],
+["KID-0109", "you", "I got one star today!", "", 1],
+["PIP-0023", "pip", "นี่คือสมุดบันทึกของวันนี้ ฟังแล้วอ่านตามได้นะ แล้วกดราตรีสวัสดิ์", "", 1],
+["KID-0110", "you", "Do you want to go to bed?", "จะเข้านอนเลยไหม (ผักที่รดน้ำแล้วจะโตขึ้น)", 1],
+["NAR-0017", "narr", "The mailbox is empty.", "", 1],
+["PIP-0024", "pip", "ตู้จดหมายว่างเปล่า พรุ่งนี้มาดูใหม่นะ", "", 1],
+["KID-0111", "you", "What do you want to cook?", "อยากทำอาหารอะไรดี", 1],
+["KID-0112", "you", "I need one cabbage and one tomato.", "ต้องมีกะหล่ำปลี 1 หัว กับ มะเขือเทศ 1 ลูกก่อนนะ", 1],
+["NAR-0018", "narr", "Let's make jam! What do we do first?", "", 1],
+["NAR-0019", "narr", "Let's make soup! What do we do first?", "", 1],
+["MIM-0001", "mimi", "Where is Mimi?", "มีมี่อยู่ที่ไหนนะ?", 1],
+["KID-0113", "you", "On the bed!", "", 1],
+["KID-0114", "you", "Under the table!", "ใต้โต๊ะ", 1],
+["KID-0115", "you", "Next to the table!", "ข้าง ๆ โต๊ะ", 1],
+["MIM-0002", "mimi", "Meow? No!", "ไม่ใช่ตรงนั้น ดูอีกทีนะ", 1],
+["MIM-0003", "mimi", "Meow! You found me! I am next to the table.", "เมี้ยว! หาเจอแล้ว มีมี่อยู่ข้าง ๆ โต๊ะ ได้ 5 เหรียญ", 1],
+["MIM-0004", "mimi", "Meow! Purr...", "เมี้ยว~ มีมี่ชอบให้ลูบหัว พรุ่งนี้มีมี่จะไปซ่อนที่ใหม่นะ", 1],
+["KID-0116", "you", "{pet} is happy! Say: Good dog, {pet}!", "{pet}ดีใจมาก ลองชมว่า Good dog, {pet}!", 1],
+["KID-0117", "you", "Good dog, {pet}!", "", 1],
+["NAR-0020", "narr", "Here are today's jobs.", "", 1],
+["NAR-0021", "narr", "Find two things outside.", "", 1],
+["NAR-0022", "narr", "Cut three weeds.", "", 1],
+["NAR-0023", "narr", "Chop two branches.", "", 1],
+["MIA-0009", "mia", "Welcome to the Flower Festival!", "ยินดีต้อนรับสู่เทศกาลดอกไม้!", 1],
+["KID-0118", "you", "Happy Flower Festival!", "สุขสันต์เทศกาลดอกไม้", 1],
+["LIL-0017", "lily", "The flowers are so pretty!", "ดอกไม้สวยมากเลย", 1],
+["ROS-0009", "rosa", "I made a flower cake!", "ฉันทำเค้กดอกไม้ด้วย", 1],
+["MIA-0010", "mia", "This is for you: three flowers and fifteen coins! See you next week!", "ของขวัญ: ดอกไม้ 3 ดอก และ 15 เหรียญ แล้วเจอกันสัปดาห์หน้านะ", 1],
+["NAR-0024", "narr", "The nest is empty. Feed the chickens!", "", 1],
+["PIP-0025", "pip", "รังว่างเปล่า ให้อาหารไก่ก่อนนะ", "", 1],
+["LIL-0018", "lily", "Let's sing a song together!", "มาร้องเพลง \"มีมี่อยู่ไหน\" ด้วยกันนะ", 1],
+["KID-0119", "you", "Let's sing!", "ร้องกันเลย", 1],
+["KID-0120", "you", "Not now.", "", 1],
+["NAR-0025", "narr", "This is the barn. Animals sleep here.", "", 1],
+["NAR-0026", "narr", "Good morning, {name}!", "", 1],
+["NAR-0027", "narr", "Today is Tuesday.", "", 1],
+["NAR-0028", "narr", "It's spring.", "", 1],
+["NAR-0029", "narr", "It's rainy today.", "", 1],
+["NAR-0030", "narr", "You have a letter!", "", 1],
+["NAR-0031", "narr", "The animals are hungry!", "", 1],
+["NAR-0032", "narr", "This is a fountain.", "", 1],
+["NAR-0033", "narr", "Today is Wednesday.", "", 1],
+["NAR-0034", "narr", "It's sunny today.", "", 1],
+["NAR-0035", "narr", "Today is Ben's birthday!", "", 1],
+["CUS-0001", "cust", "Good morning! I'm Noah.", "อรุณสวัสดิ์ ฉันชื่อNoah", 1],
+["KID-0121", "you", "Good morning! Welcome to my shop!", "", 1],
+["KID-0122", "you", "Good afternoon!", "", 1],
+["CUS-0002", "cust", "Can I have three mushrooms, please?", "ขอเห็ด 3 ดอกได้ไหม", 1],
+["KID-0123", "you", "Here you are. Three mushrooms.", "", 1],
+["KID-0124", "you", "Here you are. Four mushrooms.", "", 1],
+["KID-0125", "you", "Here you are. Two mushrooms.", "", 1],
+["CUS-0003", "cust", "Can I have one goldfish, please?", "ขอปลาทอง 1 ตัวได้ไหม", 1],
+["KID-0126", "you", "Here you are. One goldfish.", "", 1],
+["KID-0127", "you", "Here you are. Two goldfish.", "", 1],
+["KID-0128", "you", "Here you are. Three goldfish.", "", 1],
+["CUS-0004", "cust", "Can I have one jar of jam, please?", "ขอแยมเบอร์รี่ 1 ขวดได้ไหม", 1],
+["KID-0129", "you", "Here you are. Three jars of jam.", "", 1],
+["KID-0130", "you", "Here you are. Two jars of jam.", "", 1],
+["KID-0131", "you", "Here you are. One jar of jam.", "", 1],
+["CUS-0005", "cust", "How much is it?", "ราคาเท่าไร · ไหมพรม ม้วนละ 9 เหรียญ นับเหรียญทั้งหมด", 1],
+["CUS-0006", "cust", "Count the coins again!", "", 1],
+["LIL-0019", "lily", "What's your favorite vegetable?", "ผักที่ชอบที่สุดคืออะไร", 1],
+["KID-0132", "you", "I like carrots.", "ชอบแครอท", 1],
+["KID-0133", "you", "I like potatoes.", "", 1],
+["KID-0134", "you", "I like cabbages.", "", 1],
+["KID-0135", "you", "I like tomatoes.", "", 1],
+["LIL-0020", "lily", "Tomatoes are yummy!", "มะเขือเทศอร่อยมาก!", 1],
+["JOE-0010", "joe", "Wednesday! Thank you, {name}!", "วันพุธ ขอบใจนะ", 1],
+["KID-0136", "you", "It's Tuesday.", "วันอังคาร", 1],
+["PAT-0009", "pat", "You have a letter! Look in your mailbox.", "มีจดหมายมาส่ง ไปดูที่ตู้จดหมายข้างบ้านนะ", 1],
+["KID-0137", "you", "Today is Wednesday.", "", 1],
+["KID-0138", "you", "I finished a job: give a gift to a friend.", "", 1],
+["KID-0139", "you", "I gave a pumpkin to Lily.", "", 1],
+["KID-0140", "you", "I got two stars today!", "", 1],
+["NAR-0036", "narr", "Dear {name}, Hello!", "", 1],
+["NAR-0037", "narr", "I'm Pat.", "", 1],
+["NAR-0038", "narr", "I bring letters to you.", "", 1],
+["NAR-0039", "narr", "Check your mailbox every day!", "", 1],
+["NAR-0040", "narr", "From, Pat", "", 1],
+["NAR-0041", "narr", "Dear {name}, Tomorrow is Ben's birthday!", "", 1],
+["NAR-0042", "narr", "Say happy birthday!", "", 1],
+["NAR-0043", "narr", "Dear {name}, Thank you for your help.", "", 1],
+["NAR-0044", "narr", "Here are some coins.", "", 1],
+["NAR-0045", "narr", "From, Grandpa Tom", "", 1],
+["KID-0141", "you", "In front of the sofa!", "หน้าโซฟา", 1],
+["MIM-0005", "mimi", "Meow! You found me! I am on the bed.", "เมี้ยว! หาเจอแล้ว มีมี่อยู่บนเตียง ได้ 5 เหรียญ", 1],
+["NAR-0046", "narr", "Catch two bugs.", "", 1],
+["NAR-0047", "narr", "Give a gift to a friend.", "", 1],
+["NAR-0048", "narr", "Feed four animals.", "", 1],
+["NAR-0049", "narr", "Today is Thursday.", "", 1],
+["NAR-0050", "narr", "Today is Friday.", "", 1],
+["NAR-0051", "narr", "It's cloudy today.", "", 1],
+["NAR-0052", "narr", "Today is Lily's birthday!", "", 1],
+["LIL-0021", "lily", "It's my birthday today!", "วันนี้เป็นวันเกิดของลิลลี่!", 1],
+["KID-0142", "you", "Happy birthday, Lily!", "สุขสันต์วันเกิดนะ ลิลลี่", 1],
+["LIL-0022", "lily", "Thank you, {name}! You are a good friend.", "ขอบคุณนะ {name} เธอเป็นเพื่อนที่ดีมาก", 1],
+["LIL-0023", "lily", "Your plants are thirsty. Water them every day!", "ต้นผักหิวน้ำแล้ว ต้องรดน้ำทุกวันนะ", 1],
+["CUS-0007", "cust", "Good morning! I'm Sam.", "อรุณสวัสดิ์ ฉันชื่อSam", 1],
+["CUS-0008", "cust", "Can I have one salad, please?", "ขอสลัด 1 จานได้ไหม", 1],
+["KID-0143", "you", "Here you are. Three salads.", "", 1],
+["KID-0144", "you", "Here you are. One salad.", "", 1],
+["KID-0145", "you", "Here you are. Two salads.", "", 1],
+["JOE-0011", "joe", "Friday! Thank you, {name}!", "วันศุกร์ ขอบใจนะ", 1],
+["KID-0146", "you", "Today is Friday.", "", 1],
+["KID-0147", "you", "It was cloudy.", "", 1],
+["KID-0148", "you", "I said happy birthday to Lily.", "", 1],
+["NAR-0053", "narr", "Dear {name}, Tomorrow is Lily's birthday!", "", 1],
+["KID-0149", "you", "Next to the bed!", "ข้าง ๆ เตียง", 1],
+["MIM-0006", "mimi", "Meow! You found me! I am in front of the sofa.", "เมี้ยว! หาเจอแล้ว มีมี่อยู่หน้าโซฟา ได้ 5 เหรียญ", 1],
+["NAR-0054", "narr", "Pick up three pieces of trash.", "", 1],
+["NAR-0055", "narr", "Today is Saturday.", "", 1],
+["LIL-0024", "lily", "Go to bed now. Plants grow at night.", "ไปนอนได้แล้ว ผักจะโตตอนกลางคืน", 1],
+["NAR-0056", "narr", "Today is Sunday.", "", 1],
+["NAR-0057", "narr", "It's the Flower Festival in town!", "", 1],
+["LIL-0025", "lily", "Wow, you have them! Can I have three carrots, please?", "ว้าว มีครบแล้ว ขอแครอท 3 หัวได้ไหม", 1],
+["KID-0150", "you", "Here you are. Four carrots.", "", 1],
+["KID-0151", "you", "Here you are. Two carrots.", "", 1],
+["KID-0152", "you", "Here you are. Three carrots.", "", 1],
+["LIL-0026", "lily", "Thank you, {name}! Yummy!", "ขอบคุณนะ {name}! น่ากินจัง", 1],
+["CUS-0009", "cust", "Can I have one cheese, please?", "ขอชีส 1 ก้อนได้ไหม", 1],
+["KID-0153", "you", "Here you are. Two cheeses.", "", 1],
+["KID-0154", "you", "Here you are. One cheese.", "", 1],
+["KID-0155", "you", "Here you are. Three cheeses.", "", 1],
+["CUS-0010", "cust", "Can I have three crabs, please?", "ขอปู 3 ตัวได้ไหม", 1],
+["KID-0156", "you", "Here you are. Two crabs.", "", 1],
+["KID-0157", "you", "Here you are. Three crabs.", "", 1],
+["KID-0158", "you", "Here you are. Four crabs.", "", 1],
+["CUS-0011", "cust", "Can I have two berries, please?", "ขอเบอร์รี่ 2 ลูกได้ไหม", 1],
+["KID-0159", "you", "Here you are. Two berries.", "", 1],
+["KID-0160", "you", "Here you are. Three berries.", "", 1],
+["KID-0161", "you", "Here you are. One berry.", "", 1],
+["LIL-0027", "lily", "Ben's shop is on the right. Buy two tomato seeds.", "ร้าน Ben อยู่ทางขวา ไปซื้อเมล็ดมะเขือเทศ 2 เมล็ดนะ", 1],
+["PIP-0026", "pip", "งานวันนี้: เก็บของ เช่น ดอกไม้ เห็ด 2 อย่าง ทำเสร็จได้ 9 เหรียญ ดูบอร์ดงานที่ข้างแปลงผักได้นะ", "", 1],
+["PIP-0027", "pip", "ไว้ร้องทีหลังก็ได้ แตะคุยกับลิลลี่แล้วเลือก Let's sing! หรือเปิดหน้าเพลงในสมุดคำศัพท์", "", 1],
+["JOE-0012", "joe", "Sunday! Thank you, {name}!", "วันอาทิตย์ ขอบใจนะ", 1],
+["KID-0162", "you", "Today is Sunday.", "", 1],
+["NAR-0058", "narr", "Dear {name}, Tomorrow is Sunday!", "", 1],
+["NAR-0059", "narr", "Come to the Flower Festival in town!", "", 1],
+["NAR-0060", "narr", "From, Mia", "", 1],
+["NAR-0061", "narr", "Dear {name}, I made cookies this morning.", "", 1],
+["NAR-0062", "narr", "Here is a cookie for you!", "", 1],
+["NAR-0063", "narr", "From, Rosa", "", 1],
+["NAR-0064", "narr", "Dear {name}, Tomorrow is Bo's birthday!", "", 1],
+["KID-0163", "you", "Under the bed!", "ใต้เตียง", 1],
+["KID-0164", "you", "Next to the window!", "ข้าง ๆ หน้าต่าง", 1],
+["MIM-0007", "mimi", "Meow! You found me! I am under the bed.", "เมี้ยว! หาเจอแล้ว มีมี่อยู่ใต้เตียง ได้ 5 เหรียญ", 1],
+["NAR-0065", "narr", "Catch a fish.", "", 1],
+["NAR-0066", "narr", "Today is Monday.", "", 1],
+["NAR-0067", "narr", "It's summer now!", "", 1],
+["NAR-0068", "narr", "It's windy today.", "", 1],
+["NAR-0069", "narr", "Today is Bo's birthday!", "", 1],
+["NAR-0070", "narr", "It's summer.", "", 1],
+["CUS-0012", "cust", "Good morning! I'm Zoe.", "อรุณสวัสดิ์ ฉันชื่อZoe", 1],
+["CUS-0013", "cust", "Can I have two crabs, please?", "ขอปู 2 ตัวได้ไหม", 1],
+["KID-0165", "you", "Here you are. One crab.", "", 1],
+["CUS-0014", "cust", "Can I have one apple, please?", "ขอแอปเปิ้ล 1 ลูกได้ไหม", 1],
+["KID-0166", "you", "Here you are. Three apples.", "", 1],
+["KID-0167", "you", "Here you are. One apple.", "", 1],
+["KID-0168", "you", "Here you are. Two apples.", "", 1],
+["JOE-0013", "joe", "Tuesday! Thank you, {name}!", "วันอังคาร ขอบใจนะ", 1],
+["KID-0169", "you", "Today is Tuesday.", "", 1],
+["KID-0170", "you", "It was windy.", "", 1],
+["NAR-0071", "narr", "Dear {name}, Tomorrow is Grandpa Tom's birthday!", "", 1],
+["KID-0171", "you", "On the sofa!", "บนโซฟา", 1],
+["MIM-0008", "mimi", "Meow! You found me! I am next to the window.", "เมี้ยว! หาเจอแล้ว มีมี่อยู่ข้าง ๆ หน้าต่าง ได้ 5 เหรียญ", 1],
+["MIA-0011", "mia", "Welcome to the Fishing Festival!", "ยินดีต้อนรับสู่เทศกาลตกปลา!", 1],
+["KID-0172", "you", "Happy Fishing Festival!", "สุขสันต์เทศกาลตกปลา", 1],
+["FIN-0009", "finn", "Who can catch the biggest fish?", "ใครจะตกปลาได้ตัวใหญ่ที่สุด", 1],
+["JOE-0014", "joe", "I caught a fish when I was young!", "ตอนเด็ก ๆ ตาก็ตกปลาเก่งนะ", 1],
+["MIA-0012", "mia", "This is for you: two carp and fifteen coins! See you next week!", "ของขวัญ: ปลาคาร์ป 2 ตัว และ 15 เหรียญ แล้วเจอกันสัปดาห์หน้านะ", 1],
+["NAR-0072", "narr", "Today is Grandpa Tom's birthday!", "", 1],
+["CUS-0015", "cust", "Good morning! I'm Nina.", "อรุณสวัสดิ์ ฉันชื่อNina", 1],
+["CUS-0016", "cust", "Can I have one carp, please?", "ขอปลาคาร์ป 1 ตัวได้ไหม", 1],
+["KID-0173", "you", "Here you are. Three carp.", "", 1],
+["KID-0174", "you", "Here you are. Two carp.", "", 1],
+["KID-0175", "you", "Here you are. One carp.", "", 1],
+["CUS-0017", "cust", "Can I have three pieces of wood, please?", "ขอไม้ 3 ชิ้นได้ไหม", 1],
+["KID-0176", "you", "Here you are. Three pieces of wood.", "", 1],
+["KID-0177", "you", "Here you are. Four pieces of wood.", "", 1],
+["KID-0178", "you", "Here you are. Two pieces of wood.", "", 1],
+["CUS-0018", "cust", "Can I have one bowl of soup, please?", "ขอซุปเห็ด 1 ถ้วยได้ไหม", 1],
+["KID-0179", "you", "Here you are. One bowl of soup.", "", 1],
+["KID-0180", "you", "Here you are. Two bowls of soup.", "", 1],
+["KID-0181", "you", "Here you are. Three bowls of soup.", "", 1],
+["JOE-0015", "joe", "Thursday! Thank you, {name}!", "วันพฤหัสบดี ขอบใจนะ", 1],
+["KID-0182", "you", "Today is Thursday.", "", 1],
+["NAR-0073", "narr", "Pet your pet.", "", 1],
+["NAR-0074", "narr", "Today is Rosa's birthday!", "", 1],
+["LIL-0028", "lily", "Ben buys vegetables. Sell three to him!", "Ben รับซื้อผัก ไปขายให้เขา 3 ชิ้นนะ", 1],
+["CUS-0019", "cust", "Can I have one cabbage, please?", "ขอกะหล่ำปลี 1 หัวได้ไหม", 1],
+["KID-0183", "you", "Here you are. Two cabbages.", "", 1],
+["KID-0184", "you", "Here you are. Three cabbages.", "", 1],
+["KID-0185", "you", "Here you are. One cabbage.", "", 1],
+["ROS-0010", "rosa", "It's my birthday today!", "วันนี้เป็นวันเกิดของโรซ่า!", 1],
+["KID-0186", "you", "Happy birthday, Rosa!", "สุขสันต์วันเกิดนะ โรซ่า", 1],
+["ROS-0011", "rosa", "Thank you, {name}! You are a good friend.", "ขอบคุณนะ {name} เธอเป็นเพื่อนที่ดีมาก", 1],
+["JOE-0016", "joe", "Saturday! Thank you, {name}!", "วันเสาร์ ขอบใจนะ", 1],
+["KID-0187", "you", "Today is Saturday.", "", 1],
+["KID-0188", "you", "I said happy birthday to Rosa.", "", 1],
+["NAR-0075", "narr", "Dear {name}, Tomorrow is Rosa's birthday!", "", 1],
+["NAR-0076", "narr", "Come to the Fishing Festival in town!", "", 1],
+["NAR-0077", "narr", "It's the Fishing Festival in town!", "", 1],
+["LIL-0029", "lily", "Wow, you have them! Can I have two tomatoes, please?", "ว้าว มีครบแล้ว ขอมะเขือเทศ 2 ลูกได้ไหม", 1],
+["KID-0189", "you", "Here you are. Two tomatoes.", "", 1],
+["KID-0190", "you", "Here you are. One tomato.", "", 1],
+["KID-0191", "you", "Here you are. Three tomatoes.", "", 1],
+["NAR-0078", "narr", "It's fall now!", "", 1],
+["NAR-0079", "narr", "What do plants need?", "", 1],
+["NAR-0080", "narr", "Great job, {name}! Stage one clear!", "", 1],
+["CUS-0020", "cust", "Good morning! I'm Leo.", "อรุณสวัสดิ์ ฉันชื่อLeo", 1],
+["NAR-0081", "narr", "Talk to three friends.", "", 1],
+["CUS-0021", "cust", "Can I have one grilled fish, please?", "ขอปลาย่าง 1 ตัวได้ไหม", 1],
+["TOM-0009", "tom", "Wow, you have them! Can I have two eggs, please?", "ว้าว มีครบแล้ว ขอไข่ 2 ฟองได้ไหม", 1],
+["KID-0192", "you", "It was rainy.", "", 1],
+["CUS-0022", "cust", "Good morning! I'm Kai.", "อรุณสวัสดิ์ ฉันชื่อKai", 1],
+["CUS-0023", "cust", "Can I have one jar of mayonnaise, please?", "ขอมายองเนส 1 ขวดได้ไหม", 1],
+["CUS-0024", "cust", "Can I have one crab, please?", "ขอปู 1 ตัวได้ไหม", 1],
+["CUS-0025", "cust", "Can I have one bag of wool, please?", "ขอขนแกะ 1 ถุงได้ไหม", 1],
+["CUS-0026", "cust", "Can I have two carrots, please?", "ขอแครอท 2 หัวได้ไหม", 1],
+["CUS-0027", "cust", "Can I have one apple pie, please?", "ขอพายแอปเปิ้ล 1 ชิ้นได้ไหม", 1],
+["KID-0193", "you", "I caught a ladybug! Say: ladybug!", "จับเต่าทองครั้งแรก! ลองพูดว่า ladybug", 1],
+["KID-0194", "you", "ladybug", "", 1],
+["KID-0195", "you", "Bye-bye, ladybug!", "", 1],
+["KID-0196", "you", "I found a flower! Say: flower!", "เจอดอกไม้ครั้งแรก! ลองพูดว่า flower", 1],
+["NAR-0082", "narr", "Chop!", "", 1],
+["NAR-0083", "narr", "Pick up the trash. Thank you!", "", 1],
+["KID-0197", "you", "Hi! I'm {name}!", "สวัสดี ฉันชื่อ {name}", 1],
+["KID-0198", "you", "You too!", "ยินดีที่ได้รู้จักเหมือนกัน", 1],
+["PIP-0028", "pip", "ตอนนี้เป็นตอนเช้า เราทักทายว่า Good morning นะ", "", 1],
+["PIP-0029", "pip", "แตะรูปที่อยากเลือกนะ กดปุ่มลำโพงเพื่อฟังชื่อได้", "", 1],
+["KID-0199", "you", "Good morning!", "อรุณสวัสดิ์ คุณตาทอม", 1],
+["PIP-0030", "pip", "งานวันนี้: ตัดหญ้ารก 3 กอ ทำเสร็จได้ 9 เหรียญ ดูบอร์ดงานที่ข้างแปลงผักได้นะ", "", 1],
+["PIP-0031", "pip", "ดูที่นาฬิกาด้านบนนะ วันนี้คือวันจันทร์", "", 1],
+["PIP-0032", "pip", "ดูให้ดีว่ามีมี่อยู่ตรงไหน แตะรูปแล้วพูดตาม", "", 1],
+["PIP-0033", "pip", "พูดว่า Happy Flower Festival! นะ", "", 1],
+["PIP-0034", "pip", "ร้องเพลงได้ทุกเมื่อ แตะคุยกับเพื่อนคนนี้แล้วเลือก Let's sing!", "", 1],
+["CUS-0028", "cust", "Can I have one trout, please?", "ขอปลาเทราต์ 1 ตัวได้ไหม", 1],
+["PIP-0035", "pip", "แตะนับปลาเทราต์ 1 ตัวให้ครบนะ", "", 1],
+["PIP-0036", "pip", "แตะนับปู 3 ตัวให้ครบนะ", "", 1],
+["PIP-0037", "pip", "แตะนับพายแอปเปิ้ล 1 ชิ้นให้ครบนะ", "", 1],
+["PIP-0038", "pip", "ดูที่นาฬิกาด้านบนนะ วันนี้คือวันพุธ", "", 1],
+["PIP-0039", "pip", "อวยพรวันเกิดว่า Happy birthday! นะ", "", 1],
+["PIP-0040", "pip", "แตะนับกะหล่ำปลี 1 หัวให้ครบนะ", "", 1],
+["PIP-0041", "pip", "แตะนับปลาย่าง 1 ตัวให้ครบนะ", "", 1],
+["PIP-0042", "pip", "แตะนับสลัด 1 จานให้ครบนะ", "", 1],
+["PIP-0043", "pip", "ดูที่นาฬิกาด้านบนนะ วันนี้คือวันศุกร์", "", 1],
+["PIP-0044", "pip", "แตะนับปู 1 ตัวให้ครบนะ", "", 1],
+["CUS-0029", "cust", "Can I have three berries, please?", "ขอเบอร์รี่ 3 ลูกได้ไหม", 1],
+["PIP-0045", "pip", "แตะนับเบอร์รี่ 3 ลูกให้ครบนะ", "", 1],
+["PIP-0046", "pip", "แตะนับแยมเบอร์รี่ 1 ขวดให้ครบนะ", "", 1],
+["PIP-0047", "pip", "ดูที่นาฬิกาด้านบนนะ วันนี้คือวันอาทิตย์", "", 1],
+["NAR-0084", "narr", "Dear {name}, I love your farm!", "", 1],
+["NAR-0085", "narr", "See you in town!", "", 1],
+["PIP-0048", "pip", "แตะนับแครอท 3 หัวให้ครบนะ", "", 1],
+["CUS-0030", "cust", "Can I have one ball of yarn, please?", "ขอไหมพรม 1 ม้วนได้ไหม", 1],
+["PIP-0049", "pip", "แตะนับไหมพรม 1 ม้วนให้ครบนะ", "", 1],
+["PIP-0050", "pip", "แตะนับซุปเห็ด 1 ถ้วยให้ครบนะ", "", 1],
+["PIP-0051", "pip", "งานวันนี้: จับแมลง 2 ตัว ทำเสร็จได้ 9 เหรียญ ดูบอร์ดงานที่ข้างแปลงผักได้นะ", "", 1],
+["PIP-0052", "pip", "ดูที่นาฬิกาด้านบนนะ วันนี้คือวันอังคาร", "", 1],
+["PIP-0053", "pip", "พูดว่า Happy Fishing Festival! นะ", "", 1],
+["PIP-0054", "pip", "แตะนับขนแกะ 1 ถุงให้ครบนะ", "", 1],
+["PIP-0055", "pip", "ดูที่นาฬิกาด้านบนนะ วันนี้คือวันพฤหัสบดี", "", 1],
+["PIP-0056", "pip", "แตะนับมายองเนส 1 ขวดให้ครบนะ", "", 1],
+["PIP-0057", "pip", "แตะนับแครอท 2 หัวให้ครบนะ", "", 1],
+["PIP-0058", "pip", "ดูที่นาฬิกาด้านบนนะ วันนี้คือวันเสาร์", "", 1],
+["PIP-0059", "pip", "แตะนับมะเขือเทศ 2 ลูกให้ครบนะ", "", 1],
+["PIP-0060", "pip", "แตะนับไข่ 2 ฟองให้ครบนะ", "", 1],
+["NAR-0086", "narr", "Girl!", "", 1],
+["NAR-0087", "narr", "Surprise!", "", 1],
+["KID-0200", "you", "OK", "", 1],
+["NAR-0088", "narr", "Hi, {name}!", "", 1],
+["NAR-0089", "narr", "Welcome, {name}!", "", 1],
+["NAR-0090", "narr", "Welcome back, {name}!", "", 1],
+["NAR-0091", "narr", "Let's start!", "", 1],
+["NAR-0092", "narr", "Great!", "", 1],
+["NAR-0093", "narr", "Let's listen. price.", "", 1],
+["NAR-0094", "narr", "Correct! chair.", "", 1],
+["NAR-0095", "narr", "Let's listen. egg.", "", 1],
+["NAR-0096", "narr", "Correct! girl.", "", 1],
+["NAR-0097", "narr", "Let's listen. carrot.", "", 1],
+["NAR-0098", "narr", "Good try! {name}!", "", 1],
+["NAR-0099", "narr", "Excellent! {name}!", "", 1],
+["PIP-0061", "pip", "ผู้ปกครองให้ฝึกคำเพิ่ม 5 คำ เปิดสมุดคำศัพท์ที่แท็บฝึกเพิ่ม แล้วฝึกพูดตามนะ", "", 1],
+["NAR-0100", "narr", "Five more minutes!", "", 1],
+["NAR-0101", "narr", "One more minute!", "", 1],
+["NAR-0102", "narr", "Time's up!", "", 1],
+["NAR-0103", "narr", "Great job today.", "", 1],
+["NAR-0104", "narr", "See you tomorrow!", "", 1],
+["NAR-0105", "narr", "Yay! More time!", "", 1],
+["NAR-0106", "narr", "Bye-bye! See you tomorrow!", "", 1],
+["NAR-0107", "narr", "Time's up today! See you tomorrow!", "", 1],
+["KID-0201", "you", "Seeds, please!", "ฉันอยากซื้อเมล็ดพันธุ์", 1],
+["BEN-0017", "ben", "How many tomato seeds?", "เอาเมล็ดมะเขือเทศกี่เมล็ด", 1],
+["BEN-0018", "ben", "One tomato seed. That's 10 coins.", "เมล็ดมะเขือเทศ 1 เมล็ด ทั้งหมด 10 เหรียญ", 1],
+["BEN-0019", "ben", "Thank you! Plant them in your farm.", "ขอบคุณ เอาไปปลูกในฟาร์มนะ", 1],
+["KID-0202", "you", "Three carrots!", "นี่จ้ะ แครอท 3 หัว", 1],
+["KID-0203", "you", "Go inside.", "", 1],
+["PIP-0062", "pip", "ถึงตาเราแล้ว แตะไมค์สีแดงแล้วพูดตามเลย", "", 1],
+["PIP-0063", "pip", "ฟังอีกครั้งช้า ๆ แล้วพูดตามนะ", "", 1],
+["PIP-0064", "pip", "ดูคำแปลแล้วพูดตามช้า ๆ อีกครั้งนะ", "", 1],
+["PIP-0065", "pip", "เก่งมากที่พยายามนะ ไปต่อกันเลย", "", 1],
+["NAR-0108", "narr", "Dig!", "", 1],
+["NAR-0109", "narr", "Plant a carrot seed.", "", 1],
+["NAR-0110", "narr", "Water!", "", 1],
+["NAR-0111", "narr", "Map!", "", 1],
+["NAR-0112", "narr", "River", "", 1],
+["NAR-0113", "narr", "You need a bug net.", "", 1],
+["PIP-0066", "pip", "ต้องมีสวิงจับแมลงก่อนนะ ไปหาโบในป่า (เดินลงไปจากฟาร์มสัตว์)", "", 1],
+["BOO-0010", "bo", "Hi! I'm Bo. I love bugs!", "สวัสดี ฉันชื่อโบ ฉันชอบแมลงมาก", 1],
+["BOO-0011", "bo", "Here is a bug net for you. Catch bugs and say their names!", "นี่สวิงจับแมลงให้เธอ จับแมลงแล้วพูดชื่อมันนะ (จับแล้วปล่อยกลับไป)", 1],
+["KID-0204", "you", "Thank you, Bo!", "ขอบคุณนะ โบ", 1],
+["BOO-0012", "bo", "Look in the forest and in the grass. Have fun!", "ลองหาในป่ากับในหญ้านะ สนุกแน่นอน", 1],
+["PIP-0067", "pip", "ได้สวิงแล้ว เดินไปใกล้แมลงแล้วกดปุ่ม Catch เพื่อจับนะ", "", 1],
+["NAR-0114", "narr", "Wood! You have one piece of wood.", "", 1],
+["NAR-0115", "narr", "Cut! You found a cabbage seed!", "", 1],
+["NAR-0116", "narr", "Cut! You found a potato seed!", "", 1],
+["NAR-0117", "narr", "Cut! You found a tomato seed!", "", 1],
+["NAR-0118", "narr", "You need a fishing rod.", "", 1],
+["PIP-0068", "pip", "ต้องมีเบ็ดตกปลาก่อนนะ ไปหาฟินน์ที่ริมแม่น้ำ", "", 1],
+["FIN-0010", "finn", "Hello! I'm Finn. Do you like fishing?", "สวัสดี ฉันชื่อฟินน์ ชอบตกปลาไหม", 1],
+["FIN-0011", "finn", "Here is a fishing rod. Wait for the bobber to go down, then pull!", "นี่เบ็ดตกปลา รอให้ทุ่นจมแล้วดึงนะ", 1],
+["KID-0205", "you", "Thank you, Finn!", "ขอบคุณนะ ฟินน์", 1],
+["FIN-0012", "finn", "Stand next to the river and try it!", "ยืนริมแม่น้ำแล้วลองตกดูนะ", 1],
+["PIP-0069", "pip", "ได้เบ็ดแล้ว ยืนริมแม่น้ำแล้วกดปุ่ม Fish เพื่อตกปลา", "", 1],
+["NAR-0119", "narr", "Wait for it...", "", 1],
+["PIP-0070", "pip", "รอให้ทุ่นสีแดงจมน้ำ แล้วกดปุ่มเขียวเพื่อดึงนะ", "", 1],
+["NAR-0120", "narr", "Too soon! Wait for it.", "", 1],
+["PIP-0071", "pip", "ยังไม่ถึงเวลา รอให้ทุ่นจมก่อนนะ", "", 1],
+["KID-0206", "you", "I caught a trout! Say: trout!", "จับปลาเทราต์ครั้งแรก! ลองพูดว่า trout", 1],
+["KID-0207", "you", "trout", "", 1],
+["NAR-0121", "narr", "Oh no! The fish got away.", "", 1],
+["KID-0208", "you", "Let's talk!", "", 1],
+["LIL-0030", "lily", "Carrots are yummy!", "แครอทอร่อยมาก!", 1],
+["KID-0209", "you", "I have a gift for you.", "", 1],
+["KID-0210", "you", "Here is a flower for you.", "ให้ดอกไม้", 1],
+["LIL-0031", "lily", "Wow! I love flowers! Thank you, {name}!", "ว้าว ชอบดอกไม้ที่สุดเลย ขอบคุณนะ", 1],
+["PIP-0072", "pip", "แตะอาหารสัตว์ แล้วแตะสัตว์ทีละตัว ให้อาหารครบสี่ตัว ทั้งวัว ไก่สองตัว และแกะ", "", 2],
+["PIP-0073", "pip", "แตะแปรง แล้วแตะวัวกับแกะ สัตว์จะมีความสุขมาก", "", 2],
+["PIP-0074", "pip", "แตะมือ แล้วแตะวัวเพื่อรีดนม แตะรังไข่ที่มุมคอกเพื่อเก็บไข่ และแตะแกะเพื่อเก็บขนแกะ ถ้ายังไม่ได้ให้อาหารต้องให้อาหารก่อนนะ", "", 2],
+["PIP-0075", "pip", "ไปที่โต๊ะครัวข้างโรงนา เลือกทำชีส แล้วเรียงขั้นตอนให้ถูก อย่างแรก ต่อมา และสุดท้าย", "", 2],
+["PIP-0076", "pip", "ทำมายองเนสจากไข่ที่โต๊ะครัว ถ้าไม่มีไข่ ให้อาหารไก่แล้วเก็บไข่จากรังก่อนนะ", "", 2],
+["PIP-0077", "pip", "ทำไหมพรมจากขนแกะที่โต๊ะครัว ถ้าไม่มีขนแกะ ให้อาหารและแปรงขนแกะก่อน แล้วแตะแกะด้วยมือ", "", 2],
+["PIP-0078", "pip", "ยินดีด้วย ด่านสองฟาร์มสัตว์เปิดแล้ว ไปหาคุณตาทอมที่ฟาร์มสัตว์ด้านล่างได้เลยจ้า", "", 2],
+["NAR-0122", "narr", "Stage two! Animal Farm!", "ด่าน 2", 2],
+["TOM-0010", "tom", "Help, please!", "ช่วยหน่อยนะ!", 2],
+["KID-0211", "you", "OK!", "ได้เลย!", 2],
+["PIP-0079", "pip", "ไปคุยกับคุณตาทอมที่ฟาร์มสัตว์กันเลย ทางเดินลงไปข้างล่างนะ", "", 2],
+["PIE-0010", "pipen", "Milk comes from a...?", "นมมาจากสัตว์ตัวไหนนะ?", 2],
+["PIP-0080", "pip", "นมมาจากสัตว์ตัวไหนนะ?", "", 2],
+["KID-0212", "you", "Cow!", "วัว", 2],
+["KID-0213", "you", "Hen!", "ไก่", 2],
+["KID-0214", "you", "Sheep!", "แกะ", 2],
+["PIP-0081", "pip", "วัวให้นม ไก่ให้ไข่ แกะให้ขนแกะ สัตว์ช่วยเรามากเลยนะ", "", 2],
+["PIE-0011", "pipen", "Cows give milk.", "วัวให้นม", 2],
+["NTH-0002", "nar", "ชายใส่หมวกทรงสูงเดินมาพร้อมจดหมายเชิญ", "", 2],
+["MAX-0009", "max", "Hello! Come to town!", "สวัสดี! เชิญมาที่เมืองนะ!", 2],
+["TOM-0011", "tom", "The cow says moo, moo, moo.", "วัวร้อง มอ มอ มอ", 2],
+["TOM-0012", "tom", "The hen says cluck, cluck, cluck.", "ไก่ร้อง กุ๊ก กุ๊ก กุ๊ก", 2],
+["TOM-0013", "tom", "The sheep says baa, baa, baa.", "แกะร้อง แบ๊ แบ๊ แบ๊", 2],
+["TOM-0014", "tom", "Feed them, brush them, happy farm!", "ให้อาหาร แปรงขน ฟาร์มมีความสุข", 2],
+["TOM-0015", "tom", "Milk and eggs and wool for you!", "นม ไข่ ขนแกะ ให้เธอ", 2],
+["GRA-0009", "gran", "Happy cows! Happy hens!", "วัวกับไก่มีความสุขแล้ว ยายดีใจมาก", 2],
+["GRA-0010", "gran", "Here are some coins.", "ยายส่งเหรียญมาให้ใช้นะ", 2],
+["BOO-0013", "bo", "In fall, dragonflies fly by the river!", "ฤดูใบไม้ร่วงแมลงปอบินอยู่ริมแม่น้ำ", 2],
+["BOO-0014", "bo", "In winter, bugs sleep. Look for ladybugs!", "ฤดูหนาวแมลงนอนหลับ ลองหาเต่าทองดู", 2],
+["LIL-0032", "lily", "Grandpa Tom has animals! Go down the path.", "คุณตาทอมมีสัตว์เยอะเลย เดินลงไปตามทางข้างล่างนะ", 2],
+["CUS-0031", "cust", "Can I have two jars of mayonnaise, please?", "ขอมายองเนส 2 ขวดได้ไหม", 2],
+["KID-0215", "you", "Here you are. Two jars of mayonnaise.", "", 2],
+["KID-0216", "you", "Here you are. One jar of mayonnaise.", "", 2],
+["KID-0217", "you", "Here you are. Three jars of mayonnaise.", "", 2],
+["TOM-0016", "tom", "Good morning, {name}! I'm Grandpa Tom. How are you?", "อรุณสวัสดิ์ {name}! ฉันชื่อคุณตาทอม สบายดีไหม", 2],
+["KID-0218", "you", "I'm fine, thank you. And you?", "", 2],
+["KID-0219", "you", "I'm five carrots.", "", 2],
+["TOM-0017", "tom", "I'm great, thank you! Welcome to the animal farm.", "ตาสบายดี ขอบใจนะ ยินดีต้อนรับสู่ฟาร์มสัตว์", 2],
+["TOM-0018", "tom", "These are your animals: a cow, two chickens and a sheep!", "นี่คือสัตว์ของหลาน วัว 1 ตัว ไก่ 2 ตัว และแกะ 1 ตัว", 2],
+["TOM-0019", "tom", "This is a cow. Can you say cow?", "นี่คือวัว ลองพูดว่า cow", 2],
+["KID-0220", "you", "cow", "", 2],
+["TOM-0020", "tom", "Animals are hungry in the morning. Feed them every day!", "สัตว์จะหิวทุกเช้า ให้อาหารทุกวันนะ", 2],
+["TOM-0021", "tom", "Animals are hungry in the morning. Feed them!", "สัตว์หิวตอนเช้า ให้อาหารพวกมันนะ", 2],
+["PIP-0082", "pip", "งานวันนี้: ตัดหญ้ารก 3 กอ ทำเสร็จได้ 7 เหรียญ ดูบอร์ดงานที่ข้างแปลงผักได้นะ", "", 2],
+["PIP-0083", "pip", "มีจดหมายจากคุณยายมาที่ตู้จดหมายแล้ว ไปเปิดดูกันนะ", "", 2],
+["KID-0221", "you", "I gave a jar of mayonnaise to Grandpa Joe.", "", 2],
+["KID-0222", "you", "I gave a pumpkin to Mayor Max.", "", 2],
+["NAR-0123", "narr", "Dear {name}, Tomorrow is Mia's birthday!", "", 2],
+["NAR-0124", "narr", "Dear {name}, The garden is green!", "", 2],
+["NAR-0125", "narr", "Good job!", "", 2],
+["NAR-0126", "narr", "Here are pumpkin seeds for you.", "", 2],
+["NAR-0127", "narr", "From, Grandma Rosie", "", 2],
+["MIA-0013", "mia", "Welcome to the Harvest Festival!", "ยินดีต้อนรับสู่เทศกาลเก็บเกี่ยว!", 2],
+["KID-0223", "you", "Happy Harvest Festival!", "สุขสันต์เทศกาลเก็บเกี่ยว", 2],
+["TOM-0022", "tom", "Look at all the vegetables!", "ดูผักพวกนี้สิ", 2],
+["BEN-0020", "ben", "Thank you for growing food!", "ขอบคุณที่ช่วยปลูกผักนะ", 2],
+["MIA-0014", "mia", "This is for you: one apple pie and fifteen coins! See you next week!", "ของขวัญ: พายแอปเปิ้ล 1 ชิ้น และ 15 เหรียญ แล้วเจอกันสัปดาห์หน้านะ", 2],
+["NAR-0128", "narr", "It's fall.", "", 2],
+["NAR-0129", "narr", "Today is Mia's birthday!", "", 2],
+["CUS-0032", "cust", "Can I have one tomato, please?", "ขอมะเขือเทศ 1 ลูกได้ไหม", 2],
+["CUS-0033", "cust", "Can I have one piece of wood, please?", "ขอไม้ 1 ชิ้นได้ไหม", 2],
+["KID-0224", "you", "Here you are. One piece of wood.", "", 2],
+["CUS-0034", "cust", "Can I have one potato, please?", "ขอมันฝรั่ง 1 หัวได้ไหม", 2],
+["KID-0225", "you", "Here you are. Three potatoes.", "", 2],
+["KID-0226", "you", "Here you are. Two potatoes.", "", 2],
+["KID-0227", "you", "Here you are. One potato.", "", 2],
+["NAR-0130", "narr", "Dear {name}, Tomorrow is Finn's birthday!", "", 2],
+["MIM-0009", "mimi", "Meow! You found me! I am next to the bed.", "เมี้ยว! หาเจอแล้ว มีมี่อยู่ข้าง ๆ เตียง ได้ 5 เหรียญ", 2],
+["NAR-0131", "narr", "Today is Finn's birthday!", "", 2],
+["LIL-0033", "lily", "I love your farm! See you tomorrow.", "ฟาร์มของเธอสวยมาก แล้วเจอกันพรุ่งนี้นะ", 2],
+["KID-0228", "you", "I got zero stars today!", "", 2],
+["NAR-0132", "narr", "Dear {name}, I have new chairs in my shop.", "", 2],
+["NAR-0133", "narr", "Come and see!", "", 2],
+["NAR-0134", "narr", "From, Mayor Max", "", 2],
+["NAR-0135", "narr", "Dear {name}, Tomorrow is Grandpa Joe's birthday!", "", 2],
+["NAR-0136", "narr", "Today is Grandpa Joe's birthday!", "", 2],
+["NAR-0137", "narr", "It's the Harvest Festival in town!", "", 2],
+["TOM-0023", "tom", "Brush the cow and the sheep. They love it!", "แปรงขนให้วัวกับแกะนะ พวกมันชอบมาก", 2],
+["NAR-0138", "narr", "Come to the Harvest Festival in town!", "", 2],
+["NAR-0139", "narr", "It's winter now!", "", 2],
+["NAR-0140", "narr", "It's winter.", "", 2],
+["CUS-0035", "cust", "Can I have one egg, please?", "ขอไข่ 1 ฟองได้ไหม", 2],
+["KID-0229", "you", "Here you are. Three eggs.", "", 2],
+["KID-0230", "you", "Here you are. One egg.", "", 2],
+["KID-0231", "you", "Here you are. Two eggs.", "", 2],
+["TOM-0024", "tom", "Feed the cow, then milk it. Eggs are in the nest.", "ให้อาหารวัวแล้วค่อยรีดนม ไข่อยู่ในรังนะ", 2],
+["TOM-0025", "tom", "That's OK. They like you!", "ไม่เป็นไร พวกมันชอบหลานนะ", 2],
+["KID-0232", "you", "I gave a pumpkin to Grandpa Tom.", "", 2],
+["MIA-0015", "mia", "Welcome to the Star Festival!", "ยินดีต้อนรับสู่เทศกาลดวงดาว!", 2],
+["KID-0233", "you", "Happy Star Festival!", "สุขสันต์เทศกาลดวงดาว", 2],
+["MAX-0010", "max", "Look at the stars!", "ดูดาวสิ", 2],
+["BOO-0015", "bo", "I can see a firefly star!", "ฉันเห็นดาวเหมือนหิ่งห้อยเลย", 2],
+["MIA-0016", "mia", "This is for you: three cookies and fifteen coins! See you next week!", "ของขวัญ: คุกกี้ 3 ชิ้น และ 15 เหรียญ แล้วเจอกันสัปดาห์หน้านะ", 2],
+["NAR-0141", "narr", "Today is Mayor Max's birthday!", "", 2],
+["KID-0234", "you", "Here you are. Three grilled fish.", "", 2],
+["KID-0235", "you", "Here you are. Two grilled fish.", "", 2],
+["KID-0236", "you", "Here you are. One grilled fish.", "", 2],
+["CUS-0036", "cust", "Can I have one carrot, please?", "ขอแครอท 1 หัวได้ไหม", 2],
+["KID-0237", "you", "Here you are. One carrot.", "", 2],
+["TOM-0026", "tom", "Make cheese at the kitchen table. First, heat the milk!", "ทำชีสที่โต๊ะครัว อย่างแรกต้องอุ่นนมก่อน", 2],
+["MAX-0011", "max", "It's my birthday today!", "วันนี้เป็นวันเกิดของนายกฯ แม็กซ์!", 2],
+["KID-0238", "you", "Happy birthday, Mayor Max!", "สุขสันต์วันเกิดนะ นายกฯ แม็กซ์", 2],
+["MAX-0012", "max", "Thank you, {name}! You are a good friend.", "ขอบคุณนะ {name} เธอเป็นเพื่อนที่ดีมาก", 2],
+["KID-0239", "you", "I said happy birthday to Mayor Max.", "", 2],
+["NAR-0142", "narr", "Dear {name}, Tomorrow is Mayor Max's birthday!", "", 2],
+["NAR-0143", "narr", "It's snowy today.", "", 2],
+["NAR-0144", "narr", "Today is Pat's birthday!", "", 2],
+["TOM-0027", "tom", "You can make mayonnaise with an egg.", "ใช้ไข่ทำมายองเนสได้นะ", 2],
+["PAT-0010", "pat", "It's my birthday today!", "วันนี้เป็นวันเกิดของแพท!", 2],
+["KID-0240", "you", "Happy birthday, Pat!", "สุขสันต์วันเกิดนะ แพท", 2],
+["PAT-0011", "pat", "Thank you, {name}! You are a good friend.", "ขอบคุณนะ {name} เธอเป็นเพื่อนที่ดีมาก", 2],
+["NAR-0145", "narr", "Dear {name}, Tomorrow is Pat's birthday!", "", 2],
+["NAR-0146", "narr", "Come to the Star Festival in town!", "", 2],
+["NAR-0147", "narr", "Dear {name}, I planted flowers today.", "", 2],
+["NAR-0148", "narr", "Here are two tomato seeds for you!", "", 2],
+["NAR-0149", "narr", "From, Lily", "", 2],
+["NAR-0150", "narr", "It's the Star Festival in town!", "", 2],
+["NAR-0151", "narr", "It's spring now!", "", 2],
+["CUS-0037", "cust", "Can I have three carp, please?", "ขอปลาคาร์ป 3 ตัวได้ไหม", 2],
+["KID-0241", "you", "Here you are. Four carp.", "", 2],
+["CUS-0038", "cust", "Can I have two cheeses, please?", "ขอชีส 2 ก้อนได้ไหม", 2],
+["TOM-0028", "tom", "Wool makes yarn. Wash it, spin it, roll it!", "ขนแกะทำเป็นไหมพรมได้ ล้าง ปั่น แล้วม้วน", 2],
+["CUS-0039", "cust", "Good morning! I'm Emma.", "อรุณสวัสดิ์ ฉันชื่อEmma", 2],
+["TOM-0029", "tom", "Thank you, {name}! Now I can bake a big cake.", "ขอบคุณนะ {name} ตาจะเอาไปอบเค้กก้อนใหญ่", 2],
+["CUS-0040", "cust", "Can I have three shells, please?", "ขอเปลือกหอย 3 อันได้ไหม", 2],
+["KID-0242", "you", "I fed the animals.", "", 2],
+["KID-0243", "you", "It was snowy.", "", 2],
+["PIP-0084", "pip", "แตะนับเบอร์รี่ 2 ลูกให้ครบนะ", "", 2],
+["PIP-0085", "pip", "แตะนับปลาทอง 1 ตัวให้ครบนะ", "", 2],
+["PIP-0086", "pip", "แตะนับมะเขือเทศ 1 ลูกให้ครบนะ", "", 2],
+["KID-0244", "you", "Fine, thank you!", "สบายดี ขอบคุณ แล้วคุณล่ะ", 2],
+["PIP-0087", "pip", "พูดว่า Happy Harvest Festival! นะ", "", 2],
+["CUS-0041", "cust", "Can I have one pine cone, please?", "ขอลูกสน 1 ลูกได้ไหม", 2],
+["PIP-0088", "pip", "แตะนับลูกสน 1 ลูกให้ครบนะ", "", 2],
+["PIP-0089", "pip", "งานวันนี้: ลูบหัวสัตว์เลี้ยงของเรา ทำเสร็จได้ 10 เหรียญ ดูบอร์ดงานที่ข้างแปลงผักได้นะ", "", 2],
+["CUS-0042", "cust", "Can I have two trout, please?", "ขอปลาเทราต์ 2 ตัวได้ไหม", 2],
+["PIP-0090", "pip", "แตะนับปลาเทราต์ 2 ตัวให้ครบนะ", "", 2],
+["NAR-0152", "narr", "Dear {name}, I saw a big beetle in the forest!", "", 2],
+["NAR-0153", "narr", "Let's catch bugs together!", "", 2],
+["NAR-0154", "narr", "From, Bo", "", 2],
+["PIP-0091", "pip", "แตะนับปลาคาร์ป 1 ตัวให้ครบนะ", "", 2],
+["CUS-0043", "cust", "Can I have two apples, please?", "ขอแอปเปิ้ล 2 ลูกได้ไหม", 2],
+["PIP-0092", "pip", "แตะนับแอปเปิ้ล 2 ลูกให้ครบนะ", "", 2],
+["PIP-0093", "pip", "แตะนับปู 2 ตัวให้ครบนะ", "", 2],
+["PIP-0094", "pip", "พูดว่า Happy Star Festival! นะ", "", 2],
+["CUS-0044", "cust", "Can I have one catfish, please?", "ขอปลาดุก 1 ตัวได้ไหม", 2],
+["PIP-0095", "pip", "แตะนับปลาดุก 1 ตัวให้ครบนะ", "", 2],
+["CUS-0045", "cust", "Can I have two pine cones, please?", "ขอลูกสน 2 ลูกได้ไหม", 2],
+["PIP-0096", "pip", "แตะนับลูกสน 2 ลูกให้ครบนะ", "", 2],
+["CUS-0046", "cust", "Can I have one bottle of milk, please?", "ขอนม 1 ขวดได้ไหม", 2],
+["PIP-0097", "pip", "แตะนับนม 1 ขวดให้ครบนะ", "", 2],
+["PIP-0098", "pip", "แตะนับชีส 2 ก้อนให้ครบนะ", "", 2],
+["PIP-0099", "pip", "แตะนับเปลือกหอย 3 อันให้ครบนะ", "", 2],
+["PIP-0100", "pip", "แตะนับมายองเนส 2 ขวดให้ครบนะ", "", 2],
+["CUS-0047", "cust", "Can I have two mushrooms, please?", "ขอเห็ด 2 ดอกได้ไหม", 2],
+["PIP-0101", "pip", "แตะนับเห็ด 2 ดอกให้ครบนะ", "", 2],
+["CUS-0048", "cust", "Can I have one berry, please?", "ขอเบอร์รี่ 1 ลูกได้ไหม", 2],
+["PIP-0102", "pip", "แตะนับเบอร์รี่ 1 ลูกให้ครบนะ", "", 2],
+["PIP-0103", "pip", "แตะนับไม้ 3 ชิ้นให้ครบนะ", "", 2],
+["CUS-0049", "cust", "Can I have three apples, please?", "ขอแอปเปิ้ล 3 ลูกได้ไหม", 2],
+["PIP-0104", "pip", "แตะนับแอปเปิ้ล 3 ลูกให้ครบนะ", "", 2],
+["NAR-0155", "narr", "Feed the cow. Moo!", "", 2],
+["NAR-0156", "narr", "Feed the chicken. Cluck!", "", 2],
+["NAR-0157", "narr", "Feed the sheep. Baa!", "", 2],
+["NAR-0158", "narr", "Brush the cow. The cow is happy!", "", 2],
+["NAR-0159", "narr", "Brush the sheep. The sheep is happy!", "", 2],
+["TOM-0030", "tom", "Let's sing a song together!", "มาร้องเพลง \"สัตว์ ๆ มีความสุข\" ด้วยกันนะ", 2],
+["PIP-0105", "pip", "งานวันนี้: คุยกับเพื่อน 3 คน ทำเสร็จได้ 10 เหรียญ ดูบอร์ดงานที่ข้างแปลงผักได้นะ", "", 2],
+["NAR-0160", "narr", "Milk! You have one bottle of milk.", "", 2],
+["NAR-0161", "narr", "Wool! You have one bag of wool.", "", 2],
+["NAR-0162", "narr", "Two eggs! You have two eggs.", "", 2],
+["KID-0245", "you", "Make cheese", "", 2],
+["NAR-0163", "narr", "Stir the milk?", "", 2],
+["PIP-0106", "pip", "ยังไม่ใช่ขั้นตอนอย่างแรกนะ ลองคิดดูอีกที", "", 2],
+["NAR-0164", "narr", "First, heat the milk.", "", 2],
+["NAR-0165", "narr", "Then, stir the milk.", "", 2],
+["NAR-0166", "narr", "Finally, press the cheese.", "", 2],
+["NAR-0167", "narr", "You made cheese! You have one cheese.", "", 2],
+["KID-0246", "you", "You made cheese! Say: I made cheese!", "ทำชีสสำเร็จแล้ว พูดว่า I made cheese!", 2],
+["KID-0247", "you", "I made cheese!", "", 2],
+["KID-0248", "you", "Make mayonnaise", "", 2],
+["NAR-0168", "narr", "Add the oil?", "", 2],
+["NAR-0169", "narr", "First, crack the egg.", "", 2],
+["NAR-0170", "narr", "Then, add the oil.", "", 2],
+["NAR-0171", "narr", "Finally, mix it.", "", 2],
+["NAR-0172", "narr", "You made mayonnaise! You have one jar of mayonnaise.", "", 2],
+["KID-0249", "you", "You made mayonnaise! Say: I made mayonnaise!", "ทำมายองเนสสำเร็จแล้ว พูดว่า I made mayonnaise!", 2],
+["KID-0250", "you", "I made mayonnaise!", "", 2],
+["KID-0251", "you", "Make yarn", "", 2],
+["NAR-0173", "narr", "Spin the wool?", "", 2],
+["NAR-0174", "narr", "First, wash the wool.", "", 2],
+["NAR-0175", "narr", "Then, spin the wool.", "", 2],
+["NAR-0176", "narr", "Finally, roll the yarn.", "", 2],
+["NAR-0177", "narr", "You made yarn! You have one ball of yarn.", "", 2],
+["KID-0252", "you", "You made yarn! Say: I made yarn!", "ทำไหมพรมสำเร็จแล้ว พูดว่า I made yarn!", 2],
+["KID-0253", "you", "I made yarn!", "", 2],
+["KID-0254", "you", "I talked to Lily and Grandpa Tom.", "", 2],
+["NAR-0178", "narr", "Let's go!", "", 2],
+["NAR-0179", "narr", "Two eggs! You have three eggs.", "", 2],
+["PIP-0107", "pip", "งานวันนี้: ตัดหญ้ารก 3 กอ ทำเสร็จได้ 6 เหรียญ ดูบอร์ดงานที่ข้างแปลงผักได้นะ", "", 2],
+["NAR-0180", "narr", "four", "4", 3],
+["NAR-0181", "narr", "five", "5", 3],
+["NAR-0182", "narr", "six", "6", 3],
+["NAR-0183", "narr", "seven", "7", 3],
+["NAR-0184", "narr", "eight", "8", 3],
+["PIP-0108", "pip", "เดินไปทางขวาเข้าเมือง แล้วไปทักทายมีอา โรซ่า และคุณตาโจ ถ้าเขาถามว่า How are you ให้ตอบว่า I'm fine, thank you", "", 3],
+["PIP-0109", "pip", "ไปร้านเบเกอรี่หลังคาสีชมพู พูดกับโรซ่าว่า I'd like a cake, please แล้วแตะเหรียญทีละเหรียญเพื่อจ่ายเงินให้พอดี", "", 3],
+["PIP-0110", "pip", "ไปที่แผงขายของของเรา ข้างป้าย MARKET ลูกค้าจะมาซื้อ ให้นับของและนับเหรียญให้ถูก ขายให้ครบสามคน", "", 3],
+["PIP-0111", "pip", "อรุณสวัสดิ์จ้า ไปดูผักในแปลงกันเถอะ", "", 3],
+["PIP-0112", "pip", "ยินดีด้วย ด่านสามตลาดในเมืองเปิดแล้ว ร้านค้าในเมืองทางขวาเปิดแล้วจ้า", "", 3],
+["NAR-0185", "narr", "Stage three! Town Market!", "ด่าน 3", 3],
+["MAX-0013", "max", "Say hello, please!", "ช่วยทักทายทุกคนนะ!", 3],
+["KID-0255", "you", "Hello!", "สวัสดี!", 3],
+["PIP-0113", "pip", "ด่านนี้ยากขึ้นนิดนึงนะ คำแปลภาษาไทยจะซ่อนไว้ ถ้าไม่เข้าใจ กดปุ่ม ? เพื่อดูคำแปลได้เลย", "", 3],
+["PIE-0012", "pipen", "Happy town!", "เมืองมีความสุข!", 3],
+["PIE-0013", "pipen", "Two coins. One more! How many?", "มี 2 เหรียญ ได้เพิ่มอีก 1 เหรียญ รวมเป็นกี่เหรียญ?", 3],
+["PIP-0114", "pip", "มี 2 เหรียญ ได้เพิ่มอีก 1 เหรียญ รวมเป็นกี่เหรียญ?", "", 3],
+["KID-0256", "you", "Two!", "สอง", 3],
+["KID-0257", "you", "Three!", "สาม", 3],
+["KID-0258", "you", "Four!", "สี่", 3],
+["PIP-0115", "pip", "2 บวกเพิ่มอีก 1 เป็น 3 เก่งมาก!", "", 3],
+["PIE-0014", "pipen", "Two and one is three.", "2 + 1 = 3", 3],
+["NTH-0003", "nar", "ลิลลี่ถือพู่กันวิ่งเข้ามา", "", 3],
+["LIL-0034", "lily", "Grandma's house! Let's go!", "ไปบ้านคุณยายกัน!", 3],
+["MAX-0014", "max", "Hello, hello, how are you?", "สวัสดี สวัสดี สบายดีไหม", 3],
+["MAX-0015", "max", "I'm fine, thank you! How are you?", "สบายดี ขอบคุณ แล้วเธอล่ะ", 3],
+["MAX-0016", "max", "Good morning, friends, good morning!", "อรุณสวัสดิ์ เพื่อน ๆ อรุณสวัสดิ์", 3],
+["MAX-0017", "max", "Please and thank you, every day!", "พูดว่า please กับ thank you ทุกวัน", 3],
+["GRA-0011", "gran", "Hello, town! Hello, friends!", "เพื่อน ๆ ในเมืองกลับมายิ้มแล้ว", 3],
+["GRA-0012", "gran", "Mimi is waiting at home.", "มีมี่รอหลานอยู่ที่บ้านนะ", 3],
+["TOM-0031", "tom", "Your animals are so happy!", "สัตว์ของเธอมีความสุขมากเลย", 3],
+["ROS-0012", "rosa", "Good morning, {name}! I'm Rosa. How are you?", "อรุณสวัสดิ์ {name}! ฉันชื่อโรซ่า สบายดีไหม", 3],
+["ROS-0013", "rosa", "I'm great, thanks! I make cakes and bread in my bakery.", "ฉันสบายดี ขอบคุณ ฉันทำเค้กและขนมปังที่ร้านเบเกอรี่", 3],
+["ROS-0014", "rosa", "Good morning, {name}! Welcome to my bakery. What would you like?", "อรุณสวัสดิ์ {name}! ยินดีต้อนรับสู่ร้านเบเกอรี่ อยากได้อะไรดี", 3],
+["KID-0259", "you", "I'd like a cake, please.", "", 3],
+["KID-0260", "you", "I'd like some bread, please.", "", 3],
+["KID-0261", "you", "I'd like a cookie, please.", "", 3],
+["ROS-0015", "rosa", "Here you are! That's 5 coins.", "นี่จ้ะ ขนมปัง ราคา 5 เหรียญ แตะเหรียญเพื่อจ่ายให้พอดีนะ", 3],
+["ROS-0016", "rosa", "Here you are! That's 8 coins.", "นี่จ้ะ เค้ก ราคา 8 เหรียญ แตะเหรียญเพื่อจ่ายให้พอดีนะ", 3],
+["ROS-0017", "rosa", "Here you are! That's 3 coins.", "นี่จ้ะ คุกกี้ ราคา 3 เหรียญ แตะเหรียญเพื่อจ่ายให้พอดีนะ", 3],
+["TOM-0032", "tom", "ขอบใจมากนะหลาน ฟาร์มกลับมาคึกคักเหมือนตอนคุณยายอยู่เลย", "", 3],
+["NAR-0186", "narr", "Milk comes from a...?", "", 3],
+["TOM-0033", "tom", "อ้าว... นั่นใครมาน่ะ?", "", 3],
+["NAR-0187", "narr", "Great job, {name}! Stage two clear!", "", 3],
+["MIA-0017", "mia", "Good morning, {name}! I'm Mia. How are you?", "อรุณสวัสดิ์ {name}! ฉันชื่อมีอา สบายดีไหม", 3],
+["MIA-0018", "mia", "I'm great, thanks! I love parties. Welcome to our town!", "ฉันสบายดี ขอบคุณนะ ฉันชอบงานปาร์ตี้ ยินดีต้อนรับสู่เมืองของเรา", 3],
+["JOE-0017", "joe", "Good morning, {name}! I'm Grandpa Joe. How are you?", "อรุณสวัสดิ์ {name}! ฉันชื่อคุณตาโจ สบายดีไหม", 3],
+["JOE-0018", "joe", "I'm great, thanks! I sit here and watch the birds every day.", "ตาสบายดี ขอบใจนะ ตานั่งดูนกตรงนี้ทุกวัน", 3],
+["KID-0262", "you", "Tomatoes", "", 3],
+["BEN-0021", "ben", "How many pumpkins?", "จะขายฟักทองกี่ลูก", 3],
+["BEN-0022", "ben", "How many trout?", "จะขายปลาเทราต์กี่ตัว", 3],
+["BEN-0023", "ben", "How many goldfish?", "จะขายปลาทองกี่ตัว", 3],
+["BEN-0024", "ben", "How many mushrooms?", "จะขายเห็ดกี่ดอก", 3],
+["BEN-0025", "ben", "How many apples?", "จะขายแอปเปิ้ลกี่ลูก", 3],
+["BEN-0026", "ben", "How many shells?", "จะขายเปลือกหอยกี่อัน", 3],
+["BEN-0027", "ben", "How many pieces of wood?", "จะขายไม้กี่ชิ้น", 3],
+["BEN-0028", "ben", "How many carrots?", "จะขายแครอทกี่หัว", 3],
+["KID-0263", "you", "I gave a tomato to Bo.", "", 3],
+["NAR-0188", "narr", "Dear {name}, Happy cows!", "", 3],
+["NAR-0189", "narr", "Happy hens!", "", 3],
+["NAR-0190", "narr", "Let's make salad! What do we do first?", "", 3],
+["MIM-0010", "mimi", "Meow! You found me! I am under the table.", "เมี้ยว! หาเจอแล้ว มีมี่อยู่ใต้โต๊ะ ได้ 5 เหรียญ", 3],
+["MAX-0018", "max", "Let's sing a song together!", "มาร้องเพลง \"สวัสดีเพื่อน ๆ\" ด้วยกันนะ", 3],
+["PIP-0116", "pip", "ไว้ร้องทีหลังก็ได้ แตะคุยกับนายกฯ แม็กซ์แล้วเลือก Let's sing! หรือเปิดหน้าเพลงในสมุดคำศัพท์", "", 3],
+["LIL-0035", "lily", "The town is on the right. Say hello to my friends!", "เมืองอยู่ทางขวา ไปทักทายเพื่อน ๆ ของฉันนะ", 3],
+["CUS-0050", "cust", "Can I have two potatoes, please?", "ขอมันฝรั่ง 2 หัวได้ไหม", 3],
+["PIP-0117", "pip", "งานวันนี้: คุยกับเพื่อน 3 คน ทำเสร็จได้ 6 เหรียญ ดูบอร์ดงานที่ข้างแปลงผักได้นะ", "", 3],
+["CUS-0051", "cust", "Can I have three pine cones, please?", "ขอลูกสน 3 ลูกได้ไหม", 3],
+["KID-0264", "you", "Here you are. Two pine cones.", "", 3],
+["KID-0265", "you", "Here you are. Three pine cones.", "", 3],
+["KID-0266", "you", "Here you are. Four pine cones.", "", 3],
+["MIM-0011", "mimi", "Meow! You found me! I am on the sofa.", "เมี้ยว! หาเจอแล้ว มีมี่อยู่บนโซฟา ได้ 5 เหรียญ", 3],
+["LIL-0036", "lily", "It's rainy today. Do you have an umbrella?", "วันนี้ฝนตก มีร่มไหม", 3],
+["LIL-0037", "lily", "Oh! You can use my umbrella.", "ใช้ร่มของฉันก็ได้นะ", 3],
+["CUS-0052", "cust", "Can I have two eggs, please?", "ขอไข่ 2 ฟองได้ไหม", 3],
+["MIA-0019", "mia", "Wow, you have them! Can I have one cheese and one ball of yarn, please?", "ว้าว มีครบแล้ว ขอชีส 1 ก้อน กับ ไหมพรม 1 ม้วนได้ไหม", 3],
+["KID-0267", "you", "Here you are. Two cheeses and one ball of yarn.", "", 3],
+["KID-0268", "you", "Here you are. One cheese and two balls of yarn.", "", 3],
+["KID-0269", "you", "Here you are. One cheese and one ball of yarn.", "", 3],
+["MIA-0020", "mia", "Thank you, {name}! My party will be great!", "ขอบคุณนะ {name} ปาร์ตี้ของฉันต้องสนุกแน่ ๆ", 3],
+["CUS-0053", "cust", "Can I have two carp, please?", "ขอปลาคาร์ป 2 ตัวได้ไหม", 3],
+["NAR-0191", "narr", "Stage 3: Town Market", "", 3],
+["MAX-0019", "max", "ผมแม็กซ์ นายกเทศมนตรีของเมืองนี้ แล้วก็เปิดร้านเฟอร์นิเจอร์ด้วยครับ", "", 3],
+["MAX-0020", "max", "เมื่อก่อนตลาดของเราครึกครื้นทุกวันอาทิตย์ คุณยายจะเอาผักมาขายที่แผงเล็ก ๆ ทุกคนทักทายกันเสียงดัง", "", 3],
+["MAX-0021", "max", "แต่ตอนนี้... ทุกคนเขินอาย เดินผ่านกันเฉย ๆ ถ้าหลานเริ่มทักก่อน รอยยิ้มจะกลับมาทั้งเมืองแน่นอนครับ", "", 3],
+["KID-0270", "you", "I'm fine, thank you!", "สบายดี ขอบคุณ แล้วคุณล่ะ", 3],
+["CUS-0054", "cust", "Good morning! I'm Ava.", "อรุณสวัสดิ์ ฉันชื่อAva", 3],
+["KID-0271", "you", "Good morning! Welcome!", "อรุณสวัสดิ์ ยินดีต้อนรับสู่ร้านของฉัน", 3],
+["PIP-0118", "pip", "แตะนับลูกสน 3 ลูกให้ครบนะ", "", 3],
+["CUS-0055", "cust", "Can I have two balls of yarn, please?", "ขอไหมพรม 2 ม้วนได้ไหม", 3],
+["PIP-0119", "pip", "แตะนับไหมพรม 2 ม้วนให้ครบนะ", "", 3],
+["PIP-0120", "pip", "งานวันนี้: จับแมลง 2 ตัว ทำเสร็จได้ 7 เหรียญ ดูบอร์ดงานที่ข้างแปลงผักได้นะ", "", 3],
+["PIP-0121", "pip", "แตะนับเห็ด 3 ดอกให้ครบนะ", "", 3],
+["PIP-0122", "pip", "แตะนับปลาคาร์ป 2 ตัวให้ครบนะ", "", 3],
+["LIL-0038", "lily", "It's cloudy today. Maybe it will rain.", "วันนี้เมฆเยอะ บางทีฝนอาจจะตก", 3],
+["LIL-0039", "lily", "Me too! Rain is good for plants.", "ฉันก็ชอบ ฝนดีกับต้นไม้", 3],
+["PIP-0123", "pip", "แตะนับปลาคาร์ป 3 ตัวให้ครบนะ", "", 3],
+["PIP-0124", "pip", "แตะนับไข่ 1 ฟองให้ครบนะ", "", 3],
+["PIP-0125", "pip", "แตะนับชีส 1 ก้อน กับ ไหมพรม 1 ม้วนให้ครบนะ", "", 3],
+["PIP-0126", "pip", "แตะนับชีส 1 ก้อนให้ครบนะ", "", 3],
+["PIP-0127", "pip", "งานวันนี้: ตัดกิ่งไม้ในป่า 2 กิ่ง ทำเสร็จได้ 10 เหรียญ ดูบอร์ดงานที่ข้างแปลงผักได้นะ", "", 3],
+["ROS-0018", "rosa", "That's seven coins. I need eight coins.", "", 3],
+["ROS-0019", "rosa", "Thank you! Enjoy your cake!", "ขอบคุณจ้ะ ขอให้อร่อยนะ", 3],
+["KID-0272", "you", "That's eight coins.", "", 3],
+["CUS-0056", "cust", "Here you are. 8 coins.", "นี่เงิน 8 เหรียญ", 3],
+["KID-0273", "you", "Thank you! Come again!", "ขอบคุณ แล้วมาอีกนะ", 3],
+["KID-0274", "you", "That's three coins.", "", 3],
+["CUS-0057", "cust", "Here you are. 3 coins.", "นี่เงิน 3 เหรียญ", 3],
+["KID-0275", "you", "Here you are. Two balls of yarn.", "", 3],
+["KID-0276", "you", "Here you are. One ball of yarn.", "", 3],
+["KID-0277", "you", "Here you are. Three balls of yarn.", "", 3],
+["KID-0278", "you", "That's nine coins.", "", 3],
+["CUS-0058", "cust", "Here you are. 9 coins.", "นี่เงิน 9 เหรียญ", 3],
+["PIP-0128", "pip", "งานวันนี้: ให้อาหารสัตว์ 4 ตัว ทำเสร็จได้ 10 เหรียญ ดูบอร์ดงานที่ข้างแปลงผักได้นะ", "", 3],
+["KID-0279", "you", "A cake, please!", "ขอเค้กหนึ่งชิ้น · 8 เหรียญ", 3],
+["PIP-0129", "pip", "ตอนนี้เป็นตอนเช้า ทักทายลูกค้าว่า Good morning นะ", "", 3],
+["KID-0280", "you", "That's ten coins.", "", 3],
+["CUS-0059", "cust", "Here you are. 10 coins.", "นี่เงิน 10 เหรียญ", 3],
+["KID-0281", "you", "Make salad", "", 3],
+["NAR-0192", "narr", "First, cut the cabbage.", "", 3],
+["NAR-0193", "narr", "Cut the cabbage?", "", 3],
+["PIP-0130", "pip", "ยังไม่ใช่ขั้นตอนต่อมานะ ลองคิดดูอีกที", "", 3],
+["PIP-0131", "pip", "ลองแตะ \"add the tomato\" นะ ต้องใส่มะเขือเทศก่อน", "", 3],
+["NAR-0194", "narr", "Then, add the tomato.", "", 3],
+["NAR-0195", "narr", "Finally, mix the salad.", "", 3],
+["NAR-0196", "narr", "You made salad! You have one salad.", "", 3],
+["KID-0282", "you", "You made salad! Say: I made salad!", "ทำสลัดสำเร็จแล้ว พูดว่า I made salad!", 3],
+["KID-0283", "you", "I made salad!", "", 3],
+["KID-0284", "you", "I talked to Mia.", "", 3],
+["KID-0285", "you", "I went to the Flower Festival.", "", 3],
+["KID-0286", "you", "I cooked salad.", "", 3],
+["PIP-0132", "pip", "สวัสดี!", "", 3],
+["PIP-0133", "pip", "อรุณสวัสดิ์ {name}! ฉันชื่อโรซ่า สบายดีไหม", "", 3],
+["WRD-0009", "narr", "How many?", "กี่อัน / กี่ชิ้น", 4],
+["PIP-0134", "pip", "ไปร้านของแม็กซ์ในเมือง ร้านหลังคาสีฟ้า เลือกโคมไฟ แล้วบอกสีว่า The yellow one, please", "", 4],
+["PIP-0135", "pip", "ลิลลี่รออยู่หน้าบ้าน คุยกับลิลลี่ แล้วแตะปุ่มแต่งสวน วางของตามที่ลิลลี่บอก", "", 4],
+["PIP-0136", "pip", "ทุกอย่างพร้อมแล้ว แตะประตูบ้านแล้วเลือกจัดปาร์ตี้ พูดว่า Welcome to my party", "", 4],
+["PIP-0137", "pip", "ยินดีด้วย ด่านสี่บ้านของฉันเปิดแล้ว ไปร้านของแม็กซ์ในเมืองกัน", "", 4],
+["NAR-0197", "narr", "Stage four! Grandma's House!", "ด่าน 4", 4],
+["NAR-0198", "narr", "Meow!", "เมี้ยว!", 4],
+["PIE-0015", "pipen", "Mimi? Where?", "มีมี่อยู่ไหน?", 4],
+["PIP-0138", "pip", "มีมี่ซ่อนอยู่ในบ้านทุกวันเลยนะ ถ้าเจอ แตะที่มีมี่แล้วบอกว่าอยู่ตรงไหน", "", 4],
+["NTH-0004", "nar", "ทุกคนเต้นรำใต้แสงไฟ วัวร้อง มอ~ ไก่ร้อง กุ๊ก ๆ", "", 4],
+["PIE-0016", "pipen", "How many legs? Mimi has...", "มีมี่มีขากี่ขานะ?", 4],
+["PIP-0139", "pip", "มีมี่มีขากี่ขานะ?", "", 4],
+["KID-0287", "you", "Two legs!", "2 ขา", 4],
+["KID-0288", "you", "Four legs!", "4 ขา", 4],
+["KID-0289", "you", "Six legs!", "6 ขา", 4],
+["PIP-0140", "pip", "แมว หมา วัว มี 4 ขา แต่ไก่มีแค่ 2 ขานะ", "", 4],
+["PIE-0017", "pipen", "A cat has four legs.", "แมวมี 4 ขา", 4],
+["NTH-0005", "nar", "แล้วจดหมายฉบับใหม่ก็ลอยลงมาตรงหน้าเรา", "", 4],
+["GRA-0013", "gran", "Thank you! Go to the lake!", "ขอบใจจ้ะ! ไปที่ทะเลสาบนะ!", 4],
+["PIE-0018", "pipen", "Happy farm! Fish? Let's go!", "ฟาร์มมีความสุข! ปลาเหรอ? ไปกันเลย!", 4],
+["NTH-0006", "nar", "ประตูหลังเนินเขาเปิดออก... มองเห็นทะเลสาบระยิบระยับ", "", 4],
+["LIL-0040", "lily", "Where is Mimi? Where is she?", "มีมี่อยู่ไหน อยู่ที่ไหนนะ", 4],
+["LIL-0041", "lily", "On the bed? No, no, no!", "บนเตียงเหรอ ไม่ใช่", 4],
+["LIL-0042", "lily", "Under the table? No, no, no!", "ใต้โต๊ะเหรอ ไม่ใช่", 4],
+["LIL-0043", "lily", "Next to the window? Yes, yes, yes!", "ข้าง ๆ หน้าต่างเหรอ ใช่แล้ว", 4],
+["LIL-0044", "lily", "Meow, meow, there you are!", "เมี้ยว เมี้ยว เจอแล้ว", 4],
+["MIA-0021", "mia", "Your house is so cute!", "บ้านของเธอน่ารักมาก", 4],
+["MAX-0022", "max", "Good morning, {name}! Welcome to my shop. What would you like?", "อรุณสวัสดิ์ {name}! ยินดีต้อนรับ อยากได้อะไรดี", 4],
+["KID-0290", "you", "Lamp, please.", "โคมไฟ · 12 เหรียญ", 4],
+["KID-0291", "you", "Chair, please.", "", 4],
+["KID-0292", "you", "Rug, please.", "", 4],
+["KID-0293", "you", "Clock, please.", "", 4],
+["KID-0294", "you", "Picture, please.", "", 4],
+["KID-0295", "you", "Flower pot, please.", "", 4],
+["KID-0296", "you", "Bench, please.", "", 4],
+["KID-0297", "you", "Scarecrow, please.", "", 4],
+["KID-0298", "you", "Birdhouse, please.", "", 4],
+["MAX-0023", "max", "Which color would you like?", "อยากได้โคมไฟสีอะไรดี", 4],
+["KID-0299", "you", "The red one, please.", "", 4],
+["KID-0300", "you", "The yellow one, please.", "", 4],
+["KID-0301", "you", "The orange one, please.", "", 4],
+["KID-0302", "you", "The white one, please.", "", 4],
+["MAX-0024", "max", "A yellow lamp. That's 12 coins.", "โคมไฟสีเหลือง ราคา 12 เหรียญ", 4],
+["MAX-0025", "max", "Thank you! Take it home and put it in a nice place.", "ขอบคุณ เอากลับไปวางที่บ้านในที่สวย ๆ นะ", 4],
+["KID-0303", "you", "The green one, please.", "", 4],
+["KID-0304", "you", "The blue one, please.", "", 4],
+["KID-0305", "you", "The purple one, please.", "", 4],
+["MAX-0026", "max", "A white chair. That's 12 coins.", "เก้าอี้สีขาว ราคา 12 เหรียญ", 4],
+["MAX-0027", "max", "ตลาดกลับมาครึกครื้นแล้วครับ! แผงของคุณยายก็เปิดอีกครั้งแล้ว", "", 4],
+["NAR-0199", "narr", "Two coins.", "", 4],
+["NAR-0200", "narr", "One more!", "", 4],
+["MAX-0028", "max", "อ้อ มีคนอยากพบหลานอยู่คนหนึ่ง...", "", 4],
+["KID-0306", "you", "The brown one, please.", "", 4],
+["MAX-0029", "max", "A purple flower pot. That's 6 coins.", "กระถางดอกไม้สีม่วง ราคา 6 เหรียญ", 4],
+["NAR-0201", "narr", "Great job, {name}! Stage three clear!", "", 4],
+["KID-0307", "you", "The pink one, please.", "", 4],
+["MAX-0030", "max", "A pink flower pot. That's 6 coins.", "กระถางดอกไม้สีชมพู ราคา 6 เหรียญ", 4],
+["PIP-0141", "pip", "วางโคมไฟไว้บนโต๊ะนะ on แปลว่า บน", "", 4],
+["KID-0308", "you", "I gave a tomato to Finn.", "", 4],
+["KID-0309", "you", "I gave a tomato to Pat.", "", 4],
+["NAR-0202", "narr", "Dear {name}, Hello, town!", "", 4],
+["NAR-0203", "narr", "Hello, friends!", "", 4],
+["NAR-0204", "narr", "Mimi is waiting at home.", "", 4],
+["LIL-0045", "lily", "I love yellow lamps! Max sells them in the town.", "ฉันชอบโคมไฟสีเหลือง ร้านแม็กซ์ในเมืองมีขาย", 4],
+["CUS-0060", "cust", "Can I have two catfish, please?", "ขอปลาดุก 2 ตัวได้ไหม", 4],
+["KID-0310", "you", "Here you are. One catfish.", "", 4],
+["KID-0311", "you", "Here you are. Two catfish.", "", 4],
+["KID-0312", "you", "Here you are. Three catfish.", "", 4],
+["MAX-0031", "max", "A green lamp. That's 12 coins.", "โคมไฟสีเขียว ราคา 12 เหรียญ", 4],
+["PIP-0142", "pip", "ยังต้องซื้อโคมไฟสีเหลืองนะ บอกแม็กซ์ว่า The yellow one, please", "", 4],
+["MAX-0032", "max", "A brown chair. That's 12 coins.", "เก้าอี้สีน้ำตาล ราคา 12 เหรียญ", 4],
+["MAX-0033", "max", "A brown rug. That's 10 coins.", "พรมสีน้ำตาล ราคา 10 เหรียญ", 4],
+["MAX-0034", "max", "A red flower pot. That's 6 coins.", "กระถางดอกไม้สีแดง ราคา 6 เหรียญ", 4],
+["LIL-0046", "lily", "Put the lamp on the table. It will look nice!", "วางโคมไฟไว้บนโต๊ะนะ สวยแน่ ๆ", 4],
+["KID-0313", "you", "Here you are. Two shells.", "", 4],
+["KID-0314", "you", "Here you are. Four shells.", "", 4],
+["KID-0315", "you", "Here you are. Three shells.", "", 4],
+["CUS-0061", "cust", "Can I have three eggs, please?", "ขอไข่ 3 ฟองได้ไหม", 4],
+["KID-0316", "you", "Here you are. Four eggs.", "", 4],
+["MAX-0035", "max", "An orange lamp. That's 12 coins.", "โคมไฟสีส้ม ราคา 12 เหรียญ", 4],
+["MAX-0036", "max", "A red chair. That's 12 coins.", "เก้าอี้สีแดง ราคา 12 เหรียญ", 4],
+["MAX-0037", "max", "A pink rug. That's 10 coins.", "พรมสีชมพู ราคา 10 เหรียญ", 4],
+["MAX-0038", "max", "A white flower pot. That's 6 coins.", "กระถางดอกไม้สีขาว ราคา 6 เหรียญ", 4],
+["LIL-0047", "lily", "Hi, {name}! I have gifts for your room: a teddy bear, a ball, a plant and a rug!", "ฉันมีของขวัญมาให้ ตุ๊กตาหมี ลูกบอล ต้นไม้ และพรม", 4],
+["KID-0317", "you", "Thank you, Lily!", "ขอบคุณนะ ลิลลี่", 4],
+["LIL-0048", "lily", "Please put the teddy bear on the bed.", "ช่วยวางตุ๊กตาหมีไว้บนเตียงหน่อยนะ", 4],
+["NAR-0205", "narr", "The brown teddy bear.", "", 4],
+["PIP-0143", "pip", "แตะจุดสีขาวที่อยู่บนเตียง on แปลว่า บน", "", 4],
+["PIP-0144", "pip", "แตะตุ๊กตาหมีที่แถบด้านล่าง แล้วแตะจุดสีขาวที่อยู่บนเตียง on แปลว่า บน", "", 4],
+["MAX-0039", "max", "A green chair. That's 12 coins.", "เก้าอี้สีเขียว ราคา 12 เหรียญ", 4],
+["MAX-0040", "max", "A yellow flower pot. That's 6 coins.", "กระถางดอกไม้สีเหลือง ราคา 6 เหรียญ", 4],
+["LIL-0049", "lily", "Your garden needs flowers! Please put the flower pot in front of the house.", "ช่วยวางกระถางดอกไม้ไว้หน้าบ้านนะ", 4],
+["NAR-0206", "narr", "The pink flower pot.", "", 4],
+["PIP-0145", "pip", "แตะจุดสีขาวที่อยู่หน้าบ้าน in front of แปลว่า ข้างหน้า", "", 4],
+["PIP-0146", "pip", "แตะกระถางดอกไม้ที่แถบด้านล่าง แล้วแตะจุดสีขาวหน้าบ้าน in front of แปลว่า ข้างหน้า", "", 4],
+["KID-0318", "you", "Here you are. Three bags of wool.", "", 4],
+["KID-0319", "you", "Here you are. Two bags of wool.", "", 4],
+["KID-0320", "you", "Here you are. One bag of wool.", "", 4],
+["MAX-0041", "max", "A red lamp. That's 12 coins.", "โคมไฟสีแดง ราคา 12 เหรียญ", 4],
+["MAX-0042", "max", "A yellow chair. That's 12 coins.", "เก้าอี้สีเหลือง ราคา 12 เหรียญ", 4],
+["MAX-0043", "max", "A green rug. That's 10 coins.", "พรมสีเขียว ราคา 10 เหรียญ", 4],
+["LIL-0050", "lily", "Everything looks beautiful! Let's have a party. Tap your door!", "ทุกอย่างสวยมาก มาจัดปาร์ตี้กัน แตะที่ประตูบ้านเลย", 4],
+["MAX-0044", "max", "A white lamp. That's 12 coins.", "โคมไฟสีขาว ราคา 12 เหรียญ", 4],
+["KID-0321", "you", "Everyone is here! Say: Welcome to my party!", "ทุกคนมาแล้ว พูดว่า Welcome to my party!", 4],
+["KID-0322", "you", "Welcome to my party!", "", 4],
+["LIL-0051", "lily", "Your room is so cute! I love the teddy bear on the bed.", "ห้องของเธอน่ารักมาก ฉันชอบตุ๊กตาหมีบนเตียง", 4],
+["TOM-0034", "tom", "I like the bench next to the pond!", "ตาชอบม้านั่งข้างสระน้ำ", 4],
+["KID-0323", "you", "A scarf for Grandpa Tom! Say: This is for you!", "ผ้าพันคอไหมพรมให้คุณตาทอม พูดว่า This is for you!", 4],
+["KID-0324", "you", "This is for you!", "", 4],
+["TOM-0035", "tom", "For me? Thank you!", "ให้ตาเหรอ ขอบใจนะหลาน อุ่นมากเลย", 4],
+["MIA-0022", "mia", "Thank you for the cheese and the yarn!", "ขอบคุณสำหรับชีสกับไหมพรมนะ", 4],
+["ROS-0020", "rosa", "I made a cake for you, {name}!", "ฉันทำเค้กมาให้เธอด้วย", 4],
+["LIL-0052", "lily", "ดูสิ ทุกคนหัวเราะกันอีกแล้ว เหมือนตอนคุณยายอยู่เลย", "", 4],
+["NAR-0207", "narr", "Great job, {name}! You finished Word Farm!", "", 4],
+["MAX-0045", "max", "A purple chair. That's 12 coins.", "เก้าอี้สีม่วง ราคา 12 เหรียญ", 4],
+["MAX-0046", "max", "A blue rug. That's 10 coins.", "พรมสีน้ำเงิน ราคา 10 เหรียญ", 4],
+["MAX-0047", "max", "An orange flower pot. That's 6 coins.", "กระถางดอกไม้สีส้ม ราคา 6 เหรียญ", 4],
+["MAX-0048", "max", "A yellow rug. That's 10 coins.", "พรมสีเหลือง ราคา 10 เหรียญ", 4],
+["MAX-0049", "max", "A blue flower pot. That's 6 coins.", "กระถางดอกไม้สีน้ำเงิน ราคา 6 เหรียญ", 4],
+["PIP-0147", "pip", "แตะนับแครอท 1 หัวให้ครบนะ", "", 4],
+["CUS-0062", "cust", "Can I have three bags of wool, please?", "ขอขนแกะ 3 ถุงได้ไหม", 4],
+["PIP-0148", "pip", "แตะนับขนแกะ 3 ถุงให้ครบนะ", "", 4],
+["MAX-0050", "max", "A pink chair. That's 12 coins.", "เก้าอี้สีชมพู ราคา 12 เหรียญ", 4],
+["MAX-0051", "max", "A brown flower pot. That's 6 coins.", "กระถางดอกไม้สีน้ำตาล ราคา 6 เหรียญ", 4],
+["CUS-0063", "cust", "Can I have two bottles of milk, please?", "ขอนม 2 ขวดได้ไหม", 4],
+["PIP-0149", "pip", "แตะนับนม 2 ขวดให้ครบนะ", "", 4],
+["MAX-0052", "max", "A white rug. That's 10 coins.", "พรมสีขาว ราคา 10 เหรียญ", 4],
+["PIP-0150", "pip", "แตะนับไม้ 1 ชิ้นให้ครบนะ", "", 4],
+["NAR-0208", "narr", "The yellow lamp.", "", 4],
+["PIP-0151", "pip", "แตะจุดสีขาวที่อยู่บนโต๊ะ on แปลว่า บน", "", 4],
+["KID-0325", "you", "Great! Now say it: The lamp is on the table.", "เก่งมาก โคมไฟอยู่บนโต๊ะแล้ว ลองพูดประโยคนี้นะ", 4],
+["KID-0326", "you", "The lamp is on the table.", "", 4],
+["LIL-0053", "lily", "Great! Now say it: The teddy bear is on the bed.", "เก่งมาก ตุ๊กตาหมีอยู่บนเตียงแล้ว ลองพูดประโยคนี้นะ", 4],
+["KID-0327", "you", "The teddy bear is on the bed.", "", 4],
+["LIL-0054", "lily", "Please put the ball under the bed.", "ช่วยวางลูกบอลไว้ใต้เตียงหน่อยนะ", 4],
+["PIP-0152", "pip", "วางลูกบอลไว้ใต้เตียงนะ under แปลว่า ข้างใต้", "", 4],
+["NAR-0209", "narr", "The red ball.", "", 4],
+["PIP-0153", "pip", "แตะจุดสีขาวที่อยู่ใต้เตียง under แปลว่า ข้างใต้", "", 4],
+["PIP-0154", "pip", "แตะลูกบอลที่แถบด้านล่าง แล้วแตะจุดสีขาวที่อยู่ใต้เตียง under แปลว่า ข้างใต้", "", 4],
+["NAR-0210", "narr", "Oops!", "", 4],
+["NAR-0211", "narr", "That's under the table.", "", 4],
+["NAR-0212", "narr", "Put it under the bed!", "", 4],
+["PIP-0155", "pip", "จุดนี้คือใต้โต๊ะ ต้องวางใต้เตียงนะ under แปลว่า ข้างใต้", "", 4],
+["LIL-0055", "lily", "Great! Now say it: The ball is under the bed.", "เก่งมาก ลูกบอลอยู่ใต้เตียงแล้ว ลองพูดประโยคนี้นะ", 4],
+["KID-0328", "you", "The ball is under the bed.", "", 4],
+["LIL-0056", "lily", "Please put the plant next to the window.", "ช่วยวางต้นไม้ในกระถางไว้ข้าง ๆ หน้าต่างหน่อยนะ", 4],
+["NAR-0213", "narr", "The orange plant.", "", 4],
+["PIP-0156", "pip", "แตะจุดสีขาวที่อยู่ข้าง ๆ หน้าต่าง next to แปลว่า ข้าง ๆ", "", 4],
+["PIP-0157", "pip", "แตะต้นไม้ในกระถางที่แถบด้านล่าง แล้วแตะจุดสีขาวที่อยู่ข้าง ๆ หน้าต่าง next to แปลว่า ข้าง ๆ", "", 4],
+["LIL-0057", "lily", "Great! Now say it: The plant is next to the window.", "เก่งมาก ต้นไม้ในกระถางอยู่ข้าง ๆ หน้าต่างแล้ว ลองพูดประโยคนี้นะ", 4],
+["KID-0329", "you", "The plant is next to the window.", "", 4],
+["LIL-0058", "lily", "Please put the rug in front of the sofa.", "ช่วยวางพรมไว้หน้าโซฟาหน่อยนะ", 4],
+["NAR-0214", "narr", "The blue rug.", "", 4],
+["PIP-0158", "pip", "แตะจุดสีขาวที่อยู่หน้าโซฟา in front of แปลว่า ข้างหน้า", "", 4],
+["PIP-0159", "pip", "แตะพรมที่แถบด้านล่าง แล้วแตะจุดสีขาวที่อยู่หน้าโซฟา in front of แปลว่า ข้างหน้า", "", 4],
+["LIL-0059", "lily", "Great! Now say it: The rug is in front of the sofa.", "เก่งมาก พรมอยู่หน้าโซฟาแล้ว ลองพูดประโยคนี้นะ", 4],
+["KID-0330", "you", "The rug is in front of the sofa.", "", 4],
+["LIL-0060", "lily", "Great! Now say it: The flower pot is in front of the house.", "เก่งมาก กระถางดอกไม้อยู่หน้าบ้านแล้ว ลองพูดประโยคนี้นะ", 4],
+["KID-0331", "you", "The flower pot is in front of the house.", "", 4],
+["LIL-0061", "lily", "Now put the bench next to the pond.", "ช่วยวางม้านั่งไว้ข้าง ๆ สระน้ำนะ", 4],
+["NAR-0215", "narr", "The brown bench.", "", 4],
+["PIP-0160", "pip", "แตะจุดสีขาวที่อยู่ข้าง ๆ สระน้ำ next to แปลว่า ข้าง ๆ", "", 4],
+["PIP-0161", "pip", "แตะม้านั่งที่แถบด้านล่าง แล้วแตะจุดสีขาวข้าง ๆ สระน้ำ next to แปลว่า ข้าง ๆ", "", 4],
+["LIL-0062", "lily", "Great! Now say it: The bench is next to the pond.", "เก่งมาก ม้านั่งอยู่ข้าง ๆ สระน้ำแล้ว ลองพูดประโยคนี้นะ", 4],
+["KID-0332", "you", "The bench is next to the pond.", "", 4],
+["KID-0333", "you", "Have the party!", "", 4],
+["KID-0334", "you", "Yellow, please!", "สีเหลือง", 4],
+["KID-0335", "you", "On the table!", "", 4],
+["KID-0336", "you", "In front of the house!", "", 4],
+["KID-0337", "you", "Next to the pond!", "", 4],
+["LIL-0063", "lily", "I planted flowers today.", "วันนี้ฉันปลูกดอกไม้", 5],
+["LIL-0064", "lily", "Here are two tomato seeds for you!", "นี่เมล็ดมะเขือเทศ 2 เมล็ดสำหรับเธอ", 5],
+["ROS-0021", "rosa", "I made cookies this morning.", "เช้านี้ฉันอบคุกกี้", 5],
+["ROS-0022", "rosa", "Here is a cookie for you!", "นี่คุกกี้สำหรับเธอ", 5],
+["BOO-0016", "bo", "I saw a big beetle in the forest!", "ฉันเห็นด้วงตัวใหญ่ในป่า", 5],
+["BOO-0017", "bo", "Let's catch bugs together!", "ไปจับแมลงด้วยกันนะ", 5],
+["TOM-0036", "tom", "Thank you for your help.", "ขอบใจที่ช่วยตานะ", 5],
+["TOM-0037", "tom", "Here are some coins.", "นี่เหรียญให้หลาน", 5],
+["MIA-0023", "mia", "I love your farm!", "ฉันชอบฟาร์มของเธอมาก", 5],
+["MIA-0024", "mia", "See you in town!", "เจอกันในเมืองนะ", 5],
+["MAX-0053", "max", "I have new chairs in my shop.", "ร้านฉันมีเก้าอี้ใหม่", 5],
+["MAX-0054", "max", "Come and see!", "มาดูนะ", 5],
+["CUS-0064", "cust", "Can I have three flowers, please?", "ขอดอกไม้ 3 ดอกได้ไหม", 5],
+["KID-0338", "you", "Here you are. Three flowers.", "", 5],
+["KID-0339", "you", "Here you are. Two flowers.", "", 5],
+["KID-0340", "you", "Here you are. Four flowers.", "", 5],
+["KID-0341", "you", "Here you are. One apple pie.", "", 5],
+["KID-0342", "you", "Here you are. Three apple pies.", "", 5],
+["KID-0343", "you", "Here you are. Two apple pies.", "", 5],
+["NAR-0216", "narr", "How many legs? Mimi has...", "", 5],
+["PAT-0012", "pat", "Dear {name},", "", 5],
+["PAT-0013", "pat", "Tomorrow is Mayor Max's birthday!", "", 5],
+["PAT-0014", "pat", "Say happy birthday!", "", 5],
+["PAT-0015", "pat", "From, Pat", "", 5],
+["PAT-0016", "pat", "Hello! I'm Pat.", "", 5],
+["PAT-0017", "pat", "I bring letters to you. Check your mailbox every day!", "", 5],
+["PAT-0018", "pat", "Tomorrow is Ben's birthday!", "", 5],
+["KID-0344", "you", "I talked to Pat.", "", 5],
+["KID-0345", "you", "I watered my plants.", "", 5],
+["KID-0346", "you", "Today is Tuesday. It was rainy.", "", 5],
+["MAX-0055", "max", "A purple rug. That's 10 coins.", "พรมสีม่วง ราคา 10 เหรียญ", 5],
+["TOM-0038", "tom", "Dear {name},", "", 5],
+["TOM-0039", "tom", "From, Grandpa Tom", "", 5],
+["KID-0347", "you", "Today is Wednesday. It was sunny.", "", 5],
+["MIA-0025", "mia", "It's rainy today. Do you have an umbrella?", "วันนี้ฝนตก มีร่มไหม", 5],
+["MIA-0026", "mia", "Good! Stay dry!", "ดีมาก อย่าให้เปียกนะ", 5],
+["MAX-0056", "max", "A pink lamp. That's 12 coins.", "โคมไฟสีชมพู ราคา 12 เหรียญ", 5],
+["BOO-0018", "bo", "It's rainy today. Do you have an umbrella?", "วันนี้ฝนตก มีร่มไหม", 5],
+["BOO-0019", "bo", "Good! Stay dry!", "ดีมาก อย่าให้เปียกนะ", 5],
+["FIN-0013", "finn", "It's rainy today. Do you have an umbrella?", "วันนี้ฝนตก มีร่มไหม", 5],
+["FIN-0014", "finn", "Good! Stay dry!", "ดีมาก อย่าให้เปียกนะ", 5],
+["PAT-0019", "pat", "It's rainy today. Do you have an umbrella?", "วันนี้ฝนตก มีร่มไหม", 5],
+["PAT-0020", "pat", "Good! Stay dry!", "ดีมาก อย่าให้เปียกนะ", 5],
+["PAT-0021", "pat", "Tomorrow is Lily's birthday!", "", 5],
+["KID-0348", "you", "Today is Thursday. It was rainy.", "", 5],
+["KID-0349", "you", "Today is Friday. It was cloudy.", "", 5],
+["MIA-0027", "mia", "Dear {name},", "", 5],
+["MIA-0028", "mia", "Tomorrow is Sunday!", "", 5],
+["MIA-0029", "mia", "Come to the Flower Festival in town!", "", 5],
+["MIA-0030", "mia", "From, Mia", "", 5],
+["ROS-0023", "rosa", "Dear {name},", "", 5],
+["ROS-0024", "rosa", "From, Rosa", "", 5],
+["KID-0350", "you", "Today is Saturday. It was sunny.", "", 5],
+["PAT-0022", "pat", "Tomorrow is Bo's birthday!", "", 5],
+["KID-0351", "you", "Today is Sunday. It was cloudy.", "", 5],
+["MIA-0031", "mia", "It's summer now! Do you like summer?", "ตอนนี้เป็นฤดูร้อนแล้ว ชอบไหม", 5],
+["MIA-0032", "mia", "Me too!", "ฉันก็ชอบ", 5],
+["BOO-0020", "bo", "It's my birthday today!", "วันนี้เป็นวันเกิดของโบ!", 5],
+["KID-0352", "you", "Happy birthday, Bo!", "สุขสันต์วันเกิดนะ โบ", 5],
+["BOO-0021", "bo", "Thank you, {name}! You are a good friend.", "ขอบคุณนะ {name} เธอเป็นเพื่อนที่ดีมาก", 5],
+["FIN-0015", "finn", "It's summer now! Do you like summer?", "ตอนนี้เป็นฤดูร้อนแล้ว ชอบไหม", 5],
+["FIN-0016", "finn", "Me too!", "ฉันก็ชอบ", 5],
+["PAT-0023", "pat", "It's summer now! Do you like summer?", "ตอนนี้เป็นฤดูร้อนแล้ว ชอบไหม", 5],
+["PAT-0024", "pat", "Me too!", "ฉันก็ชอบ", 5],
+["KID-0353", "you", "Today is Monday. It was windy.", "", 5],
+["MAX-0057", "max", "An orange chair. That's 12 coins.", "เก้าอี้สีส้ม ราคา 12 เหรียญ", 5],
+["PAT-0025", "pat", "Tomorrow is Grandpa Tom's birthday!", "", 5],
+["KID-0354", "you", "Today is Tuesday. It was windy.", "", 5],
+["TOM-0040", "tom", "It's my birthday today!", "วันนี้เป็นวันเกิดของคุณตาทอม!", 5],
+["KID-0355", "you", "Happy birthday, Grandpa Tom!", "สุขสันต์วันเกิดนะ คุณตาทอม", 5],
+["TOM-0041", "tom", "Thank you, {name}! You are a good friend.", "ขอบคุณนะ {name} เธอเป็นเพื่อนที่ดีมาก", 5],
+["KID-0356", "you", "Today is Thursday. It was sunny.", "", 5],
+["PAT-0026", "pat", "Tomorrow is Rosa's birthday!", "", 5],
+["KID-0357", "you", "Today is Friday. It was rainy.", "", 5],
+["MIA-0033", "mia", "Come to the Fishing Festival in town!", "", 5],
+["KID-0358", "you", "Today is Saturday. It was windy.", "", 5],
+["TOM-0042", "tom", "Wow! I love milk! Thank you, {name}!", "ว้าว ชอบนมที่สุดเลย ขอบคุณนะ", 5],
+["KID-0359", "you", "Today is Sunday. It was sunny.", "", 5],
+["PAT-0027", "pat", "Tomorrow is Mia's birthday!", "", 5],
+["MIA-0034", "mia", "It's my birthday today!", "วันนี้เป็นวันเกิดของมีอา!", 5],
+["KID-0360", "you", "Happy birthday, Mia!", "สุขสันต์วันเกิดนะ มีอา", 5],
+["MIA-0035", "mia", "Thank you, {name}! You are a good friend.", "ขอบคุณนะ {name} เธอเป็นเพื่อนที่ดีมาก", 5],
+["BOO-0022", "bo", "It's windy today! Hold your hat!", "วันนี้ลมแรง จับหมวกไว้นะ", 5],
+["KID-0361", "you", "OK! Thank you!", "โอเค ขอบคุณ", 5],
+["BOO-0023", "bo", "Ha ha! Be careful!", "ฮ่า ๆ ระวังนะ", 5],
+["FIN-0017", "finn", "It's windy today! Hold your hat!", "วันนี้ลมแรง จับหมวกไว้นะ", 5],
+["FIN-0018", "finn", "Ha ha! Be careful!", "ฮ่า ๆ ระวังนะ", 5],
+["PAT-0028", "pat", "It's windy today! Hold your hat!", "วันนี้ลมแรง จับหมวกไว้นะ", 5],
+["PAT-0029", "pat", "Ha ha! Be careful!", "ฮ่า ๆ ระวังนะ", 5],
+["PAT-0030", "pat", "Tomorrow is Finn's birthday!", "", 5],
+["MAX-0058", "max", "A red rug. That's 10 coins.", "พรมสีแดง ราคา 10 เหรียญ", 5],
+["FIN-0019", "finn", "It's my birthday today!", "วันนี้เป็นวันเกิดของฟินน์!", 5],
+["KID-0362", "you", "Happy birthday, Finn!", "สุขสันต์วันเกิดนะ ฟินน์", 5],
+["FIN-0020", "finn", "Thank you, {name}! You are a good friend.", "ขอบคุณนะ {name} เธอเป็นเพื่อนที่ดีมาก", 5],
+["MAX-0059", "max", "Dear {name},", "", 5],
+["MAX-0060", "max", "From, Mayor Max", "", 5],
+["KID-0363", "you", "Today is Thursday. It was windy.", "", 5],
+["PAT-0031", "pat", "Tomorrow is Grandpa Joe's birthday!", "", 5],
+["KID-0364", "you", "Today is Friday. It was windy.", "", 5],
+["MIA-0036", "mia", "It's sunny today! Do you like sunny days?", "วันนี้แดดดี ชอบวันแดดออกไหม", 5],
+["MIA-0037", "mia", "Me too! Let's play outside!", "ฉันก็ชอบ ไปเล่นข้างนอกกัน", 5],
+["JOE-0019", "joe", "It's my birthday today!", "วันนี้เป็นวันเกิดของคุณตาโจ!", 5],
+["KID-0365", "you", "Happy birthday, Grandpa Joe!", "สุขสันต์วันเกิดนะ คุณตาโจ", 5],
+["JOE-0020", "joe", "Thank you, {name}! You are a good friend.", "ขอบคุณนะ {name} เธอเป็นเพื่อนที่ดีมาก", 5],
+["BOO-0024", "bo", "It's sunny today! Do you like sunny days?", "วันนี้แดดดี ชอบวันแดดออกไหม", 5],
+["BOO-0025", "bo", "Me too! Let's play outside!", "ฉันก็ชอบ ไปเล่นข้างนอกกัน", 5],
+["FIN-0021", "finn", "It's sunny today! Do you like sunny days?", "วันนี้แดดดี ชอบวันแดดออกไหม", 5],
+["FIN-0022", "finn", "Me too! Let's play outside!", "ฉันก็ชอบ ไปเล่นข้างนอกกัน", 5],
+["PAT-0032", "pat", "It's sunny today! Do you like sunny days?", "วันนี้แดดดี ชอบวันแดดออกไหม", 5],
+["PAT-0033", "pat", "Me too! Let's play outside!", "ฉันก็ชอบ ไปเล่นข้างนอกกัน", 5],
+["MIA-0038", "mia", "Come to the Harvest Festival in town!", "", 5],
+["MAX-0061", "max", "An orange rug. That's 10 coins.", "พรมสีส้ม ราคา 10 เหรียญ", 5],
+["KID-0366", "you", "Today is Monday. It was cloudy.", "", 5],
+["KID-0367", "you", "Today is Tuesday. It was sunny.", "", 5],
+["MIA-0039", "mia", "It's cloudy today. Maybe it will rain.", "วันนี้เมฆเยอะ บางทีฝนอาจจะตก", 5],
+["KID-0368", "you", "Oh no!", "", 5],
+["KID-0369", "you", "I like rain!", "", 5],
+["MIA-0040", "mia", "Don't worry. It's OK!", "ไม่ต้องห่วง ไม่เป็นไร", 5],
+["BOO-0026", "bo", "It's cloudy today. Maybe it will rain.", "วันนี้เมฆเยอะ บางทีฝนอาจจะตก", 5],
+["BOO-0027", "bo", "Don't worry. It's OK!", "ไม่ต้องห่วง ไม่เป็นไร", 5],
+["FIN-0023", "finn", "It's cloudy today. Maybe it will rain.", "วันนี้เมฆเยอะ บางทีฝนอาจจะตก", 5],
+["FIN-0024", "finn", "Don't worry. It's OK!", "ไม่ต้องห่วง ไม่เป็นไร", 5],
+["PAT-0034", "pat", "It's cloudy today. Maybe it will rain.", "วันนี้เมฆเยอะ บางทีฝนอาจจะตก", 5],
+["PAT-0035", "pat", "Don't worry. It's OK!", "ไม่ต้องห่วง ไม่เป็นไร", 5],
+["KID-0370", "you", "Today is Wednesday. It was cloudy.", "", 5],
+["PAT-0036", "pat", "Tomorrow is Pat's birthday!", "", 5],
+["KID-0371", "you", "Today is Friday. It was snowy.", "", 5],
+["MAX-0062", "max", "A green flower pot. That's 6 coins.", "กระถางดอกไม้สีเขียว ราคา 6 เหรียญ", 5],
+["MIA-0041", "mia", "Come to the Star Festival in town!", "", 5],
+["LIL-0065", "lily", "Dear {name},", "", 5],
+["LIL-0066", "lily", "From, Lily", "", 5],
+["KID-0372", "you", "Today is Saturday. It was cloudy.", "", 5],
+["MIA-0042", "mia", "It's snowy! Do you like snow?", "หิมะตก ชอบหิมะไหม", 5],
+["MIA-0043", "mia", "Me too! Let's make a snowman!", "ฉันก็ชอบ ไปปั้นตุ๊กตาหิมะกัน", 5],
+["BOO-0028", "bo", "It's snowy! Do you like snow?", "หิมะตก ชอบหิมะไหม", 5],
+["BOO-0029", "bo", "Me too! Let's make a snowman!", "ฉันก็ชอบ ไปปั้นตุ๊กตาหิมะกัน", 5],
+["FIN-0025", "finn", "It's snowy! Do you like snow?", "หิมะตก ชอบหิมะไหม", 5],
+["FIN-0026", "finn", "Me too! Let's make a snowman!", "ฉันก็ชอบ ไปปั้นตุ๊กตาหิมะกัน", 5],
+["PAT-0037", "pat", "It's snowy! Do you like snow?", "หิมะตก ชอบหิมะไหม", 5],
+["PAT-0038", "pat", "Me too! Let's make a snowman!", "ฉันก็ชอบ ไปปั้นตุ๊กตาหิมะกัน", 5],
+["KID-0373", "you", "Today is Sunday. It was snowy.", "", 5],
+["KID-0374", "you", "I caught a butterfly! Say: butterfly!", "จับผีเสื้อครั้งแรก! ลองพูดว่า butterfly", 5],
+["KID-0375", "you", "butterfly", "", 5],
+["KID-0376", "you", "Bye-bye, butterfly!", "", 5],
+["KID-0377", "you", "I caught a butterfly! Bye-bye, butterfly!", "", 5],
+["KID-0378", "you", "I caught a ladybug! Bye-bye, ladybug!", "", 5],
+["KID-0379", "you", "I caught a bee! Say: bee!", "จับผึ้งครั้งแรก! ลองพูดว่า bee", 5],
+["KID-0380", "you", "bee", "", 5],
+["KID-0381", "you", "Bye-bye, bee!", "", 5],
+["KID-0382", "you", "I caught a bee! Bye-bye, bee!", "", 5],
+["KID-0383", "you", "I caught a beetle! Say: beetle!", "จับด้วงครั้งแรก! ลองพูดว่า beetle", 5],
+["KID-0384", "you", "beetle", "", 5],
+["KID-0385", "you", "Bye-bye, beetle!", "", 5],
+["KID-0386", "you", "I caught a beetle! Bye-bye, beetle!", "", 5],
+["KID-0387", "you", "I caught a dragonfly! Say: dragonfly!", "จับแมลงปอครั้งแรก! ลองพูดว่า dragonfly", 5],
+["KID-0388", "you", "dragonfly", "", 5],
+["KID-0389", "you", "Bye-bye, dragonfly!", "", 5],
+["KID-0390", "you", "I caught a dragonfly! Bye-bye, dragonfly!", "", 5],
+["KID-0391", "you", "I caught a grasshopper! Say: grasshopper!", "จับตั๊กแตนครั้งแรก! ลองพูดว่า grasshopper", 5],
+["KID-0392", "you", "grasshopper", "", 5],
+["KID-0393", "you", "Bye-bye, grasshopper!", "", 5],
+["KID-0394", "you", "I caught a grasshopper! Bye-bye, grasshopper!", "", 5],
+["KID-0395", "you", "I caught a snail! Say: snail!", "จับหอยทากครั้งแรก! ลองพูดว่า snail", 5],
+["KID-0396", "you", "snail", "", 5],
+["KID-0397", "you", "Bye-bye, snail!", "", 5],
+["KID-0398", "you", "I caught a snail! Bye-bye, snail!", "", 5],
+["KID-0399", "you", "I caught a firefly! Say: firefly!", "จับหิ่งห้อยครั้งแรก! ลองพูดว่า firefly", 5],
+["KID-0400", "you", "firefly", "", 5],
+["KID-0401", "you", "Bye-bye, firefly!", "", 5],
+["KID-0402", "you", "I caught a firefly! Bye-bye, firefly!", "", 5],
+["KID-0403", "you", "I found a mushroom! Say: mushroom!", "เจอเห็ดครั้งแรก! ลองพูดว่า mushroom", 5],
+["KID-0404", "you", "mushroom", "", 5],
+["KID-0405", "you", "I found a berry! Say: berry!", "เจอเบอร์รี่ครั้งแรก! ลองพูดว่า berry", 5],
+["KID-0406", "you", "berry", "", 5],
+["KID-0407", "you", "I found an apple! Say: apple!", "เจอแอปเปิ้ลครั้งแรก! ลองพูดว่า apple", 5],
+["KID-0408", "you", "I found a shell! Say: shell!", "เจอเปลือกหอยครั้งแรก! ลองพูดว่า shell", 5],
+["KID-0409", "you", "shell", "", 5],
+["KID-0410", "you", "I found a pine cone! Say: pine cone!", "เจอลูกสนครั้งแรก! ลองพูดว่า pine cone", 5],
+["KID-0411", "you", "pine cone", "", 5],
+["NAR-0217", "narr", "Cut!", "", 5],
+["NAR-0218", "narr", "Cut! You found a carrot seed!", "", 5],
+["NAR-0219", "narr", "Stage 2: Animal Farm", "", 5],
+["TOM-0043", "tom", "เมื่อก่อนคุณยายจะมาให้อาหาร แล้วก็แปรงขนให้สัตว์ทุกเช้า ร้องเพลงให้ฟังด้วยนะ", "", 5],
+["TOM-0044", "tom", "ตั้งแต่คุณยายไป วัว ไก่ แกะ ก็เศร้ากันหมด ไม่ยอมให้นม ไข่ หรือขนเลย หลานช่วยตาหน่อยได้ไหม", "", 5],
+["NAR-0220", "narr", "Stage 4: Grandma's House", "", 5],
+["LIL-0067", "lily", "ฉันลิลลี่ เพื่อนสนิทของคุณยายเลยนะ ก่อนไปเที่ยว คุณยายเก็บของในบ้านไปหมด บ้านเลยมืดแล้วก็ว่างเปล่า", "", 5],
+["LIL-0068", "lily", "เหลือแค่แมวเหมียวมีมี่ที่ชอบซ่อนตัว", "", 5],
+["LIL-0069", "lily", "มาแต่งบ้านให้น่าอยู่กัน เริ่มจากซื้อโคมไฟที่ร้านของนายกฯ แม็กซ์ แล้วจัดปาร์ตี้ให้ทุกคนมาสนุกด้วยกันนะ!", "", 5],
+["MAX-0063", "max", "A purple lamp. That's 12 coins.", "โคมไฟสีม่วง ราคา 12 เหรียญ", 5],
+["NAR-0221", "narr", "Dear {name}, The fish are big today.", "", 5],
+["NAR-0222", "narr", "Come to the river!", "", 5],
+["NAR-0223", "narr", "From, Finn", "", 5],
+["TOM-0045", "tom", "It's rainy today. Do you have an umbrella?", "วันนี้ฝนตก มีร่มไหม", 5],
+["CUS-0065", "cust", "Can I have one flower, please?", "ขอดอกไม้ 1 ดอกได้ไหม", 5],
+["PIP-0162", "pip", "แตะนับดอกไม้ 1 ดอกให้ครบนะ", "", 5],
+["MAX-0064", "max", "A blue chair. That's 12 coins.", "เก้าอี้สีน้ำเงิน ราคา 12 เหรียญ", 5],
+["KID-0412", "you", "Today is Friday. It was sunny.", "", 5],
+["KID-0413", "you", "Today is Saturday. It was rainy.", "", 5],
+["KID-0414", "you", "Today is Monday. It was rainy.", "", 5],
+["KID-0415", "you", "Today is Wednesday. It was rainy.", "", 5],
+["BOO-0030", "bo", "Dear {name},", "", 5],
+["BOO-0031", "bo", "From, Bo", "", 5],
+["KID-0416", "you", "Today is Thursday. It was cloudy.", "", 5],
+["KID-0417", "you", "Today is Monday. It was snowy.", "", 5],
+["MIA-0044", "mia", "It's windy today! Hold your hat!", "วันนี้ลมแรง จับหมวกไว้นะ", 5],
+["MIA-0045", "mia", "Ha ha! Be careful!", "ฮ่า ๆ ระวังนะ", 5],
+["KID-0418", "you", "Today is Wednesday. It was windy.", "", 5],
+["KID-0419", "you", "Today is Thursday. It was snowy.", "", 5],
+["PIP-0163", "pip", "ยินดีต้อนรับกลับมาจ้า มาเล่นต่อกันเลย ผ่านครบทุกด่านแล้ว เก่งที่สุดเลย เล่นต่อได้ตามใจ หรือไปฝึกพูดคำศัพท์ในสมุดให้ได้สามดาวทุกคำนะ", "", 5],
+["WRD-0010", "narr", "potato", "มันฝรั่ง", 0],
+["WRD-0011", "narr", "cabbage", "กะหล่ำปลี", 0],
+["WRD-0012", "narr", "tomato", "มะเขือเทศ", 0],
+["WRD-0013", "narr", "pumpkin", "ฟักทอง", 0],
+["WRD-0014", "narr", "seed", "เมล็ด", 0],
+["WRD-0015", "narr", "vegetable", "ผัก", 0],
+["WRD-0016", "narr", "dig", "ขุด", 0],
+["WRD-0017", "narr", "plant", "ปลูก", 0],
+["WRD-0018", "narr", "water", "รดน้ำ / น้ำ", 0],
+["WRD-0019", "narr", "grow", "โต / เติบโต", 0],
+["WRD-0020", "narr", "harvest", "เก็บเกี่ยว", 0],
+["WRD-0021", "narr", "fill", "เติม (ให้เต็ม)", 0],
+["WRD-0022", "narr", "sleep", "นอนหลับ", 0],
+["WRD-0023", "narr", "buy", "ซื้อ", 0],
+["WRD-0024", "narr", "sell", "ขาย", 0],
+["WRD-0025", "narr", "give", "ให้", 0],
+["WRD-0026", "narr", "feed", "ให้อาหาร", 0],
+["WRD-0027", "narr", "brush", "แปรง", 0],
+["WRD-0028", "narr", "heat", "ทำให้ร้อน / อุ่น", 0],
+["WRD-0029", "narr", "stir", "คน", 0],
+["WRD-0030", "narr", "press", "กด / อัด", 0],
+["WRD-0031", "narr", "crack", "ตอก (ไข่)", 0],
+["WRD-0032", "narr", "add", "เติม / ใส่เพิ่ม", 0],
+["WRD-0033", "narr", "mix", "ผสม", 0],
+["WRD-0034", "narr", "wash", "ล้าง", 0],
+["WRD-0035", "narr", "spin", "ปั่น", 0],
+["WRD-0036", "narr", "roll", "ม้วน", 0],
+["WRD-0037", "narr", "make", "ทำ", 0],
+["WRD-0038", "narr", "put", "วาง", 0],
+["WRD-0039", "narr", "farm", "ฟาร์ม", 0],
+["WRD-0040", "narr", "soil", "ดิน", 0],
+["WRD-0041", "narr", "hoe", "จอบ", 0],
+["WRD-0042", "narr", "watering can", "บัวรดน้ำ", 0],
+["WRD-0043", "narr", "well", "บ่อน้ำ", 0],
+["WRD-0044", "narr", "pond", "สระน้ำ", 0],
+["WRD-0045", "narr", "house", "บ้าน", 0],
+["WRD-0046", "narr", "shop", "ร้านค้า", 0],
+["WRD-0047", "narr", "coin", "เหรียญ", 0],
+["WRD-0048", "narr", "bed", "เตียงนอน", 0],
+["WRD-0049", "narr", "barn", "โรงนา", 0],
+["WRD-0050", "narr", "animal", "สัตว์", 0],
+["WRD-0051", "narr", "chicken", "ไก่", 0],
+["WRD-0052", "narr", "sheep", "แกะ", 0],
+["WRD-0053", "narr", "hay", "หญ้าแห้ง", 0],
+["WRD-0054", "narr", "corn", "ข้าวโพด", 0],
+["WRD-0055", "narr", "milk", "นม", 0],
+["WRD-0056", "narr", "wool", "ขนแกะ", 0],
+["WRD-0057", "narr", "nest", "รังไข่", 0],
+["WRD-0058", "narr", "cheese", "ชีส", 0],
+["WRD-0059", "narr", "mayonnaise", "มายองเนส", 0],
+["WRD-0060", "narr", "yarn", "ไหมพรม", 0],
+["WRD-0061", "narr", "oil", "น้ำมัน", 0],
+["WRD-0062", "narr", "hungry", "หิว", 0],
+["WRD-0063", "narr", "happy", "มีความสุข", 0],
+["WRD-0064", "narr", "cake", "เค้ก", 0],
+["WRD-0065", "narr", "bread", "ขนมปัง", 0],
+["WRD-0066", "narr", "cookie", "คุกกี้", 0],
+["WRD-0067", "narr", "town", "เมือง", 0],
+["WRD-0068", "narr", "friend", "เพื่อน", 0],
+["WRD-0069", "narr", "bakery", "ร้านเบเกอรี่", 0],
+["WRD-0070", "narr", "market", "ตลาด", 0],
+["WRD-0071", "narr", "customer", "ลูกค้า", 0],
+["WRD-0072", "narr", "party", "งานปาร์ตี้", 0],
+["WRD-0073", "narr", "home", "บ้าน (ของเรา)", 0],
+["WRD-0074", "narr", "room", "ห้อง", 0],
+["WRD-0075", "narr", "table", "โต๊ะ", 0],
+["WRD-0076", "narr", "sofa", "โซฟา", 0],
+["WRD-0077", "narr", "shelf", "ชั้นวาง", 0],
+["WRD-0078", "narr", "wall", "ผนัง", 0],
+["WRD-0079", "narr", "window", "หน้าต่าง", 0],
+["WRD-0080", "narr", "lamp", "โคมไฟ", 0],
+["WRD-0081", "narr", "rug", "พรม", 0],
+["WRD-0082", "narr", "clock", "นาฬิกา", 0],
+["WRD-0083", "narr", "picture", "รูปภาพ", 0],
+["WRD-0084", "narr", "teddy bear", "ตุ๊กตาหมี", 0],
+["WRD-0085", "narr", "ball", "ลูกบอล", 0],
+["WRD-0086", "narr", "flower pot", "กระถางดอกไม้", 0],
+["WRD-0087", "narr", "bench", "ม้านั่ง", 0],
+["WRD-0088", "narr", "scarecrow", "หุ่นไล่กา", 0],
+["WRD-0089", "narr", "birdhouse", "บ้านนก", 0],
+["WRD-0090", "narr", "garden", "สวน", 0],
+["WRD-0091", "narr", "tree", "ต้นไม้", 0],
+["WRD-0092", "narr", "door", "ประตู", 0],
+["WRD-0093", "narr", "mirror", "กระจก", 0],
+["WRD-0094", "narr", "on", "บน", 0],
+["WRD-0095", "narr", "under", "ข้างใต้", 0],
+["WRD-0096", "narr", "next to", "ข้าง ๆ", 0],
+["WRD-0097", "narr", "in front of", "ข้างหน้า", 0],
+["NAR-0224", "narr", "red", "สีแดง", 0],
+["NAR-0225", "narr", "blue", "สีน้ำเงิน", 0],
+["NAR-0226", "narr", "yellow", "สีเหลือง", 0],
+["NAR-0227", "narr", "green", "สีเขียว", 0],
+["NAR-0228", "narr", "pink", "สีชมพู", 0],
+["NAR-0229", "narr", "purple", "สีม่วง", 0],
+["NAR-0230", "narr", "orange", "สีส้ม", 0],
+["NAR-0231", "narr", "white", "สีขาว", 0],
+["NAR-0232", "narr", "brown", "สีน้ำตาล", 0],
+["NAR-0233", "narr", "black", "สีดำ", 0],
+["WRD-0098", "narr", "color", "สี", 0],
+["WRD-0099", "narr", "boy", "เด็กผู้ชาย", 0],
+["WRD-0100", "narr", "hair", "ผม", 0],
+["WRD-0101", "narr", "shirt", "เสื้อ", 0],
+["WRD-0102", "narr", "pants", "กางเกง", 0],
+["WRD-0103", "narr", "overalls", "ชุดเอี๊ยม", 0],
+["WRD-0104", "narr", "skirt", "กระโปรง", 0],
+["WRD-0105", "narr", "dress", "ชุดกระโปรง", 0],
+["WRD-0106", "narr", "hat", "หมวก", 0],
+["WRD-0107", "narr", "cap", "หมวกแก๊ป", 0],
+["NAR-0234", "narr", "nine", "9", 0],
+["NAR-0235", "narr", "ten", "10", 0],
+["NAR-0236", "narr", "eleven", "11", 0],
+["NAR-0237", "narr", "twelve", "12", 0],
+["NAR-0238", "narr", "thirteen", "13", 0],
+["NAR-0239", "narr", "fourteen", "14", 0],
+["NAR-0240", "narr", "fifteen", "15", 0],
+["NAR-0241", "narr", "sixteen", "16", 0],
+["NAR-0242", "narr", "seventeen", "17", 0],
+["NAR-0243", "narr", "eighteen", "18", 0],
+["NAR-0244", "narr", "nineteen", "19", 0],
+["NAR-0245", "narr", "twenty", "20", 0],
+["NAR-0246", "narr", "Monday", "วันจันทร์", 0],
+["NAR-0247", "narr", "Tuesday", "วันอังคาร", 0],
+["NAR-0248", "narr", "Wednesday", "วันพุธ", 0],
+["NAR-0249", "narr", "Thursday", "วันพฤหัสบดี", 0],
+["NAR-0250", "narr", "Friday", "วันศุกร์", 0],
+["NAR-0251", "narr", "Saturday", "วันเสาร์", 0],
+["NAR-0252", "narr", "Sunday", "วันอาทิตย์", 0],
+["WRD-0108", "narr", "day", "วัน", 0],
+["WRD-0109", "narr", "today", "วันนี้", 0],
+["WRD-0110", "narr", "tomorrow", "พรุ่งนี้", 0],
+["WRD-0111", "narr", "morning", "ตอนเช้า", 0],
+["WRD-0112", "narr", "afternoon", "ตอนบ่าย", 0],
+["WRD-0113", "narr", "evening", "ตอนเย็น", 0],
+["WRD-0114", "narr", "night", "กลางคืน", 0],
+["WRD-0115", "narr", "o'clock", "…นาฬิกา (เวลาตรง)", 0],
+["WRD-0116", "narr", "Hello!", "สวัสดี", 0],
+["WRD-0117", "narr", "Nice to meet you.", "ยินดีที่ได้รู้จัก", 0],
+["WRD-0118", "narr", "My name is …", "ฉันชื่อ …", 0],
+["WRD-0119", "narr", "Here you are.", "นี่จ้ะ (ตอนยื่นของให้)", 0],
+["WRD-0120", "narr", "Goodbye!", "ลาก่อน", 0],
+["WRD-0121", "narr", "Good morning!", "อรุณสวัสดิ์ (ทักตอนเช้า)", 0],
+["WRD-0122", "narr", "Good afternoon!", "สวัสดีตอนบ่าย", 0],
+["WRD-0123", "narr", "Good evening!", "สวัสดีตอนเย็น", 0],
+["WRD-0124", "narr", "How much is it?", "ราคาเท่าไร", 0],
+["WRD-0125", "narr", "please", "ได้โปรด / กรุณา (พูดให้สุภาพ)", 0],
+["WRD-0126", "narr", "I want to buy …", "ฉันอยากซื้อ …", 0],
+["WRD-0127", "narr", "I want to sell …", "ฉันอยากขาย …", 0],
+["WRD-0128", "narr", "How are you?", "สบายดีไหม", 0],
+["WRD-0129", "narr", "I'm fine, thank you.", "สบายดี ขอบคุณ", 0],
+["WRD-0130", "narr", "I'd like …, please.", "ฉันอยากได้ … (พูดสุภาพ)", 0],
+["WRD-0131", "narr", "Can I have …?", "ขอ … ได้ไหม", 0],
+["WRD-0132", "narr", "Come again!", "แล้วมาอีกนะ", 0],
+["WRD-0133", "narr", "The yellow one, please.", "เอาอันสีเหลือง (บอกสีที่อยากได้)", 0],
+["WRD-0134", "narr", "first", "อย่างแรก", 0],
+["WRD-0135", "narr", "then", "ต่อมา", 0],
+["WRD-0136", "narr", "finally", "สุดท้าย", 0],
+["WRD-0137", "narr", "I made …!", "ฉันทำ … แล้ว!", 0],
+["WRD-0138", "narr", "Welcome to my party!", "ยินดีต้อนรับสู่งานปาร์ตี้ของฉัน", 0],
+["WRD-0139", "narr", "forest", "ป่า", 0],
+["WRD-0140", "narr", "river", "แม่น้ำ", 0],
+["WRD-0141", "narr", "map", "แผนที่", 0],
+["WRD-0142", "narr", "bug", "แมลง", 0],
+["WRD-0143", "narr", "butterfly", "ผีเสื้อ", 0],
+["WRD-0144", "narr", "ladybug", "เต่าทอง", 0],
+["WRD-0145", "narr", "bee", "ผึ้ง", 0],
+["WRD-0146", "narr", "beetle", "ด้วง", 0],
+["WRD-0147", "narr", "dragonfly", "แมลงปอ", 0],
+["WRD-0148", "narr", "firefly", "หิ่งห้อย", 0],
+["WRD-0149", "narr", "snail", "หอยทาก", 0],
+["WRD-0150", "narr", "grasshopper", "ตั๊กแตน", 0],
+["WRD-0151", "narr", "bug net", "สวิงจับแมลง", 0],
+["WRD-0152", "narr", "fish", "ปลา", 0],
+["WRD-0153", "narr", "carp", "ปลาคาร์ป", 0],
+["WRD-0154", "narr", "trout", "ปลาเทราต์", 0],
+["WRD-0155", "narr", "catfish", "ปลาดุก", 0],
+["WRD-0156", "narr", "goldfish", "ปลาทอง", 0],
+["WRD-0157", "narr", "crab", "ปู", 0],
+["WRD-0158", "narr", "fishing rod", "เบ็ดตกปลา", 0],
+["WRD-0159", "narr", "mushroom", "เห็ด", 0],
+["WRD-0160", "narr", "berry", "เบอร์รี่", 0],
+["WRD-0161", "narr", "apple", "แอปเปิ้ล", 0],
+["WRD-0162", "narr", "flower", "ดอกไม้", 0],
+["WRD-0163", "narr", "shell", "เปลือกหอย", 0],
+["WRD-0164", "narr", "pine cone", "ลูกสน", 0],
+["WRD-0165", "narr", "wood", "ไม้", 0],
+["WRD-0166", "narr", "axe", "ขวาน", 0],
+["WRD-0167", "narr", "weed", "หญ้ารก", 0],
+["WRD-0168", "narr", "sickle", "เคียว", 0],
+["WRD-0169", "narr", "trash", "ขยะ", 0],
+["WRD-0170", "narr", "spring", "ฤดูใบไม้ผลิ", 0],
+["WRD-0171", "narr", "summer", "ฤดูร้อน", 0],
+["WRD-0172", "narr", "fall", "ฤดูใบไม้ร่วง", 0],
+["WRD-0173", "narr", "winter", "ฤดูหนาว", 0],
+["WRD-0174", "narr", "weather", "อากาศ", 0],
+["WRD-0175", "narr", "sunny", "แดดออก", 0],
+["WRD-0176", "narr", "cloudy", "มีเมฆมาก", 0],
+["WRD-0177", "narr", "rainy", "ฝนตก", 0],
+["WRD-0178", "narr", "windy", "ลมแรง", 0],
+["WRD-0179", "narr", "snowy", "หิมะตก", 0],
+["WRD-0180", "narr", "birthday", "วันเกิด", 0],
+["WRD-0181", "narr", "festival", "เทศกาล", 0],
+["WRD-0182", "narr", "catch", "จับ", 0],
+["WRD-0183", "narr", "chop", "ฟัน (ตัดไม้)", 0],
+["WRD-0184", "narr", "cut", "ตัด", 0],
+["WRD-0185", "narr", "pick", "เก็บ", 0],
+["WRD-0186", "narr", "clean", "ทำความสะอาด", 0],
+["WRD-0187", "narr", "cook", "ทำอาหาร", 0],
+["WRD-0188", "narr", "pet", "ลูบหัว", 0],
+["WRD-0189", "narr", "dog", "หมา", 0],
+["WRD-0190", "narr", "cat", "แมว", 0],
+["WRD-0191", "narr", "salad", "สลัด", 0],
+["WRD-0192", "narr", "soup", "ซุป", 0],
+["WRD-0193", "narr", "jam", "แยม", 0],
+["WRD-0194", "narr", "apple pie", "พายแอปเปิ้ล", 0],
+["WRD-0195", "narr", "grilled fish", "ปลาย่าง", 0],
+["WRD-0196", "narr", "letter", "จดหมาย", 0],
+["WRD-0197", "narr", "Happy birthday!", "สุขสันต์วันเกิด", 0],
+["WRD-0198", "narr", "Here is … for you.", "นี่ … สำหรับเธอ (ให้ของขวัญ)", 0],
+["WRD-0199", "narr", "Me too!", "ฉันก็เหมือนกัน", 0],
+["WRD-0200", "narr", "I like …", "ฉันชอบ …", 0],
+["WRD-0201", "narr", "I caught a …!", "ฉันจับ … ได้!", 0],
+["WRD-0202", "narr", "Good dog!", "เก่งมาก (ชมสัตว์เลี้ยง)", 0],
+["PIP-0164", "pip", "แตะที่ลิลลี่ เด็กผู้หญิงผมเปียชุดสีม่วง แล้วกดไมค์พูดทักทายเป็นภาษาอังกฤษนะ", "", 0],
+["PIP-0165", "pip", "รดน้ำครบแล้ว เก่งมาก กลับบ้านไปนอนกัน แตะที่บ้านของเรา ผักจะโตตอนที่เรานอนหลับ", "", 0],
+["PIP-0166", "pip", "แครอทใช้เวลาโตสามวัน รดน้ำทุกวันแล้วไปนอน พอโตแล้วแตะเพื่อเก็บ แล้วเอาไปให้ลิลลี่สามหัว", "", 0],
+["PIP-0167", "pip", "อย่าลืมปลูกเมล็ดมะเขือเทศด้วยนะ แล้วเอาผักไปขายให้เบ็นสามชิ้น", "", 0],
+["PIP-0168", "pip", "มะเขือเทศใช้เวลาโตสี่วัน รดน้ำทุกวัน พอโตแล้วเอาไปให้ลิลลี่สองลูก", "", 0],
+["PIP-0169", "pip", "ไปหาคุณตาทอมที่ฟาร์มสัตว์ เดินลงไปตามทางด้านล่างฟาร์ม คุณตาใส่หมวกฟางมีเคราสีขาว ดูลูกศรสีเหลืองได้เลย", "", 0],
+["PIP-0170", "pip", "ให้อาหารไก่ทั้งสองตัว เก็บไข่สองฟองจากรัง แล้วเอาไปให้คุณตาทอม", "", 0],
+["PIP-0171", "pip", "มีอาอยากได้ชีสหนึ่งก้อนกับไหมพรมหนึ่งม้วน ทำได้ที่โต๊ะครัวในฟาร์มสัตว์ แล้วเอาไปให้มีอาในเมือง", "", 0],
+["PIP-0172", "pip", "กลับบ้าน แตะประตูแล้วเลือกเข้าบ้าน แตะโคมไฟที่แถบด้านล่าง แล้วแตะจุดสีขาวที่อยู่บนโต๊ะ", "", 0],
+["PIP-0173", "pip", "ลิลลี่รออยู่ในบ้านของเรา เข้าบ้านแล้วคุยกับลิลลี่ ฟังว่าให้วางของไว้ตรงไหน", "", 0],
+["PIP-0174", "pip", "ผ่านครบทุกด่านแล้ว เก่งที่สุดเลย เล่นต่อได้ตามใจ หรือไปฝึกพูดคำศัพท์ในสมุดให้ได้สามดาวทุกคำนะ", "", 0],
+["PIP-0175", "pip", "สวัสดีจ้า ฉันชื่อปิ๊บ จะคอยช่วยนะ แตะที่พื้นเพื่อเดิน แตะที่เพื่อนเพื่อคุยกัน", "", 0],
+["PIP-0176", "pip", "ยินดีต้อนรับกลับมาจ้า มาเล่นต่อกันเลย", "", 0],
+["PIP-0177", "pip", "หน้านี้ใช้ไมค์ไม่ได้ เลือกคำตอบด้วยการแตะแทนนะ", "", 0],
+["PIP-0178", "pip", "กดปุ่มไมค์สีแดง แล้วพูดคำตอบเป็นภาษาอังกฤษนะ", "", 0],
+["PIP-0179", "pip", "ไม่เป็นไรนะ ตอนนี้แตะเลือกคำตอบได้แล้ว", "", 0],
+["PIP-0180", "pip", "ดึกแล้ว ได้เวลากลับบ้านไปนอนแล้วนะ", "", 0],
+["PIP-0181", "pip", "ประตูนี้ยังล็อกอยู่ ทำด่านก่อนหน้าให้ผ่านก่อนนะ", "", 0],
+["PIP-0182", "pip", "ผู้ปกครองให้ฝึกคำเพิ่ม {n} คำ เปิดสมุดคำศัพท์ที่แท็บฝึกเพิ่ม แล้วฝึกพูดตามนะ", "", 0],
+["PIP-0183", "pip", "ไม่เป็นไรนะ ฟังอีกครั้งแล้วลองพูดตามใหม่", "", 0],
+["NAR-0253", "narr", "Almost!", "เกือบแล้ว ลองฟังตัวอย่างแล้วพูดใหม่นะ", 0],
+["PIP-0184", "pip", "เกือบแล้ว ลองฟังตัวอย่างแล้วพูดใหม่นะ", "", 0],
+["NAR-0254", "narr", "Good try!", "ผ่านแล้ว เก่งมาก ครั้งหน้าลองพูดดัง ๆ ชัด ๆ อีกนิดนะ", 0],
+["PIP-0185", "pip", "ผ่านแล้ว เก่งมาก ครั้งหน้าลองพูดดัง ๆ ชัด ๆ อีกนิดนะ", "", 0],
+["NAR-0255", "narr", "Great job!", "เก่งมาก พูดได้ดีแล้ว", 0],
+["PIP-0186", "pip", "เก่งมาก พูดได้ดีแล้ว", "", 0],
+["NAR-0256", "narr", "Excellent!", "เยี่ยมมาก ออกเสียงชัดเจนเลย", 0],
+["FIN-0027", "finn", "The fish are big today.", "วันนี้ปลาตัวใหญ่มาก", 0],
+["FIN-0028", "finn", "Come to the river!", "มาที่แม่น้ำนะ", 0]];
+
+/* ---------- developer mode: record or drop in a voice for every line of the game ----------
+   SCRIPT (p_script.js) lists every line with a code like LIL-0001. Record them anywhere, name each file by its code
+   (LIL-0001.mp3), then drop all the files in at once. Lines that change during play (numbers, items) and are not in
+   the list show up here too after they are heard once, ready to record. */
+const SPK_INFO={lily:["LIL","Lily · ลิลลี่"],ben:["BEN","Ben · เบ็น"],tom:["TOM","Grandpa Tom · คุณตาทอม"],rosa:["ROS","Rosa · โรซ่า"],mia:["MIA","Mia · มีอา"],
+  joe:["JOE","Grandpa Joe · คุณตาโจ"],max:["MAX","Mayor Max · นายกฯ แม็กซ์"],bo:["BOO","Bo · โบ"],finn:["FIN","Finn · ฟินน์"],pat:["PAT","Pat · แพท"],
+  cust:["CUS","ลูกค้า (ในตลาด)"],gran:["GRA","Grandma Rosie · คุณยายโรซี่"],mimi:["MIM","Mimi · แมวมีมี่"],pip:["PIP","ปิ๊บ · พูดไทย"],pipen:["PIE","ปิ๊บ · พูดอังกฤษ"],
+  nar:["NTH","ผู้เล่าเรื่อง · ไทย"],narr:["NAR","ผู้บรรยาย · อังกฤษ"],words:["WRD","คำศัพท์ (ผู้บรรยาย)"],you:["KID","เด็ก · ประโยคให้พูดตาม"]};
+const SCRIPT_BY_ID={},SCRIPT_BY_KEY={};
+for(const r of SCRIPT){const [id,who,text]=r;SCRIPT_BY_ID[id]=r;SCRIPT_BY_KEY[who+"|"+text]=r;}
+const scriptGroup=r=>r[0].startsWith("WRD")?"words":r[1];
+let devVoice={who:"all",q:"",show:"todo",page:1};
+/* every line we know of: the script, plus anything heard during play or recorded that the script does not have */
+function allVoiceLines(){
+  const out=SCRIPT.map(r=>({id:r[0],who:r[1],group:scriptGroup(r),text:r[2],th:r[3]||"",stage:r[4]||0,key:r[1]+"|"+r[2]}));
+  const seen=new Set(out.map(x=>x.key));
+  const extra=k=>{if(seen.has(k)||/^(song|bgm)\|/.test(k))return;seen.add(k);const i=k.indexOf("|");out.push({id:"",who:k.slice(0,i),group:k.slice(0,i),text:k.slice(i+1),th:"",stage:0,key:k});};
+  for(const [k] of LINES)extra(k);for(const k in CLIPS)extra(k);
+  return out;
+}
+function renderDevLines(body){
+  const all=allVoiceLines(),done=all.filter(x=>CLIPS[x.key]).length,inScript=SCRIPT.filter(r=>CLIPS[r[1]+"|"+r[2]]).length;
+  const head=el("div","vo-head");
+  head.innerHTML=`<div class="vo-prog"><b>อัดแล้ว ${inScript} / ${SCRIPT.length} บท</b><i style="width:${(inScript/Math.max(1,SCRIPT.length)*100).toFixed(1)}%"></i></div>`+
+    `<p class="devnote">อัดเสียงทีละบทได้ (● อัด / ⬆ ไฟล์) หรืออัดข้างนอกแล้ว<b>ตั้งชื่อไฟล์ตามรหัส</b> เช่น <code>LIL-0001.mp3</code> แล้วกด "ใส่ไฟล์หลายไฟล์" ทีเดียว เกมจะจับคู่ให้เอง `+
+    `· บทที่มี {name} ให้อัดแบบไม่พูดชื่อ หรือพูดว่า friend แทน · บทที่ไม่มีรหัส คือบทที่เปลี่ยนตามเกม (ตัวเลข สิ่งของ) ที่เพิ่งได้ยินระหว่างเล่น อัดในหน้านี้ได้เลย</p>`;
+  const acts=el("div","dev-acts");acts.style.justifyContent="flex-start";
+  const fi=el("input");fi.type="file";fi.accept="audio/*";fi.multiple=true;fi.hidden=true;fi.onchange=()=>bulkVoiceImport([...(fi.files||[])]);
+  acts.append(fi,devBtnEl("⬆ ใส่ไฟล์หลายไฟล์ (ตั้งชื่อตามรหัส)","",()=>fi.click()),devBtnEl("⬇ รายการบทพูดทั้งหมด (CSV)","",()=>exportScriptCSV(all)));
+  head.append(acts);body.append(head);
+  /* who */
+  const groups=["all",...Object.keys(SPK_INFO).filter(g=>all.some(x=>x.group===g))];
+  const tabs=el("div","tabs vo-tabs");
+  groups.forEach(g=>{const ls=g==="all"?all:all.filter(x=>x.group===g),d=ls.filter(x=>CLIPS[x.key]).length,b=el("button","tab");b.type="button";
+    b.setAttribute("aria-selected",String(devVoice.who===g));b.innerHTML=`${esc(g==="all"?"ทั้งหมด":SPK_INFO[g][1])} <small>${d}/${ls.length}</small>`;
+    b.onclick=()=>{stopRec();devVoice.who=g;devVoice.page=1;renderDev();};tabs.append(b);});
+  body.append(tabs);
+  /* search + what to show */
+  const bar=el("div","vo-bar"),q=el("input","vo-q");q.type="search";q.placeholder="ค้นหาบทพูด หรือรหัส เช่น LIL-0012";q.value=devVoice.q;
+  let qt=null;q.oninput=()=>{clearTimeout(qt);qt=setTimeout(()=>{devVoice.q=q.value;devVoice.page=1;renderDev();setTimeout(()=>{const n=$("devBody").querySelector(".vo-q");if(n){n.focus();n.setSelectionRange(n.value.length,n.value.length);}},0);},350);};
+  const seg=el("div","seg");[["todo","ยังไม่อัด"],["done","อัดแล้ว"],["all","ทั้งหมด"]].forEach(([v,l])=>{const b=el("button");b.type="button";b.textContent=l;b.setAttribute("aria-checked",String(devVoice.show===v));b.onclick=()=>{devVoice.show=v;devVoice.page=1;renderDev();};seg.append(b);});
+  bar.append(q,seg);body.append(bar);
+  const ql=devVoice.q.trim().toLowerCase();
+  const list=all.filter(x=>(devVoice.who==="all"||x.group===devVoice.who)&&(devVoice.show==="all"||(devVoice.show==="done")===!!CLIPS[x.key])&&
+    (!ql||x.text.toLowerCase().includes(ql)||x.id.toLowerCase().includes(ql)||x.th.toLowerCase().includes(ql)));
+  const per=120,shown=list.slice(0,devVoice.page*per);
+  if(!list.length){const p=el("p","devnote");p.textContent=devVoice.show==="todo"?"อัดครบทุกบทในหมวดนี้แล้ว เก่งมาก!":"ไม่มีบทที่ตรงกับที่ค้นหา";body.append(p);}
+  for(const x of shown){
+    const has=!!CLIPS[x.key],row=el("div","dev-row"),dt=el("div","dt");
+    dt.innerHTML=`<span class="vo-id${x.id?"":" new"}">${esc(x.id||"ใหม่")}</span>${esc(x.text)}${has?'<span class="tag">เสียงอัดเอง</span>':""}`+
+      `<small>${devVoice.who==="all"?esc((SPK_INFO[x.group]||[0,x.who])[1])+" · ":""}${x.stage?"ด่าน "+(x.stage>4?"หลังจบ":x.stage)+" · ":""}${x.th&&x.th!==x.text?esc(x.th):""}</small>`;
+    const a=el("div","dev-acts");a.append(devBtnEl("▶ ฟัง","",()=>playLine(x.key)));
+    if(canRecord()){const rb=devBtnEl(recState&&recState.k===x.key?"■ หยุดอัด":"● อัด","rec"+(recState&&recState.k===x.key?" on":""),()=>toggleRecord(x.key,rb));a.append(rb);}
+    const f1=el("input");f1.type="file";f1.accept="audio/*";f1.hidden=true;f1.onchange=async()=>{const f=f1.files&&f1.files[0];if(f){await setClip(x.key,f);toast("Saved","ใส่ไฟล์เสียงแล้ว",{say:false,ms:1500});renderDev();}};
+    a.append(f1,devBtnEl("⬆ ไฟล์","",()=>f1.click()));
+    if(has)a.append(devBtnEl("✕ ลบ","",async()=>{await delClip(x.key);renderDev();}));
+    row.append(dt,a);body.append(row);
+  }
+  if(list.length>shown.length){const more=devBtnEl(`แสดงเพิ่ม (อีก ${list.length-shown.length} บท)`,"",()=>{devVoice.page++;renderDev();});more.style.margin="10px 0";body.append(more);}
+}
+/* many files at once: LIL-0001.mp3 → that line, BGM-S1.mp3 → stage 1 music, SONG1.mp3 → song 1 */
+async function bulkVoiceImport(files){
+  let ok=0;const bad=[];
+  for(const f of files){
+    const base=f.name.replace(/\.[^.]+$/,"").trim().toUpperCase();let m;
+    if((m=/^([A-Z]{3}-\d{4})/.exec(base))&&SCRIPT_BY_ID[m[1]]){const r=SCRIPT_BY_ID[m[1]];await setClip(r[1]+"|"+r[2],f);ok++;}
+    else if((m=/^BGM-(S[1-4]|NIGHT|HOME|FEST|TITLE)\b/.exec(base))){await setClip("bgm|"+m[1].toLowerCase(),f);ok++;}
+    else if((m=/^SONG([1-4])\b/.exec(base))){await setClip("song|song"+m[1],f);ok++;}
+    else bad.push(f.name);
+  }
+  bgmCur="";
+  toast(`Added ${ok}`,`ใส่เสียงแล้ว ${ok} ไฟล์${bad.length?` · ไม่รู้จัก ${bad.length} ไฟล์ (ชื่อไฟล์ไม่ตรงรหัส)`:""}`,{say:false,ms:5000});
+  if(bad.length)console.warn("unknown voice files:",bad);
+  renderDev();
+}
+function exportScriptCSV(all){
+  const q=v=>`"${String(v==null?"":v).replace(/"/g,'""')}"`;
+  const rows=[["รหัส (ชื่อไฟล์)","ตัวละคร","บทพูด","คำแปล / หมายเหตุ","ด่าน","อัดแล้ว"]].concat(all.map(x=>[x.id||"(ใหม่ อัดในเกม)",(SPK_INFO[x.group]||[0,x.who])[1],x.text,x.th&&x.th!==x.text?x.th:"",x.stage?(x.stage>4?"หลังจบ":x.stage):"ทุกด่าน",CLIPS[x.key]?"✓":""]));
+  saveFile(`wordfarm-script-${todayKey()}.csv`,"﻿"+rows.map(r=>r.map(q).join(",")).join("\r\n"),"text/csv");
+}
 
 /* ---------- accounts: kids log in with 3 secret pictures, grown-ups with a username + password ---------- */
 const ACC_KEY="wordfarm-accounts-v1";
@@ -5972,8 +7967,8 @@ function renderLogin(){
       const pr=progressOf(a);const nm=el("b");nm.textContent=a.name;const sub=el("span","th keep");sub.textContent=pr.done?"ผ่านครบทุกด่าน":`ด่าน ${pr.stage}`;
       c.append(cv2,nm,sub);const rem=remainingSec(a);
       if(rem!==null){const tb=el("span","time-badge"+(rem<=0?" out":""));tb.textContent=rem<=0?"หมดเวลาวันนี้":`เหลือ ${fmtDur(rem)}`;c.append(tb);}
-      c.onclick=()=>{audioInit();sfx.tap();if(remainingSec(a)===0){speak(`Hi, ${a.name}!`);LV={view:"locked",arg:a.id};renderLogin();return;}
-        speak(`Hi, ${a.name}!`);LV={view:"pic",arg:a.id};picBuf=[];picFails=0;renderLogin();};grid.append(c);});
+      c.onclick=()=>{audioInit();sfx.tap();if(remainingSec(a)===0){speak(`Hi, ${accSayName(a)}!`);LV={view:"locked",arg:a.id};renderLogin();return;}
+        speak(`Hi, ${accSayName(a)}!`);LV={view:"pic",arg:a.id};picBuf=[];picFails=0;renderLogin();};grid.append(c);});
     const add=el("button","acc-card add");add.type="button";add.innerHTML=`<span class="plus">+</span><b>New player</b><span class="th keep">เพิ่มผู้เล่นใหม่</span>`;
     add.onclick=()=>{audioInit();sfx.tap();LV={view:"newName"};renderLogin();};grid.append(add);
     $("toDev").onclick=()=>{sfx.tap();LV={view:"dev"};renderLogin();};
@@ -5992,19 +7987,26 @@ function renderLogin(){
     const grid=$("picGrid");
     PICS.forEach(p=>{const c=el("button","pic");c.type="button";c.innerHTML=`<img src="${spriteURL(p)}" alt=""><span>${p}</span>`;c.setAttribute("aria-label",p);
       c.onclick=()=>{if(loginBusy||picBuf.length>=3)return;picBuf.push(p);sfx.tap();speak(p,true,"narr",.9);if(picBuf.length<3)renderLogin();else{renderLogin();setTimeout(()=>picDone(v,acc),250);}};grid.append(c);});
-    $("picBack").onclick=()=>{sfx.tap();LV={view:isNew?"newName":"pick",name:LV.name};picBuf=[];picFirst=null;renderLogin();};
+    $("picBack").onclick=()=>{sfx.tap();LV={view:isNew?"newName":"pick",name:LV.name,enName:LV.enName};picBuf=[];picFirst=null;renderLogin();};
     if($("picClear"))$("picClear").onclick=()=>{picBuf=[];renderLogin();};
     return;
   }
   if(v==="newName"){
     b.innerHTML=`<h2>What's your name?</h2><div class="th keep">ชื่อของเราคืออะไร พิมพ์ชื่อเล่นได้เลย (อังกฤษหรือไทยก็ได้)</div>
       <div class="name-row"><label for="newNameIn">My name is</label><input id="newNameIn" type="text" maxlength="14" placeholder="your name" autocomplete="off"></div>
+      <div class="name-en" id="enRow" hidden><div class="th keep">ตัวละครพูดภาษาอังกฤษ อ่านชื่อภาษาไทยไม่ได้ พิมพ์ชื่อเป็นตัวอังกฤษให้ด้วย (แก้ทีหลังได้ในตั้งค่า)</div>
+        <div class="name-row"><label for="newEnIn">Call me</label><input id="newEnIn" type="text" maxlength="14" placeholder="Chaba" autocomplete="off"></div></div>
       <p class="login-msg" id="loginMsg"></p>
       <div class="row"><button class="btn" id="nameNext" type="button">Next<span class="th">ต่อไป</span></button><button class="btn ghost" id="nameBack" type="button">Back<span class="th">กลับ</span></button></div>`;
-    const inp=$("newNameIn");inp.value=LV.name||"";setTimeout(()=>{try{inp.focus();}catch(e){}},50);
-    const go=()=>{const n=inp.value.trim().slice(0,14);
+    const inp=$("newNameIn"),enIn=$("newEnIn");inp.value=LV.name||"";enIn.value=LV.enName||"";setTimeout(()=>{try{inp.focus();}catch(e){}},50);
+    let enTouched=!!LV.enName;
+    const syncEn=()=>{const th=hasThai(inp.value);$("enRow").hidden=!th;if(th&&!enTouched)enIn.value=romanizeThai(inp.value.trim());};
+    inp.addEventListener("input",syncEn);enIn.addEventListener("input",()=>{enTouched=true;});syncEn();
+    const go=()=>{const n=inp.value.trim().slice(0,14),en=hasThai(n)?enIn.value.replace(/[^A-Za-z .'-]/g,"").trim().slice(0,14):"";
       if(!n)return setLoginMsg("พิมพ์ชื่อก่อนนะ");if(nameTaken(n))return setLoginMsg("มีชื่อนี้แล้ว ลองเติมตัวอักษรหรือใช้ชื่ออื่นนะ");
-      sfx.tap();LV={view:"newPic",name:n};picBuf=[];picFirst=null;renderLogin();};
+      if(hasThai(n)&&!en)return setLoginMsg("พิมพ์ชื่อภาษาอังกฤษให้ตัวละครเรียกด้วยนะ");
+      sfx.tap();LV={view:"newPic",name:n,enName:en};picBuf=[];picFirst=null;renderLogin();};
+    enIn.addEventListener("keydown",e=>{if(e.key==="Enter"){e.preventDefault();go();}});
     $("nameNext").onclick=go;inp.addEventListener("keydown",e=>{if(e.key==="Enter"){e.preventDefault();go();}});
     $("nameBack").onclick=()=>{sfx.tap();showLogin("pick");};return;
   }
@@ -6046,17 +8048,18 @@ function renderLogin(){
 async function picDone(v,acc){
   const code=picBuf.join("-");
   if(v==="pic"){loginBusy=true;const ok=await checkAuth(acc,code);loginBusy=false;
-    if(ok){sfx.correct();speak(`Welcome, ${acc.name}!`);enterAccount(acc);return;}
+    if(ok){sfx.correct();speak(`Welcome, ${accSayName(acc)}!`);enterAccount(acc);return;}
     picFails++;picBuf=[];renderLogin();sfx.wrong();const g=$("picGrid");if(g){g.classList.remove("shake");void g.offsetWidth;g.classList.add("shake");}
     setLoginMsg(picFails>=3?"ลืมรูปลับใช่ไหม ให้ผู้ปกครองเข้า \"มุมผู้ปกครอง\" แล้วตั้งรูปลับใหม่ให้นะ":"ยังไม่ถูก ลองแตะใหม่อีกครั้งนะ");return;}
   if(v==="newPic"){
     if(!picFirst){picFirst=code;picBuf=[];sfx.tap();renderLogin();setLoginMsg("ดีมาก แตะรูปเดิมอีกครั้งเพื่อยืนยัน",true);return;}
     if(picFirst!==code){picFirst=null;picBuf=[];sfx.wrong();renderLogin();setLoginMsg("รูปไม่ตรงกัน มาเลือกใหม่ตั้งแต่ต้นนะ");return;}
     loginBusy=true;const migrate=!ACC.length&&!!loadOldSave();
-    const acc={id:"a"+Date.now().toString(36)+rndHex(3),name:LV.name,user:normUser(LV.name),role:"kid",auth:await makeAuth("pic",code),look:null,created:Date.now(),last:Date.now()};loginBusy=false;
-    ACC.push(acc);saveAccounts();sfx.correct();speak(`Hello, ${acc.name}!`);enterAccount(acc,{isNew:true,migrate});
+    const acc={id:"a"+Date.now().toString(36)+rndHex(3),name:LV.name,enName:LV.enName||"",user:normUser(LV.name),role:"kid",auth:await makeAuth("pic",code),look:null,created:Date.now(),last:Date.now()};loginBusy=false;
+    ACC.push(acc);saveAccounts();sfx.correct();speak(`Hello, ${accSayName(acc)}!`);enterAccount(acc,{isNew:true,migrate});
   }
 }
+const accSayName=a=>a.enName||(hasThai(a.name)?romanizeThai(a.name):a.name);
 function enterAccount(acc,opt={}){
   CUR=acc;acc.last=Date.now();saveAccounts();
   let s=loadSaveFor(acc.id);
@@ -6091,7 +8094,7 @@ function greetPlayer(q,fresh){
 function logout(){
   save();sqClear();stopListen();closeDialog();for(const id of MODALS)if(id!=="loginModal")$(id).hidden=true;
   if(curCust&&curCust.obj&&renderer)scene.remove(curCust.obj);curCust=null;custWalk.length=0;partyOn=false;decorSel=null;gardenMode=false;
-  story=null;started=false;CUR=null;S=freshState("");placePlayer();rebuildPlayer();renderAll();musicStop();updateTimeChip();showLogin("pick");
+  story=null;stopSong();started=false;CUR=null;S=freshState("");placePlayer();rebuildPlayer();renderAll();musicStop();updateTimeChip();showLogin("pick");
 }
 function renderProfile(){
   const f=$("profFace");if(f)drawPortrait(f,(S&&S.look)||LOOK_DEFAULT.boy);
@@ -6151,7 +8154,13 @@ function renderCreator(){
   const pc=el("div","sw-row");for(const k in PET_COLORS)pc.append(swatch(PET_COLORS[k],pt.color===PET_COLORS[k],k,()=>setPet({color:PET_COLORS[k]},k,WORDS[k]?k:null)));
   box.append(ccSection("Pet color","สีขนสัตว์เลี้ยง",pc));
   const pn=el("div","row-btns");PET_NAMES.forEach(n=>{const b=el("button","chip"+(pt.name===n?" on":""));b.type="button";b.setAttribute("aria-pressed",String(pt.name===n));b.textContent=n;b.onclick=()=>setPet({name:n},n,null);pn.append(b);});
-  box.append(ccSection(`Pet name: ${pt.name}`,"ชื่อสัตว์เลี้ยง",pn));
+  /* or type your own name for the pet (Thai is fine: the voices read a romanized spelling) */
+  const own=el("input","cc-petname");own.type="text";own.maxLength=12;own.placeholder="ตั้งชื่อเอง";own.setAttribute("aria-label","ตั้งชื่อสัตว์เลี้ยงเอง");own.autocomplete="off";
+  own.value=PET_NAMES.includes(pt.name)?"":pt.name;pn.append(own);
+  const petSec=ccSection(`Pet name: ${pt.name}`,"ชื่อสัตว์เลี้ยง · แตะชื่อ หรือพิมพ์ชื่อเองในช่องสุดท้าย",pn);box.append(petSec);
+  own.oninput=()=>{const v=own.value.replace(/[<>]/g,"").trim();if(!v)return;CC.look.pet=Object.assign({},pt,CC.look.pet||{},{name:v});petSec.querySelector("h3").firstChild.textContent=`Pet name: ${v} `;
+    pn.querySelectorAll(".chip").forEach(c=>{c.classList.remove("on");c.setAttribute("aria-pressed","false");});};
+  own.onchange=()=>{const v=own.value.replace(/[<>]/g,"").trim();if(v){sfx.tap();speak(`Hello, ${hasThai(v)?romanizeThai(v):v}!`,true,"narr");}};
   if(!ccR){const c2=$("ccCanvas2d");c2.hidden=false;$("ccCanvas3d").hidden=true;drawPortrait(c2,CC.look);}
 }
 function randomizeLook(){
@@ -6167,11 +8176,17 @@ function startPreview(){
     ccR.setPixelRatio(Math.min(window.devicePixelRatio||1,2));ccScene=new THREE.Scene();
     ccScene.add(new THREE.HemisphereLight("#fff7e8","#b8d98f",.85));const dl=new THREE.DirectionalLight("#ffffff",.55);dl.position.set(2,4,3);ccScene.add(dl);
     const disc=mk(gCyl(),toon("#8bcf5b"),0,-.04,0,.75,.08,.75);disc.castShadow=false;ccScene.add(disc);
-    ccCam=new THREE.PerspectiveCamera(30,1,.1,20);ccCam.position.set(0,1.05,3.1);ccCam.lookAt(0,.55,0);
+    ccCam=new THREE.PerspectiveCamera(30,1,.1,20);fitCreatorCam(300/360);
     cvs.addEventListener("pointerdown",e=>{ccDrag={x:e.clientX,s:ccSpin};try{cvs.setPointerCapture(e.pointerId);}catch(_){} });
     cvs.addEventListener("pointermove",e=>{if(ccDrag)ccSpin=ccDrag.s+(e.clientX-ccDrag.x)/60;});
     ["pointerup","pointercancel"].forEach(ev=>cvs.addEventListener(ev,()=>{ccDrag=null;}));}
   refreshPreview();if(!ccRunning){ccRunning=true;requestAnimationFrame(ccLoop);}
+}
+/* keep the farmer (and the pet beside them) inside the frame whatever the shape of the preview */
+function fitCreatorCam(aspect){
+  if(!ccCam)return;const tanV=Math.tan(15*Math.PI/180),cy=.8,halfH=1.02,halfW=1.0;
+  const d=Math.max(halfH/tanV,halfW/(tanV*aspect))+.35;
+  ccCam.aspect=aspect;ccCam.position.set(0,cy+d*.16,d);ccCam.lookAt(0,cy,0);ccCam.updateProjectionMatrix();
 }
 function refreshPreview(){
   if(!ccR){const c2=$("ccCanvas2d");if(c2)drawPortrait(c2,CC.look);return;}
@@ -6180,7 +8195,7 @@ function refreshPreview(){
 }
 function ccLoop(t){
   if($("creatorModal").hidden||!ccR){ccRunning=false;return;}
-  const cvs=$("ccCanvas3d"),w=cvs.clientWidth||300,h=cvs.clientHeight||360;ccR.setSize(w,h,false);ccCam.aspect=w/h;ccCam.updateProjectionMatrix();
+  const cvs=$("ccCanvas3d"),w=cvs.clientWidth||300,h=cvs.clientHeight||360;ccR.setSize(w,h,false);fitCreatorCam(w/h);
   if(!ccDrag)ccSpin+=.008;if(ccModel){ccModel.rotation.y=ccSpin;animPerson(ccModel.children[0],t,false,0);}
   ccR.render(ccScene,ccCam);requestAnimationFrame(ccLoop);
 }
@@ -6604,7 +8619,7 @@ function finishTest(){
     ${miss.length?`<p class="pk-note">ส่งคำที่ควรฝึก ${miss.length} คำ ไปที่แท็บ "ฝึกเพิ่ม" ในสมุดคำศัพท์ของ ${esc(t.acc.name)} แล้ว · ลูกฝึกพูดผ่านเมื่อไรคำจะหายไปเอง</p>`:`<p class="pk-note">ไม่มีคำที่ต้องฝึกเพิ่ม เยี่ยมมาก!</p>`}
     <div class="row"><button class="btn" id="tDone" type="button">เสร็จแล้ว<span class="th">Done</span></button><button class="btn ghost" id="tAgain" type="button">ทดสอบอีกครั้ง<span class="th">New test</span></button></div>`;
   $("tDone").onclick=()=>{sfx.tap();closeTest();};$("tAgain").onclick=()=>{sfx.tap();renderTestSetup();};
-  if(stars>=2){sfx.cheer();}else sfx.word();speak(`${msg[0]} ${t.acc.name}!`,true);
+  if(stars>=2){sfx.cheer();}else sfx.word();speak(`${msg[0]} ${accSayName(t.acc)}!`,true);
   t.i=n;
 }
 function flagReview(acc,ids){
@@ -6710,11 +8725,12 @@ function boot(data){
   if(hotAcc&&data.started)enterAccount(hotAcc);else showLogin("pick");
   requestAnimationFrame(frameLoop);
 }
+if(window.__WF_TEST)window.__ev=s=>eval(s);
 if(window.__WF_TEST)window.__wf={get S(){return S;},set S(v){S=v;},P,dlg,get CUR(){return CUR;},get ACC(){return ACC;},actOn,talkNpc,tapHit,openWorkshop,openProcess,pickStep:i=>pickStep(i,$("procCards").children[0]),
   openStall,placeSelected,selectDecor,selectDecorType,goInside,goOutside,completeQuest,jumpToStage,showLogin,enterAccount,startPlaying,logout,useOnAnimal,collectEggs,
   renderTools,zoneNow,decorInstruction,teleport,get qid(){return curQ().id;},get stall(){return stallItems();},renderAll,markerVisible,showDlg,pickChoice,unplacedItems,get curCust(){return curCust;},get proc(){return proc;},stageNow,npcTile,walkable,findPath,doSleep,
   openParent,openTest,get TS(){return TS;},remainingSec,setRemaining,showTimeUp,playTick,findParentByPin,markItem,parents,enterParent,renderParent,rollDay,
-  talkBen,doorMenu,giveFlow,littleMode,askSleep,syncSettings,JOY,joyDraw,updateActBtn,actionTarget,doAction,ctrlMode,questGoal,openMap,goToGoal,drawPortrait,makePerson,faceOf,makeSpawnObj,makePet,PET_COLORS,ensureToday,newDay,genSpawns,spawnAt,useSpawn,startFishing,pullFish,get fishing(){return fishing;},petPet,petNear,get petPos(){return petPos;},openDay,useBoard,useMailbox,openKitchen,festivalFlow,openDiary,diaryLines,weatherNow,seasonNow,isBirthday,heartsOf,talkBo,talkFinn,actionLabel,lifeCount,tickClock,get diaryCb(){return diaryCb;},openBook,renderBook,set bookCat(v){bookCat=v;},makeCow,makeHen,makeSheep,openCreator,NPCS,LOOK_DEFAULT,closeDialog,playStory,storyNext,storyClose,get story(){return story;},STORY,STORY_ORDER,gradedSay,stageStars,starsOfStage,thaiAsk,stageEndFlow,wakeStage,mimiFlow,mimiTile,mimiSpot,mimiAt,get mimiObj(){return mimiObj;},zzzObjs,stageAwake,storyFlag,renderStoryBook,drawCatFace,prepPic,stageIntro,showStageClear,zoneAt,tileAt,get guideArrow(){return guideArrow;},get activePad(){return activePad;},get micState(){return micState;},testPools,planItems,renderTestItem,worksheetBody,get PTab(){return PTab;},set PTab(v){PTab=v;}};
+  talkBen,doorMenu,giveFlow,littleMode,askSleep,syncSettings,JOY,joyDraw,updateActBtn,actionTarget,doAction,ctrlMode,questGoal,openMap,goToGoal,drawPortrait,makePerson,faceOf,makeSpawnObj,makePet,PET_COLORS,ensureToday,newDay,genSpawns,spawnAt,useSpawn,startFishing,pullFish,get fishing(){return fishing;},petPet,petNear,get petPos(){return petPos;},openDay,useBoard,useMailbox,openKitchen,festivalFlow,openDiary,diaryLines,weatherNow,seasonNow,isBirthday,heartsOf,talkBo,talkFinn,actionLabel,lifeCount,tickClock,get diaryCb(){return diaryCb;},openBook,renderBook,set bookCat(v){bookCat=v;},makeCow,makeHen,makeSheep,openCreator,NPCS,LOOK_DEFAULT,closeDialog,setClip,syncSpawns,get spawnObjs(){return spawnObjs;},openSong,closeSong,unlockSong,songUnlocked,songData,SONGS,parseLyrics,renderDevSongs,get SG(){return SG;},songStore,songStoreSet,romanizeThai,nameEn,speakableNames,fitCreatorCam,petFacing,playStory,storyNext,storyClose,get story(){return story;},STORY,STORY_ORDER,gradedSay,stageStars,starsOfStage,thaiAsk,stageEndFlow,wakeStage,mimiFlow,mimiTile,mimiSpot,mimiAt,get mimiObj(){return mimiObj;},zzzObjs,stageAwake,storyFlag,renderStoryBook,drawCatFace,prepPic,stageIntro,showStageClear,zoneAt,tileAt,get guideArrow(){return guideArrow;},get activePad(){return activePad;},get micState(){return micState;},testPools,planItems,renderTestItem,worksheetBody,get PTab(){return PTab;},set PTab(v){PTab=v;}};
 const hot=window.claude&&window.claude.hot;
 if(hot&&hot.ready)hot.ready(boot);else boot((hot&&hot.data)||{});
 })();
