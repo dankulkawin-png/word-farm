@@ -2997,7 +2997,7 @@ function speak(text,interrupt=true,who="narr",rateMul=1,onStart=null,onEnd=null)
   const parts=splitSentences(text);
   if(parts.length>1&&!clipFor(who,text)&&parts.some(p=>clipFor(who,p))){
     parts.forEach((p,i)=>sq.push({text:prep(p),orig:p,who,rateMul,onStart:i?null:onStart,onEnd:i===parts.length-1?onEnd:null}));pump();return;}
-  sq.push({text:prep(text),orig:String(text),who,rateMul,onStart,onEnd});pump();
+  sq.push({text:prep(text),orig:String(text),who,rateMul,onStart,onEnd,noWeb:karaoke});pump();
 }
 const stripEmoji=t=>String(t).replace(/[\u{1F300}-\u{1FAFF}\u{2600}-\u{27BF}\u{2B00}-\u{2BFF}]\u{FE0F}?/gu,"").replace(/\s{2,}/g," ").trim();
 function splitSentences(t){const m=stripEmoji(t).match(/[^.!?…]+(?:[.!?…]+["')]?|$)/g);return (m||[String(t)]).map(x=>x.trim()).filter(Boolean);}
@@ -3007,11 +3007,14 @@ function pump(){
   if(sqBusy||!sq.length)return;
   const it=sq.shift(),gen=++sqGen;sqBusy=true;duck(true);if(it.who==="pip"||it.who==="pipen")pipTalk(true);if(it.onStart)try{it.onStart();}catch(e){}
   const done=()=>{if(gen!==sqGen)return;sqGen++;sqBusy=false;clearTimeout(sqTimer);curAudio=null;pipTalk(false);hiChoice(null);if(!sq.length)duck(false);if(it.onEnd)try{it.onEnd();}catch(e){}pump();};
-  const clip=clipFor(it.who,it.orig||it.text);
+  let clip=clipFor(it.who,it.orig||it.text),web=null;
+  /* a line the script does not list may still have a file on the website, named by its own code (e.g. LIL-X3F9A2C.mp3) */
+  if(!clip&&!it.noWeb&&typeof webTryFor==="function"){web=webTryFor(it.who,it.orig||it.text);clip=web&&web.url;}
   if(clip){
+    const fail=()=>{if(web)webMiss(web);if(gen===sqGen){curAudio=null;ttsSay(it,done);}};
     /* recordings play at their natural speed; only the deliberate slow replays are slowed a little */
-    try{const a=new Audio(clip);curAudio=a;try{const r=it.rateMul||1;a.playbackRate=r<.75?Math.max(.6,r+.12):1;}catch(e){}a.onended=done;a.onerror=()=>{if(gen===sqGen){curAudio=null;ttsSay(it,done);}};
-      const p=a.play();if(p&&p.catch)p.catch(()=>{if(gen===sqGen){curAudio=null;ttsSay(it,done);}});sqTimer=setTimeout(done,25000);return;}catch(e){}
+    try{const a=new Audio(clip);curAudio=a;try{const r=it.rateMul||1;a.playbackRate=r<.75?Math.max(.6,r+.12):1;}catch(e){}a.onended=done;a.onerror=fail;if(web)a.onloadeddata=()=>webHit(web);
+      const p=a.play();if(p&&p.catch)p.catch(fail);sqTimer=setTimeout(done,25000);return;}catch(e){}
   }
   ttsSay(it,done);
 }
@@ -3043,7 +3046,9 @@ async function delClip(k){await idbDel(k);try{if(CLIPS[k])URL.revokeObjectURL(CL
 const LINES_KEY="wordfarm-lines-v1";let LINES=[];
 try{LINES=JSON.parse(localStorage.getItem(LINES_KEY)||"[]");if(!Array.isArray(LINES))LINES=[];}catch(e){LINES=[];}
 let linesDirty=false;
-function logLine(who,text){if(karaoke)return;const k=keyFor(who,text);if(LINES.some(l=>l[0]===k))return;LINES.push([k,who]);if(LINES.length>4000)LINES.shift();linesDirty=true;}
+/* lines heard in THIS version of the game are marked, so lines older versions said (and no longer do) stay out of the record list */
+const LINES_VER=2;
+function logLine(who,text){if(karaoke)return;const k=keyFor(who,text);const ex=LINES.find(l=>l[0]===k);if(ex){if(ex[2]!==LINES_VER){ex[2]=LINES_VER;linesDirty=true;}return;}LINES.push([k,who,LINES_VER]);if(LINES.length>4000)LINES.shift();linesDirty=true;}
 setInterval(()=>{if(linesDirty){linesDirty=false;try{localStorage.setItem(LINES_KEY,JSON.stringify(LINES));}catch(e){}}},5000);
 
 /* ---------- Pip: the little Thai-speaking helper ---------- */
@@ -7838,7 +7843,76 @@ const SCRIPT=[["WRD-0001", "narr", "carrot", "แครอท", 1],
 ["PIP-0186", "pip", "เก่งมาก พูดได้ดีแล้ว", "", 0],
 ["NAR-0256", "narr", "Excellent!", "เยี่ยมมาก ออกเสียงชัดเจนเลย", 0],
 ["FIN-0027", "finn", "The fish are big today.", "วันนี้ปลาตัวใหญ่มาก", 0],
-["FIN-0028", "finn", "Come to the river!", "มาที่แม่น้ำนะ", 0]];
+["FIN-0028", "finn", "Come to the river!", "มาที่แม่น้ำนะ", 0],
+["NAR-0257", "narr", "I can't get there.", "ไปตรงนั้นไม่ได้", 0],
+["PIP-0197", "pip", "ไปตรงนั้นไม่ได้", "", 0],
+["NAR-0258", "narr", "It's ready. Plant a seed!", "ขุดแล้ว แตะเมล็ดแล้วปลูกได้เลย", 0],
+["PIP-0198", "pip", "ขุดแล้ว แตะเมล็ดแล้วปลูกได้เลย", "", 0],
+["NAR-0259", "narr", "Dig first! Use the hoe.", "ต้องขุดดินก่อน แตะจอบ", 0],
+["PIP-0199", "pip", "ต้องขุดดินก่อน แตะจอบ", "", 0],
+["NAR-0260", "narr", "You have no seeds. Buy some at the shop.", "เมล็ดหมดแล้ว ไปซื้อที่ร้านของ Ben", 0],
+["PIP-0200", "pip", "เมล็ดหมดแล้ว ไปซื้อที่ร้านของ Ben", "", 0],
+["NAR-0261", "narr", "No water! Go to the well.", "น้ำหมด แตะบ่อน้ำหน้าบ้านเพื่อเติม", 0],
+["PIP-0201", "pip", "น้ำหมด แตะบ่อน้ำหน้าบ้านเพื่อเติม", "", 0],
+["NAR-0262", "narr", "Dig and plant first.", "ขุดดินแล้วปลูกก่อนนะ", 0],
+["PIP-0202", "pip", "ขุดดินแล้วปลูกก่อนนะ", "", 0],
+["NAR-0263", "narr", "Nothing to harvest yet. Dig first!", "ยังไม่มีผักให้เก็บ แตะจอบเพื่อขุดดิน", 0],
+["PIP-0203", "pip", "ยังไม่มีผักให้เก็บ แตะจอบเพื่อขุดดิน", "", 0],
+["NAR-0264", "narr", "Nothing to harvest yet. Plant a seed!", "ยังไม่มีผักให้เก็บ แตะเมล็ดเพื่อปลูก", 0],
+["PIP-0204", "pip", "ยังไม่มีผักให้เก็บ แตะเมล็ดเพื่อปลูก", "", 0],
+["NAR-0265", "narr", "The watering can is full.", "บัวรดน้ำเต็มอยู่แล้ว", 0],
+["PIP-0188", "pip", "บัวรดน้ำเต็มอยู่แล้ว", "", 0],
+["NAR-0266", "narr", "Chickens don't need a brush!", "ไก่ไม่ต้องแปรงขนนะ", 0],
+["PIP-0205", "pip", "ไก่ไม่ต้องแปรงขนนะ", "", 0],
+["NAR-0267", "narr", "The chicken is hungry. Feed it corn!", "ไก่หิวแล้ว ให้ข้าวโพดก่อนนะ", 0],
+["PIP-0206", "pip", "ไก่หิวแล้ว ให้ข้าวโพดก่อนนะ", "", 0],
+["NAR-0268", "narr", "Cluck! Look in the nest.", "กุ๊ก ๆ ไปดูไข่ในรังมุมคอกนะ", 0],
+["PIP-0207", "pip", "กุ๊ก ๆ ไปดูไข่ในรังมุมคอกนะ", "", 0],
+["NAR-0269", "narr", "The cow is hungry. Feed it first!", "วัวหิว ให้อาหารก่อนนะ", 0],
+["PIP-0208", "pip", "วัวหิว ให้อาหารก่อนนะ", "", 0],
+["NAR-0270", "narr", "No more milk today. Come back tomorrow!", "วันนี้รีดนมไปแล้ว พรุ่งนี้มาใหม่นะ", 0],
+["PIP-0209", "pip", "วันนี้รีดนมไปแล้ว พรุ่งนี้มาใหม่นะ", "", 0],
+["NAR-0271", "narr", "The sheep is hungry. Feed it first!", "แกะหิว ให้อาหารก่อนนะ", 0],
+["PIP-0210", "pip", "แกะหิว ให้อาหารก่อนนะ", "", 0],
+["NAR-0272", "narr", "Brush the sheep first!", "แปรงขนแกะก่อนนะ", 0],
+["PIP-0211", "pip", "แปรงขนแกะก่อนนะ", "", 0],
+["NAR-0273", "narr", "No more wool today.", "วันนี้เก็บขนแกะไปแล้ว พรุ่งนี้มาใหม่นะ", 0],
+["PIP-0212", "pip", "วันนี้เก็บขนแกะไปแล้ว พรุ่งนี้มาใหม่นะ", "", 0],
+["NAR-0274", "narr", "This is a nest.", "นี่คือรังไข่", 0],
+["PIP-0213", "pip", "นี่คือรังไข่", "", 0],
+["NAR-0275", "narr", "This is the kitchen.", "นี่คือโต๊ะครัว ใช้ได้หลังจากได้สัตว์จากคุณตาทอม", 0],
+["PIP-0214", "pip", "นี่คือโต๊ะครัว ใช้ได้หลังจากได้สัตว์จากคุณตาทอม", "", 0],
+["NAR-0276", "narr", "You have nothing to sell.", "ยังไม่มีของขาย", 0],
+["PIP-0215", "pip", "ยังไม่มีของขาย", "", 0],
+["PIP-0216", "pip", "ไม่ได้ยินเลย ลองพูดดัง ๆ ใกล้ ๆ ไมค์อีกครั้งนะ", "", 0],
+["PIP-0217", "pip", "ฟังตัวอย่างช้า ๆ แล้วลองพูดอีกครั้งนะ", "", 0],
+["PIP-0218", "pip", "ยังไม่มีของจะขายเลย ไปเก็บผัก นม ไข่ หรือทำชีสที่ฟาร์มมาก่อนนะ", "", 0],
+["PIP-0219", "pip", "ดึกมากแล้ว กลับบ้านไปนอนกันเถอะ แตะที่ประตูบ้านนะ", "", 0],
+["PIP-0220", "pip", "สี่ทุ่มแล้ว กลับบ้านไปนอนนะ พรุ่งนี้มีเรื่องสนุกอีก", "", 0],
+["PIP-0221", "pip", "แตะของที่อยากวาง แล้วแตะจุดสีขาวในสวน", "", 0],
+["NAR-0277", "narr", "Try again!", "", 0],
+["NAR-0278", "narr", "Listen and try again!", "", 0],
+["NAR-0279", "narr", "You look great!", "", 0],
+["NAR-0280", "narr", "It's eight o'clock. Time for bed!", "", 0],
+["NAR-0281", "narr", "Decorate!", "", 0],
+["BEN-0029", "ben", "You have no vegetables. Grow some and come back!", "ยังไม่มีผักเลย ไปปลูกแล้วค่อยมาขายนะ", 0],
+["MIA-0046", "mia", "I'm having a party! I need one cheese and one ball of yarn.", "ฉันจะจัดปาร์ตี้ อยากได้ชีส 1 ก้อนกับไหมพรม 1 ม้วน", 0],
+["PIP-0222", "pip", "ยังไม่เจอเลย ลองออกไปหาดูนะ", "", 0],
+["PIP-0223", "pip", "เปิดเสียงปิ๊บแล้วจ้า", "", 0],
+["NAR-0282", "narr", "Sound on!", "", 0],
+["NAR-0283", "narr", "Time's up! Great job today. See you tomorrow!", "", 0],
+["PIP-0224", "pip", "ดูคำแปลแล้วลองพูดตามช้า ๆ อีกครั้งนะ", "", 0],
+["PIP-0225", "pip", "ฟังคำถามอีกครั้งช้า ๆ นะ", "", 0],
+["PIP-0226", "pip", "ยังไม่ถึงตอนนี้นะ เล่นต่อไปเรื่อย ๆ แล้วจะได้ดู", "", 0],
+["PIP-0227", "pip", "ครบห้าดาวแล้ว วันนี้เก่งมาก ๆ เลย", "", 0],
+["PIP-0190", "pip", "ไม่เป็นไรนะ มาฝึกพูดทีละคำกัน ฟังช้า ๆ แล้วพูดตามนะ", "", 0],
+["PIP-0191", "pip", "พยายามดีมาก ฟังช้า ๆ อีกรอบ แล้วลองพูดตามนะ", "", 0],
+["PIP-0193", "pip", "เก่งมาก ฝึกครบแล้ว ไปต่อกันเลย", "", 0],
+["NAR-0284", "narr", "Let's practice together!", "", 0],
+["NAR-0285", "narr", "Good try! Listen again.", "", 0],
+["NAR-0286", "narr", "Great practice!", "", 0],
+["PIP-0228", "pip", "สวัสดีจ้า ฉันชื่อปิ๊บ แตะชื่อของเราเพื่อเข้าเล่น หรือแตะเพิ่มผู้เล่นใหม่นะ", "", 0],
+["PIP-0195", "pip", "สวัสดีจ้า ฉันชื่อปิ๊บ", "", 0]];
 
 /* ---------- developer mode: record or drop in a voice for every line of the game ----------
    SCRIPT (p_script.js) lists every line with a code like LIL-0001. Record them anywhere, name each file by its code
@@ -7857,7 +7931,7 @@ function allVoiceLines(){
   const out=SCRIPT.map(r=>({id:r[0],who:r[1],group:scriptGroup(r),text:r[2],th:r[3]||"",stage:r[4]||0,key:r[1]+"|"+r[2]}));
   const seen=new Set(out.map(x=>x.key));
   const extra=k=>{if(seen.has(k)||/^(song|bgm)\|/.test(k))return;seen.add(k);const i=k.indexOf("|");out.push({id:"",who:k.slice(0,i),group:k.slice(0,i),text:k.slice(i+1),th:"",stage:0,key:k});};
-  for(const [k] of LINES)extra(k);for(const k in CLIPS)extra(k);
+  for(const l of LINES)if(l[2]===LINES_VER)extra(l[0]);for(const k in CLIPS)extra(k);
   return out;
 }
 function renderDevLines(body){
@@ -7865,7 +7939,7 @@ function renderDevLines(body){
   const head=el("div","vo-head");
   head.innerHTML=`<div class="vo-prog"><b>อัดแล้ว ${inScript} / ${SCRIPT.length} บท</b><i style="width:${(inScript/Math.max(1,SCRIPT.length)*100).toFixed(1)}%"></i></div>`+
     `${remoteState.on?`<p class="devnote"><b>เสียงจากโฟลเดอร์ voices บนเว็บ: ${remoteState.found} ไฟล์</b>${remoteState.checked<remoteState.total?` (กำลังตรวจ ${remoteState.checked}/${remoteState.total})`:""}</p>`:""}<p class="devnote">อัดเสียงทีละบทได้ (● อัด / ⬆ ไฟล์) หรืออัดข้างนอกแล้ว<b>ตั้งชื่อไฟล์ตามรหัส</b> เช่น <code>LIL-0001.mp3</code> แล้วกด "ใส่ไฟล์หลายไฟล์" ทีเดียว เกมจะจับคู่ให้เอง `+
-    `· บทที่มี {name} ให้อัดแบบไม่พูดชื่อ หรือพูดว่า friend แทน · บทที่ไม่มีรหัส คือบทที่เปลี่ยนตามเกม (ตัวเลข สิ่งของ) ที่เพิ่งได้ยินระหว่างเล่น อัดในหน้านี้ได้เลย</p>`;
+    `· บทที่มี {name} ให้อัดแบบไม่พูดชื่อ หรือพูดว่า friend แทน · บทที่มีป้าย <b>ใหม่</b> คือบทที่ไม่อยู่ในไฟล์ Excel (เช่น บทที่มีตัวเลข) ซึ่งเพิ่งได้ยินระหว่างเล่น ก็มีรหัสของตัวเอง เช่น <code>LIL-X3F9A2C</code> ตั้งชื่อไฟล์ตามรหัสนั้น แล้วใส่ทีละหลายไฟล์ หรืออัปไว้ในโฟลเดอร์ voices บน GitHub ได้เหมือนกัน</p>`;
   const acts=el("div","dev-acts");acts.style.justifyContent="flex-start";
   const fi=el("input");fi.type="file";fi.accept="audio/*";fi.multiple=true;fi.hidden=true;fi.onchange=()=>bulkVoiceImport([...(fi.files||[])]);
   acts.append(fi,devBtnEl("⬆ ใส่ไฟล์หลายไฟล์ (ตั้งชื่อตามรหัส)","",()=>fi.click()),devBtnEl("⬇ รายการบทพูดทั้งหมด (CSV)","",()=>exportScriptCSV(all)));
@@ -7884,12 +7958,12 @@ function renderDevLines(body){
   bar.append(q,seg);body.append(bar);
   const ql=devVoice.q.trim().toLowerCase();
   const list=all.filter(x=>(devVoice.who==="all"||x.group===devVoice.who)&&(devVoice.show==="all"||(devVoice.show==="done")===!!CLIPS[x.key])&&
-    (!ql||x.text.toLowerCase().includes(ql)||x.id.toLowerCase().includes(ql)||x.th.toLowerCase().includes(ql)));
+    (!ql||x.text.toLowerCase().includes(ql)||(x.id||lineCode(x.key)).toLowerCase().includes(ql)||x.th.toLowerCase().includes(ql)));
   const per=120,shown=list.slice(0,devVoice.page*per);
   if(!list.length){const p=el("p","devnote");p.textContent=devVoice.show==="todo"?"อัดครบทุกบทในหมวดนี้แล้ว เก่งมาก!":"ไม่มีบทที่ตรงกับที่ค้นหา";body.append(p);}
   for(const x of shown){
     const has=!!CLIPS[x.key],isWeb=has&&!String(CLIPS[x.key]).startsWith("blob:"),row=el("div","dev-row"),dt=el("div","dt");
-    dt.innerHTML=`<span class="vo-id${x.id?"":" new"}">${esc(x.id||"ใหม่")}</span>${esc(x.text)}${has?(isWeb?'<span class="tag web">เสียงจากเว็บ</span>':'<span class="tag">เสียงอัดเอง</span>'):""}`+
+    dt.innerHTML=`<span class="vo-id${x.id?"":" new"}" title="${x.id?"":"บทใหม่ ตั้งชื่อไฟล์ตามรหัสนี้ได้"}">${esc(x.id||lineCode(x.key))}</span>${x.id?"":'<span class="tag web" style="background:#c98a1b">ใหม่</span>'}${esc(x.text)}${has?(isWeb?'<span class="tag web">เสียงจากเว็บ</span>':'<span class="tag">เสียงอัดเอง</span>'):""}`+
       `<small>${devVoice.who==="all"?esc((SPK_INFO[x.group]||[0,x.who])[1])+" · ":""}${x.stage?"ด่าน "+(x.stage>4?"หลังจบ":x.stage)+" · ":""}${x.th&&x.th!==x.text?esc(x.th):""}</small>`;
     const a=el("div","dev-acts");a.append(devBtnEl("▶ ฟัง","",()=>playLine(x.key)));
     if(canRecord()){const rb=devBtnEl(recState&&recState.k===x.key?"■ หยุดอัด":"● อัด","rec"+(recState&&recState.k===x.key?" on":""),()=>toggleRecord(x.key,rb));a.append(rb);}
@@ -7902,10 +7976,11 @@ function renderDevLines(body){
 }
 /* many files at once: LIL-0001.mp3 → that line, BGM-S1.mp3 → stage 1 music, SONG1.mp3 → song 1 */
 async function bulkVoiceImport(files){
-  let ok=0;const bad=[];
+  let ok=0,byCode=null;const bad=[];
   for(const f of files){
     const base=f.name.replace(/\.[^.]+$/,"").trim().toUpperCase();let m;
     if((m=/^([A-Z]{3}-\d{4})/.exec(base))&&SCRIPT_BY_ID[m[1]]){const r=SCRIPT_BY_ID[m[1]];await setClip(r[1]+"|"+r[2],f);ok++;}
+    else if((m=/^([A-Z]{3}-X[0-9A-Z]{7})/.exec(base))&&(byCode||(byCode=Object.fromEntries(allVoiceLines().filter(x=>!x.id).map(x=>[lineCode(x.key),x.key]))))[m[1]]){await setClip(byCode[m[1]],f);ok++;}
     else if((m=/^BGM-(S[1-4]|NIGHT|HOME|FEST|TITLE)\b/.exec(base))){await setClip("bgm|"+m[1].toLowerCase(),f);ok++;}
     else if((m=/^SONG([1-4])\b/.exec(base))){await setClip("song|song"+m[1],f);ok++;}
     else bad.push(f.name);
@@ -7917,7 +7992,7 @@ async function bulkVoiceImport(files){
 }
 function exportScriptCSV(all){
   const q=v=>`"${String(v==null?"":v).replace(/"/g,'""')}"`;
-  const rows=[["รหัส (ชื่อไฟล์)","ตัวละคร","บทพูด","คำแปล / หมายเหตุ","ด่าน","อัดแล้ว"]].concat(all.map(x=>[x.id||"(ใหม่ อัดในเกม)",(SPK_INFO[x.group]||[0,x.who])[1],x.text,x.th&&x.th!==x.text?x.th:"",x.stage?(x.stage>4?"หลังจบ":x.stage):"ทุกด่าน",CLIPS[x.key]?"✓":""]));
+  const rows=[["รหัส (ชื่อไฟล์)","ตัวละคร","บทพูด","คำแปล / หมายเหตุ","ด่าน","อัดแล้ว"]].concat(all.map(x=>[x.id||lineCode(x.key),(SPK_INFO[x.group]||[0,x.who])[1],x.text,x.th&&x.th!==x.text?x.th:"",x.stage?(x.stage>4?"หลังจบ":x.stage):"ทุกด่าน",CLIPS[x.key]?"✓":""]));
   saveFile(`wordfarm-script-${todayKey()}.csv`,"﻿"+rows.map(r=>r.map(q).join(",")).join("\r\n"),"text/csv");
 }
 /* ---------- voices that live next to the game on the website: voices/LIL-0001.mp3, voices/BGM-S1.mp3, voices/SONG1.mp3 ----------
@@ -7944,6 +8019,24 @@ async function loadRemoteVoices(){
   await Promise.all(Array.from({length:6},worker));
   if(remoteState.found&&typeof devTab!=="undefined"&&!$("devModal").hidden)renderDev();
 }
+
+/* ---------- a code for every line, even ones the script does not list (they change with play: numbers, items) ----------
+   It is made from the line itself, so the same line always gets the same code on every device: LIL-X3F9A2C */
+function lineCode(key){
+  const r=SCRIPT_BY_KEY[key];if(r)return r[0];
+  let h=2166136261;for(let i=0;i<key.length;i++){h^=key.charCodeAt(i);h=Math.imul(h,16777619)>>>0;}
+  const who=key.slice(0,key.indexOf("|")),pf=(SPK_INFO[who]||["NEW"])[0];
+  return pf+"-X"+h.toString(36).toUpperCase().padStart(7,"0").slice(-7);
+}
+const WEB_MISS=new Set();
+function webTryFor(who,text){
+  if(!remoteVoicesAllowed())return null;
+  const key=keyFor(who,text);if(SCRIPT_BY_KEY[key]||/^(song|bgm)\|/.test(key))return null;
+  const code=lineCode(key);if(WEB_MISS.has(code))return null;
+  return {key,code,url:(window.__WF_REMOTE_BASE||"voices/")+code+".mp3"};
+}
+function webMiss(w){WEB_MISS.add(w.code);}
+function webHit(w){if(!CLIPS[w.key])CLIPS[w.key]=w.url;REMOTE.add(w.key);}
 
 /* ---------- accounts: kids log in with 3 secret pictures, grown-ups with a username + password ---------- */
 const ACC_KEY="wordfarm-accounts-v1";
@@ -8114,7 +8207,7 @@ function greetPlayer(q,fresh){
     const revN=Object.keys(S.review||{}).filter(id=>WORDS[id]).length;
     if(q.stage<=4&&!S.stageSeen[q.stage])setTimeout(()=>stageIntro(q.stage),800);
     else if(revN)pipSay(PIP.review.replace("{n}",revN));
-    else pipSay(PIP.back+" "+(PIP_Q[q.id]||PIP_Q.done));}
+    else{const h=PIP_Q[q.id]||PIP_Q.done;pipSay(PIP.back+" "+h,false);speak(PIP.back,false,"pip");speak(h,false,"pip");}}/* two lines, each with its own recording */
 }
 function logout(){
   save();sqClear();stopListen();closeDialog();for(const id of MODALS)if(id!=="loginModal")$(id).hidden=true;
